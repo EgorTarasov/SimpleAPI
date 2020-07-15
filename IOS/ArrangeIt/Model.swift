@@ -31,7 +31,7 @@ struct Event {
     
     var owner: UserID
     
-    var description: String
+    var description: String?
     var image: PictureID?
     
     var willGoUsers: [UserID]

@@ -60,3 +60,16 @@ class Author(models.Model):
     books = models.ManyToManyField(Book)
 
 
+class Event(models.Model):
+    event_name = models.CharField(
+        max_length=128,
+        default=' '
+    )
+    event_description = models.CharField(
+        max_length=512,
+        default=' '
+    )
+    event_address = models.CharField(
+        max_length=128
+    )
+

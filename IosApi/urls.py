@@ -23,8 +23,9 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth', include('rest_framework.urls')),
-    path('book/', views.BookListView.as_view() )
+    path('book/', views.book_list, name='BookList'),
 ]
 
 if settings.DEBUG :
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

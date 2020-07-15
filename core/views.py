@@ -37,3 +37,25 @@ def book_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['GET', 'POST'])
+def event_list(request):
+    """
+
+    :param request:
+    :return:
+    """
+
+    if request.method == 'GET':
+        events = Event.objects.all()
+        serializer = EventListSerializer(events, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = EventListSerializer(data=request.data)
+        if serializer.valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+

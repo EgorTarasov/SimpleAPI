@@ -72,4 +72,7 @@ class Event(models.Model):
     event_address = models.CharField(
         max_length=128
     )
+    event_date = models.DateField(
+
+    )
 

@@ -95,15 +95,35 @@ struct NetworkPuller {
     func tryDownloadEvent(ID eventID: EventID) -> Event? {
         //
         
-        return Event(id: 5, name: "Test Event5", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 3], mayGoUsers: [])
+        return Event(id: 5, name: "Test Event5", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 4], mayGoUsers: [5])
+    }
+    
+    func getUserByID(ID userID: UserID) -> User? {
+        if let downloadedUser = self.tryDownloadUser(ID: userID) {
+            return downloadedUser
+        } else {
+            return nil
+        }
+    }
+    
+    func tryDownloadUser(ID userID: UserID) -> User? {
+        //
+        
+        return User(id: 5, name: "testUser5", image: nil, isAppUser: false, followedEvents: [3, 4, 5])
     }
 }
 
 
-var testevent_1 = Event(id: 1, name: "Test Event1", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
+var testevent_1 = Event(id: 1, name: "Test Event1", eventBeginDate: Date(), eventEndDate: Date(), place: (51.1, 31.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
 
-var testevent_2 = Event(id: 2, name: "Test Event2", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
+var testevent_2 = Event(id: 2, name: "Test Event2", eventBeginDate: Date(), eventEndDate: Date(), place: (52.2, 32.2), owner: 2, willGoUsers: [2], mayGoUsers: [3, 4])
 
-var testevent_3 = Event(id: 3, name: "Test Event3", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
+var testevent_3 = Event(id: 3, name: "Test Event3", eventBeginDate: Date(), eventEndDate: Date(), place: (53.3, 33.3), owner: 2, willGoUsers: [1, 2, 3], mayGoUsers: [5])
 
-var testevent_4 = Event(id: 4, name: "Test Event4", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
+var testevent_4 = Event(id: 4, name: "Test Event4", eventBeginDate: Date(), eventEndDate: Date(), place: (54.4, 34.4), owner: 3, willGoUsers: [3], mayGoUsers: [1, 2, 4, 5])
+
+
+var testuser_1 = User(id: 1, name: "testUser1", image: nil, isAppUser: true, followedEvents: [1, 3, 4, 5])
+var testuser_2 = User(id: 2, name: "testUser2", image: nil, isAppUser: false, followedEvents: [1, 2, 3, 4])
+var testuser_3 = User(id: 3, name: "testUser3", image: nil, isAppUser: false, followedEvents: [1, 2, 3, 4])
+var testuser_4 = User(id: 4, name: "testUser4", image: nil, isAppUser: false, followedEvents: [2, 4, 5])

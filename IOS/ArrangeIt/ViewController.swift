@@ -52,7 +52,7 @@ class AccountMenuView: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AdministratedEventsItem", for: indexPath)
-            cell.textLabel?.text = everythingStorage?.getEventByID(nowUser.administratedEvents[indexPath.row - 1]).name
+            cell.textLabel?.text = everythingStorage?.getEventByID(ID: nowUser.administratedEvents[indexPath.row - 1]).name
             cell.imageView?.image = UIImage(systemName: "person.3")
             return cell
         }

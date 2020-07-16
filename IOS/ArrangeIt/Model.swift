@@ -7,9 +7,9 @@
 
 import Foundation
 
-typealias UserID = String
-typealias EventID = String
-typealias PictureID = String
+typealias UserID = Int
+typealias EventID = Int
+typealias PictureID = Int
 
 struct User {
     var id: UserID
@@ -17,22 +17,24 @@ struct User {
     var image: PictureID?
     var isAppUser: Bool
     
-    var administratedEvents: [EventID]
-    var nonadministritedEvents: [EventID]
+    var followedEvents: [EventID]
 }
 
 struct Event {
     var id: EventID
     var name: String
     
-    var happeningDate: Date
+    var eventBeginDate: Date
+    var eventEndDate : Date
     var place: (Double, Double)
     var creatingDate: Date?
     
     var owner: UserID
     
     var description: String?
-    var image: PictureID?
+    var cover: PictureID?
+    var imageGallery : [PictureID?]
+    
     
     var willGoUsers: [UserID]
     var mayGoUsers: [UserID]
@@ -122,7 +124,7 @@ var test_User1 = User(
         image: nil,
         isAppUser: true,
         administratedEvents: [test_event1.id],
-        nonadministritedEvents: [test_event2.id]
+        followedEvents: [test_event2.id]
 )
 var test_User2 = User(
         id: "2",
@@ -130,7 +132,7 @@ var test_User2 = User(
         image: nil,
         isAppUser: false,
         administratedEvents: [test_event2.id],
-        nonadministritedEvents: [test_event1.id]
+        followedEvents: [test_event1.id]
 )
 var testEverythingStorage = InternalStorage(
         nowUser: test_User1,

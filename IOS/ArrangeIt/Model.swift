@@ -38,7 +38,7 @@ struct Event {
     var mayGoUsers: [UserID]
 }
 
-struct internalStorage {
+struct InternalStorage {
     internal init(nowUser: User, cachedEvents: [EventID : Event], cachedUsers: [UserID : User], cachedPictures: [PictureID : String]) {
         self.nowUser = nowUser
         self.cachedEvents = cachedEvents
@@ -92,3 +92,49 @@ struct NetworkPuller {
     }
 }
 
+var test_event1 = Event(
+        id: "1",
+        name: "TestingEvent1",
+        happeningDate: Date(),
+        place: (56.7, 40.1),
+        creatingDate: Date(),
+        owner: "1",
+        description: "This is descritpion for 1 test event",
+        image: nil,
+        willGoUsers: ["1"],
+        mayGoUsers: ["2"]
+)
+var test_event2 = Event(
+        id: "2",
+        name: "TestingEvent2",
+        happeningDate: Date(),
+        place: (50.6, 44.2),
+        creatingDate: Date(),
+        owner: "2",
+        description: "This is descritpion for 2 test event",
+        image: nil,
+        willGoUsers: ["1", "2"],
+        mayGoUsers: []
+)
+var test_User1 = User(
+        id: "1",
+        name: "Test1Name",
+        image: nil,
+        isAppUser: true,
+        administratedEvents: [test_event1.id],
+        nonadministritedEvents: [test_event2.id]
+)
+var test_User2 = User(
+        id: "2",
+        name: "Test2Name",
+        image: nil,
+        isAppUser: false,
+        administratedEvents: [test_event2.id],
+        nonadministritedEvents: [test_event1.id]
+)
+var testEverythingStorage = InternalStorage(
+        nowUser: test_User1,
+        cachedEvents: ["1": test_event1, "2": test_event2],
+        cachedUsers: ["1": test_User1, "2": test_User2],
+        cachedPictures: [:]
+)

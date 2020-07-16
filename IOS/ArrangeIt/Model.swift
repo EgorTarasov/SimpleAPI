@@ -12,12 +12,34 @@ typealias EventID = Int
 typealias PictureID = Int
 
 struct User {
+    internal init(id: UserID, name: String, image: PictureID? = nil, isAppUser: Bool, followedEvents: [EventID]) {
+        self.id = id
+        self.name = name
+        self.image = image
+        self.isAppUser = isAppUser
+        self.followedEvents = followedEvents
+    }
+    
     var id: UserID
     var name: String
     var image: PictureID?
     var isAppUser: Bool
     
     var followedEvents: [EventID]
+    
+    func returnAdministratedEvents(storage: InternalStorage?) -> [EventID] {
+        var result: [EventID] = []
+        if let okayStorage = storage {
+            for eventID in followedEvents {
+                if okayStorage.getEventByID(ID: eventID)?.owner == self.id {
+                    result.append(eventID)
+                }
+            }
+        } else {
+            return []
+        }
+        return result
+    }
 }
 
 struct Event {
@@ -127,3 +149,6 @@ var testuser_1 = User(id: 1, name: "testUser1", image: nil, isAppUser: true, fol
 var testuser_2 = User(id: 2, name: "testUser2", image: nil, isAppUser: false, followedEvents: [1, 2, 3, 4])
 var testuser_3 = User(id: 3, name: "testUser3", image: nil, isAppUser: false, followedEvents: [1, 2, 3, 4])
 var testuser_4 = User(id: 4, name: "testUser4", image: nil, isAppUser: false, followedEvents: [2, 4, 5])
+
+
+var testEverythingStorage = InternalStorage(nowUser: testuser_1, cachedEvents: [1: testevent_1, 2: testevent_2, 3: testevent_3, 4: testevent_4], cachedUsers: [1: testuser_1, 2: testuser_2, 3: testuser_3, 4: testuser_4], cachedPictures: [:])

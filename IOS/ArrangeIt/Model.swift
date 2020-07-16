@@ -21,6 +21,22 @@ struct User {
 }
 
 struct Event {
+    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PictureID? = nil, imageGallery: [PictureID]? = nil, willGoUsers: [UserID], mayGoUsers: [UserID]) {
+        self.id = id
+        self.name = name
+        self.eventBeginDate = eventBeginDate
+        self.eventEndDate = eventEndDate
+        self.place = place
+        self.creatingDate = creatingDate
+        self.owner = owner
+        self.description = description
+        self.cover = cover
+        self.imageGallery = imageGallery
+        self.willGoUsers = willGoUsers
+        self.mayGoUsers = mayGoUsers
+    }
+    
+    
     var id: EventID
     var name: String
     
@@ -33,7 +49,7 @@ struct Event {
     
     var description: String?
     var cover: PictureID?
-    var imageGallery : [PictureID?]
+    var imageGallery : [PictureID]?
     
     
     var willGoUsers: [UserID]
@@ -79,64 +95,6 @@ struct NetworkPuller {
     func tryDownloadEvent(ID eventID: EventID) -> Event? {
         //
         
-        return Event(
-            id: "3",
-            name: "TestingEvent3",
-            happeningDate: Date(),
-            place: (51.2, 49.7),
-            creatingDate: Date(),
-            owner: "2",
-            description: "This is descritpion for 3 test event",
-            image: nil,
-            willGoUsers: ["2"],
-            mayGoUsers: []
-    )
+        return Event(id: 1, name: "Test Event1", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
     }
 }
-
-var test_event1 = Event(
-        id: "1",
-        name: "TestingEvent1",
-        happeningDate: Date(),
-        place: (56.7, 40.1),
-        creatingDate: Date(),
-        owner: "1",
-        description: "This is descritpion for 1 test event",
-        image: nil,
-        willGoUsers: ["1"],
-        mayGoUsers: ["2"]
-)
-var test_event2 = Event(
-        id: "2",
-        name: "TestingEvent2",
-        happeningDate: Date(),
-        place: (50.6, 44.2),
-        creatingDate: Date(),
-        owner: "2",
-        description: "This is descritpion for 2 test event",
-        image: nil,
-        willGoUsers: ["1", "2"],
-        mayGoUsers: []
-)
-var test_User1 = User(
-        id: "1",
-        name: "Test1Name",
-        image: nil,
-        isAppUser: true,
-        administratedEvents: [test_event1.id],
-        followedEvents: [test_event2.id]
-)
-var test_User2 = User(
-        id: "2",
-        name: "Test2Name",
-        image: nil,
-        isAppUser: false,
-        administratedEvents: [test_event2.id],
-        followedEvents: [test_event1.id]
-)
-var testEverythingStorage = InternalStorage(
-        nowUser: test_User1,
-        cachedEvents: ["1": test_event1, "2": test_event2],
-        cachedUsers: ["1": test_User1, "2": test_User2],
-        cachedPictures: [:]
-)

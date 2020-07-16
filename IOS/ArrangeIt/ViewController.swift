@@ -12,9 +12,29 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // Создание тестового пользователя и мероприятия
+        var test_event = Event(
+                id: "1",
+                name: "TestingEvent1",
+                happeningDate: Date(),
+                place: (56.7, 40.1),
+                creatingDate: Date(),
+                owner: "-1",
+                description: "This is descritpion for 1 test event",
+                image: nil,
+                willGoUsers: ["-1", "2"],
+                mayGoUsers: []
+        )
+        var test_User = User(
+                id: "1",
+                name: "Test",
+                image: nil,
+                isAppUser: true,
+                administratedEvents: [test_event],
+                nonadministritedEvents: [test_event]
+        )
     }
-    
-    
 }
 
 class AccountMenuView: UITableViewController {

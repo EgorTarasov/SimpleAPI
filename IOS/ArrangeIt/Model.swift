@@ -17,8 +17,8 @@ struct User {
     var image: PictureID?
     var isAppUser: Bool
     
-    var administratedEvents: [Event]
-    var nonadministritedEvents: [Event]
+    var administratedEvents: [EventID]
+    var nonadministritedEvents: [EventID]
 }
 
 struct Event {
@@ -27,7 +27,7 @@ struct Event {
     
     var happeningDate: Date
     var place: (Double, Double)
-    var creatingDate: Date
+    var creatingDate: Date?
     
     var owner: UserID
     
@@ -38,9 +38,6 @@ struct Event {
     var mayGoUsers: [UserID]
 }
 
-struct UserStorage {
-    var storage: [User]
-    
+struct internalStorage {
+    var nowUser: User
 }
-
-

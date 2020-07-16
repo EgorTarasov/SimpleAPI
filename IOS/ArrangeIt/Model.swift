@@ -95,6 +95,15 @@ struct NetworkPuller {
     func tryDownloadEvent(ID eventID: EventID) -> Event? {
         //
         
-        return Event(id: 1, name: "Test Event1", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
+        return Event(id: 5, name: "Test Event5", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 3], mayGoUsers: [])
     }
 }
+
+
+var testevent_1 = Event(id: 1, name: "Test Event1", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
+
+var testevent_2 = Event(id: 2, name: "Test Event2", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
+
+var testevent_3 = Event(id: 3, name: "Test Event3", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])
+
+var testevent_4 = Event(id: 4, name: "Test Event4", eventBeginDate: Date(), eventEndDate: Date(), place: (54.3, 55.1), owner: 1, willGoUsers: [1, 2], mayGoUsers: [3])

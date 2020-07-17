@@ -197,6 +197,36 @@
             </objects>
             <point key="canvasLocation" x="539" y="-6"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="bHX-tP-9iW">
+            <objects>
+                <viewController id="UU8-go-4Nb" customClass="LoginViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k9l-sR-S46">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ai2-1R-Hv4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PrC-xf-qrD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2318" y="645"/>
+        </scene>
+        <!--Registration View Controller-->
+        <scene sceneID="Olk-ln-gSu">
+            <objects>
+                <viewController id="aeF-Jl-VyX" customClass="RegistrationViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s1V-ov-bod">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="03k-UM-6ok"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EAC-5o-HJ8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2998" y="645"/>
+        </scene>
         <!--Поиск/Афиша-->
         <scene sceneID="4M9-ce-IRa">
             <objects>

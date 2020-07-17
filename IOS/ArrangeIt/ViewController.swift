@@ -84,3 +84,12 @@ class DetailedEventView: UIViewController {
         nameOfEvent.text = selectedEvent?.name
     }
 }
+
+class LoginViewController: UIViewController {
+    
+}
+
+
+class RegistrationViewController: UIViewController {
+    
+}

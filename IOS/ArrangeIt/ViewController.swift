@@ -93,3 +93,8 @@ class LoginViewController: UIViewController {
 class RegistrationViewController: UIViewController {
     
 }
+
+
+class NewEventViewController: UIViewController {
+    
+}

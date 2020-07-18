@@ -356,6 +356,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZc-vC-uxg">
                                 <rect key="frame" x="111" y="545" width="153" height="30"/>
                                 <state key="normal" title="Зарегистрироваться "/>
+                                <connections>
+                                    <action selector="enterButton:" destination="IUj-wz-PKW" eventType="touchUpInside" id="IZ7-Tx-cUu"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZaO-Lh-rnQ">
                                 <rect key="frame" x="91.5" y="412" width="192.5" height="58.5"/>

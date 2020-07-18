@@ -13,6 +13,7 @@
         <scene sceneID="bRu-fW-QUd">
             <objects>
                 <tabBarController id="Dl0-57-Npx" customClass="MainViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Aiv-sf-evv"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="39A-nw-fvE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -309,10 +310,10 @@
             </objects>
             <point key="canvasLocation" x="538" y="804"/>
         </scene>
-        <!--AuthV Iew Controller-->
+        <!--Login In Account View-->
         <scene sceneID="aUj-z9-CaD">
             <objects>
-                <viewController id="IUj-wz-PKW" customClass="AuthVIewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginInAccountView" id="IUj-wz-PKW" customClass="LoginInAccountView" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rdD-Hh-0qv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -405,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MB0-ZI-3B5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1343.2" y="-7.6461769115442282"/>
+            <point key="canvasLocation" x="1646" y="645"/>
         </scene>
     </scenes>
     <resources>

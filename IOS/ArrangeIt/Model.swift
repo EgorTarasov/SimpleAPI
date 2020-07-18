@@ -86,7 +86,7 @@ struct InternalStorage {
         self.cachedPictures = cachedPictures
     }
     
-    var nowUser: User
+    var nowUser: User?
     
     var cachedEvents: [EventID: Event]
     var cachedUsers: [UserID: User]

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		70EAF49324BF363B000E53F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70EAF49224BF363B000E53F6 /* Assets.xcassets */; };
 		70EAF49624BF363B000E53F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70EAF49424BF363B000E53F6 /* LaunchScreen.storyboard */; };
 		70EAF49E24BF4287000E53F6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EAF49D24BF4287000E53F6 /* Model.swift */; };
+		864415EF24C2F2E100BFBBE2 /* AuthVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864415EE24C2F2E100BFBBE2 /* AuthVIewController.swift */; };
 		8671619324C1C43000991822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8671619224C1C43000991822 /* GoogleService-Info.plist */; };
 		B62D5B4ED5B0BB8F5B90FCF3 /* Pods_ArrangeIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EC2655687E21FD96FCBDD0 /* Pods_ArrangeIt.framework */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		70EAF49524BF363B000E53F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70EAF49724BF363B000E53F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70EAF49D24BF4287000E53F6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		864415EE24C2F2E100BFBBE2 /* AuthVIewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthVIewController.swift; sourceTree = "<group>"; };
 		8671619224C1C43000991822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1A2683BCE4A6F0973036813 /* Pods-ArrangeIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArrangeIt.release.xcconfig"; path = "Target Support Files/Pods-ArrangeIt/Pods-ArrangeIt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,7 +54,6 @@
 				2385188D4CC181CDDB73F3C5 /* Pods-ArrangeIt.debug.xcconfig */,
 				D1A2683BCE4A6F0973036813 /* Pods-ArrangeIt.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -80,6 +81,7 @@
 				70EAF48924BF363A000E53F6 /* AppDelegate.swift */,
 				70EAF48B24BF363A000E53F6 /* SceneDelegate.swift */,
 				70EAF48D24BF363A000E53F6 /* ViewController.swift */,
+				864415EE24C2F2E100BFBBE2 /* AuthVIewController.swift */,
 				70EAF49D24BF4287000E53F6 /* Model.swift */,
 				70EAF48F24BF363A000E53F6 /* Main.storyboard */,
 				70EAF49224BF363B000E53F6 /* Assets.xcassets */,
@@ -217,6 +219,7 @@
 				70EAF48A24BF363A000E53F6 /* AppDelegate.swift in Sources */,
 				70EAF48C24BF363A000E53F6 /* SceneDelegate.swift in Sources */,
 				70EAF49E24BF4287000E53F6 /* Model.swift in Sources */,
+				864415EF24C2F2E100BFBBE2 /* AuthVIewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

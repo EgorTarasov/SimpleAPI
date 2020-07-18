@@ -96,7 +96,7 @@ class DetailedAccountView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         userName.text = selectedUser?.name
-        userPicture.image = UIImage(contentsOfFile: <#T##String#>)
+        //userPicture.image = UIImage(contentsOfFile: <#T##String#>)
     }
 }
 

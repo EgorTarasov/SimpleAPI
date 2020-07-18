@@ -29,7 +29,7 @@ class LoginInAccountView: UIViewController {
 
     
     @IBOutlet weak var accountLabel: UILabel!
-    @IBOutlet weak var titleLabel : UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!

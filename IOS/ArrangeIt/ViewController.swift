@@ -22,6 +22,7 @@ class AccountMenuView: UITableViewController {
     var nowUser: User? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
+        nowUser = everythingStorage?.nowUser
     }
     
     // Отвечает за количество строк
@@ -63,7 +64,7 @@ class AccountMenuView: UITableViewController {
         if indexPath.row == 0 && nowUser != nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccountItem", for: indexPath)
             print("account")
-            cell.textLabel?.text = nowUser!.name
+            cell.textLabel?.text = "Ваш аккаунт, \(nowUser!.name)"
             cell.imageView?.image = UIImage(systemName: "person")
             return cell
         }
@@ -89,11 +90,13 @@ class AccountMenuView: UITableViewController {
 
 class DetailedAccountView: UIViewController {
     var selectedUser: User?
+    @IBOutlet var userPicture: UIImageView!
     @IBOutlet var userName: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         userName.text = selectedUser?.name
+        userPicture.image = UIImage(contentsOfFile: <#T##String#>)
     }
 }
 

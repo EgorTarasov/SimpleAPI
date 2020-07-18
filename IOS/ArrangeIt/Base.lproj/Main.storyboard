@@ -83,18 +83,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CdX-26-dDR">
-                                <rect key="frame" x="16" y="438" width="343" height="21"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zdC-gm-cNC">
+                                <rect key="frame" x="16" y="93" width="123" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ваш Аккаунт" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akZ-ko-FZ7">
-                                <rect key="frame" x="155" y="142" width="103" height="21"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CdX-26-dDR">
+                                <rect key="frame" x="147" y="93" width="212" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Имя пользователя">
+                                        <attributes>
+                                            <font key="NSFont" size="29" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -103,11 +106,12 @@
                     </view>
                     <connections>
                         <outlet property="userName" destination="CdX-26-dDR" id="WbK-vw-Jo2"/>
+                        <outlet property="userPicture" destination="zdC-gm-cNC" id="w6O-rc-H9B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBb-n1-u8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2998" y="-7"/>
+            <point key="canvasLocation" x="2997.5999999999999" y="-7.6461769115442282"/>
         </scene>
         <!--Просмотр мероприятия-->
         <scene sceneID="H5i-Gl-3Z2">
@@ -401,7 +405,7 @@
                         <outlet property="nameField" destination="tl2-BV-Qdl" id="Uf2-cI-zD7"/>
                         <outlet property="passwordField" destination="F49-j5-5ZF" id="0Xv-cm-sT4"/>
                         <outlet property="switchButton" destination="EFi-4K-brd" id="tuj-2M-rhy"/>
-                        <outlet property="tittleLable" destination="U7G-Sc-qP6" id="PP3-8D-vb8"/>
+                        <outlet property="titleLabel" destination="U7G-Sc-qP6" id="pW3-iD-u2r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MB0-ZI-3B5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

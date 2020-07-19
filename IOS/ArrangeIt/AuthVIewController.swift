@@ -9,17 +9,17 @@
 import UIKit
 import Firebase
 
-class AuthVIewController: UIViewController {
+class LoginInAccountView: UIViewController {
     
-    var signup:Bool = true{
-        willSet{
-            if newValue{
-                tittleLable.text = "Регистрация"
+    var signup: Bool = true {
+        willSet {
+            if newValue {
+                titleLabel.text = "Регистрация"
                 nameField.isHidden = false
                 accountLabel.text = "У вас уже есть аккаунт?"
                 switchButton.setTitle("Войти", for: .normal)
-            }else{
-                tittleLable.text = "Вход"
+            } else {
+                titleLabel.text = "Вход"
                 nameField.isHidden = true
                 accountLabel.text = "Присоединиться"
                 switchButton.setTitle("Создать аккаунт", for: .normal)
@@ -29,7 +29,7 @@ class AuthVIewController: UIViewController {
 
     
     @IBOutlet weak var accountLabel: UILabel!
-    @IBOutlet weak var tittleLable: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!

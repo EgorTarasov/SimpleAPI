@@ -1,5 +1,6 @@
 //
-//  AuthVIewController.swift
+//  Login&Register.swift
+//  Регистрация и вход в приложения с помощью Firebase
 //  ArrangeIt
 //
 
@@ -9,6 +10,7 @@ import Firebase
 
 class LoginAndRegisterViewController: UIViewController {
     
+    // Переключатель Log in / sign up
     var signup: Bool = true {
         willSet {
             if newValue {
@@ -26,16 +28,16 @@ class LoginAndRegisterViewController: UIViewController {
         }
     }
     
-    // Лейблы
+
     @IBOutlet var accountLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     
-    // Поля ввода
+
     @IBOutlet var nameField: UITextField!
     @IBOutlet var emailField: UITextField!
     @IBOutlet var passwordField: UITextField!
     
-    // Кнопки
+
     @IBOutlet var enterButton: UIStackView!
     @IBOutlet var switchButton: UIButton!
     
@@ -43,7 +45,7 @@ class LoginAndRegisterViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    // Показать уведомление, что все окей
+    // Генераци всплывающего окна
     func showAlert(title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -51,8 +53,9 @@ class LoginAndRegisterViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    // Обработать введенные данные и отправить на сервер
+    // Обработать данных с экрана
     @IBAction func enterButton(_ sender: UIButton) {
+        
         let name = nameField.text!
         let email = emailField.text!
         let password = passwordField.text!

@@ -27,17 +27,17 @@ class LoginAndRegisterViewController: UIViewController {
     }
     
     // Лейблы
-    @IBOutlet weak var accountLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var accountLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
     // Поля ввода
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet var nameField: UITextField!
+    @IBOutlet var emailField: UITextField!
+    @IBOutlet var passwordField: UITextField!
     
     // Кнопки
-    @IBOutlet weak var enterButton: UIButton!
-    @IBOutlet weak var switchButton: UIButton!
+    @IBOutlet var enterButton: UIStackView!
+    @IBOutlet var switchButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +57,8 @@ class LoginAndRegisterViewController: UIViewController {
         let email = emailField.text!
         let password = passwordField.text!
         
-        if name.isEmpty || email.isEmpty || password.isEmpty {
-            showAlert(title: "Проверьте ввод", message: "Вы заполнили не все поля")
+        if (name.isEmpty && !nameField.isHidden) || email.isEmpty || password.isEmpty {
+            showAlert(title: "Ошибка при выполнении действия!", message: "Вы заполнили не все поля")
         }
         else {
             Auth.auth().createUser(withEmail: email, password: password) {

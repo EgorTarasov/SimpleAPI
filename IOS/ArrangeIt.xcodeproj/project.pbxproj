@@ -69,11 +69,33 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		70EA0A0024C4AB980076752A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				70EAF48D24BF363A000E53F6 /* MainViewController.swift */,
+				70F6296B24C4A05B00E043AF /* Afisha.swift */,
+				70F6296D24C4A09800E043AF /* NewEvent.swift */,
+				70F6296924C4A04900E043AF /* EventMenu.swift */,
+				70F6296724C4A01000E043AF /* EventDetail.swift */,
+				70F6296324C49EE400E043AF /* AccountMenu.swift */,
+				70F6296124C49ECA00E043AF /* AccountDetail.swift */,
+				864415EE24C2F2E100BFBBE2 /* Login&Register.swift */,
+				70EAF48F24BF363A000E53F6 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		70EA0A0124C4ABA60076752A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				70EAF49D24BF4287000E53F6 /* Model.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		70EAF47D24BF3639000E53F6 = {
 			isa = PBXGroup;
 			children = (
-				70F6296624C49F7B00E043AF /* Views */,
-				70F6296524C49F6300E043AF /* Data */,
 				70EAF48824BF363A000E53F6 /* ArrangeIt */,
 				70EAF48724BF363A000E53F6 /* Products */,
 				035FA9B08B9855A69B6A2F62 /* Pods */,
@@ -92,6 +114,8 @@
 		70EAF48824BF363A000E53F6 /* ArrangeIt */ = {
 			isa = PBXGroup;
 			children = (
+				70EA0A0124C4ABA60076752A /* Data */,
+				70EA0A0024C4AB980076752A /* Views */,
 				70EAF48924BF363A000E53F6 /* AppDelegate.swift */,
 				70EAF48B24BF363A000E53F6 /* SceneDelegate.swift */,
 				70EAF49224BF363B000E53F6 /* Assets.xcassets */,
@@ -100,30 +124,6 @@
 				8671619224C1C43000991822 /* GoogleService-Info.plist */,
 			);
 			path = ArrangeIt;
-			sourceTree = "<group>";
-		};
-		70F6296524C49F6300E043AF /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				70EAF49D24BF4287000E53F6 /* Model.swift */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
-		70F6296624C49F7B00E043AF /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				70EAF48D24BF363A000E53F6 /* MainViewController.swift */,
-				70F6296B24C4A05B00E043AF /* Afisha.swift */,
-				70F6296D24C4A09800E043AF /* NewEvent.swift */,
-				70F6296924C4A04900E043AF /* EventMenu.swift */,
-				70F6296724C4A01000E043AF /* EventDetail.swift */,
-				70F6296324C49EE400E043AF /* AccountMenu.swift */,
-				70F6296124C49ECA00E043AF /* AccountDetail.swift */,
-				864415EE24C2F2E100BFBBE2 /* Login&Register.swift */,
-				70EAF48F24BF363A000E53F6 /* Main.storyboard */,
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 		B3EA1ECE57BC4139BD3FA28E /* Frameworks */ = {

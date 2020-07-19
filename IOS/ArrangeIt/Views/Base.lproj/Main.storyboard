@@ -32,7 +32,7 @@
         <!--Ваши мероприятия-->
         <scene sceneID="WDb-2n-lMT">
             <objects>
-                <tableViewController id="Hqk-Xh-CyM" sceneMemberID="viewController">
+                <tableViewController id="Hqk-Xh-CyM" customClass="EventMenuViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9iP-lu-Pp0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -78,7 +78,7 @@
         <!--Просмотр аккаунта-->
         <scene sceneID="KFJ-bY-MVb">
             <objects>
-                <viewController storyboardIdentifier="detailedAccountView" title="Просмотр аккаунта" id="Hc7-Wp-LUF" customClass="DetailedAccountView" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="accountDetailView" title="Просмотр аккаунта" id="Hc7-Wp-LUF" customClass="AccountDetailViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aBM-cK-LIY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -111,12 +111,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBb-n1-u8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2997.5999999999999" y="-7.6461769115442282"/>
+            <point key="canvasLocation" x="2151" y="-7"/>
         </scene>
         <!--Просмотр мероприятия-->
         <scene sceneID="H5i-Gl-3Z2">
             <objects>
-                <viewController storyboardIdentifier="detailedEventView" id="4aO-AO-etb" customClass="DetailedEventView" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailedEventView" id="4aO-AO-etb" customClass="EventDetailViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Lj-Zf-a4i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -209,30 +209,6 @@
             </objects>
             <point key="canvasLocation" x="1426" y="-6"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="0PS-3S-85v">
-            <objects>
-                <viewController id="bWQ-Bk-7mX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4sS-2G-qGG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Просмотр аккаунта" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6JW-uS-bLc">
-                                <rect key="frame" x="109" y="126" width="157" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="CwX-6F-ahq"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="45G-DS-Ttz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2317.5999999999999" y="-8.5457271364317844"/>
-        </scene>
         <!--Мой аккаунт-->
         <scene sceneID="mX3-Au-txK">
             <objects>
@@ -250,58 +226,10 @@
             </objects>
             <point key="canvasLocation" x="539" y="-6"/>
         </scene>
-        <!--Login View Controller-->
-        <scene sceneID="bHX-tP-9iW">
-            <objects>
-                <viewController id="UU8-go-4Nb" customClass="LoginViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="k9l-sR-S46">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Вход в аккаунт" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIJ-sJ-eue">
-                                <rect key="frame" x="128" y="127" width="119" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="ai2-1R-Hv4"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PrC-xf-qrD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2318" y="645"/>
-        </scene>
-        <!--Registration View Controller-->
-        <scene sceneID="Olk-ln-gSu">
-            <objects>
-                <viewController id="aeF-Jl-VyX" customClass="RegistrationViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="s1V-ov-bod">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Регистрация в сервисе" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m9-kQ-Y58">
-                                <rect key="frame" x="94" y="118" width="186" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="03k-UM-6ok"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EAC-5o-HJ8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2998" y="645"/>
-        </scene>
         <!--Поиск/Афиша-->
         <scene sceneID="4M9-ce-IRa">
             <objects>
-                <viewController id="Uzd-kn-7rU" sceneMemberID="viewController">
+                <viewController id="Uzd-kn-7rU" customClass="AfishaViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EpR-4C-Xpk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -314,10 +242,10 @@
             </objects>
             <point key="canvasLocation" x="538" y="804"/>
         </scene>
-        <!--Login In Account View-->
+        <!--Login And Register View Controller-->
         <scene sceneID="aUj-z9-CaD">
             <objects>
-                <viewController storyboardIdentifier="loginInAccountView" id="IUj-wz-PKW" customClass="LoginInAccountView" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginAndRegisterView" id="IUj-wz-PKW" customClass="LoginAndRegisterViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rdD-Hh-0qv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -410,7 +338,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MB0-ZI-3B5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1646" y="645"/>
+            <point key="canvasLocation" x="2150" y="647"/>
         </scene>
     </scenes>
     <resources>

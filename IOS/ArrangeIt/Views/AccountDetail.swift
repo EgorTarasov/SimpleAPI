@@ -7,7 +7,7 @@
 import UIKit
 
 
-class DetailedAccountView: UIViewController {
+class AccountDetailViewController: UIViewController {
     var selectedUser: User?
     @IBOutlet var userPicture: UIImageView!
     @IBOutlet var userName: UILabel!

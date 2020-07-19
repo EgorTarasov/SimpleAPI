@@ -7,7 +7,7 @@
 import UIKit
 import Firebase
 
-class LoginAndRegisterView: UIViewController {
+class LoginAndRegisterViewController: UIViewController {
     
     var signup: Bool = true {
         willSet {

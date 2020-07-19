@@ -7,6 +7,6 @@
 import UIKit
 
 
-class EventMenuViewController: UIViewController {
+class EventMenuViewController: UITableViewController {
     
 }

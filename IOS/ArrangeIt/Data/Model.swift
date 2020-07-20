@@ -14,12 +14,13 @@ typealias PictureID = Int
 
 
 struct User {
-    internal init(id: UserID, name: String, image: PictureID? = nil, isAppUser: Bool, followedEvents: [EventID]) {
+    internal init(id: UserID, name: String, image: PictureID? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]) {
         self.id = id
         self.name = name
         self.image = image
         self.isAppUser = isAppUser
-        self.followedEvents = followedEvents
+        self.willGoEvents = willGoEvents
+        self.invitedToEvents = invitedToEvents
     }
     
     var id: UserID
@@ -27,11 +28,12 @@ struct User {
     var image: PictureID?
     var isAppUser: Bool
     
-    var followedEvents: [EventID]
+    var willGoEvents: [EventID]
+    var invitedToEvents: [EventID]
 }
 
 struct Event {
-    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PictureID? = nil, imageGallery: [PictureID]? = nil, willGoUsers: [UserID], mayGoUsers: [UserID]) {
+    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PictureID? = nil, imageGallery: [PictureID]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
         self.id = id
         self.name = name
         self.eventBeginDate = eventBeginDate
@@ -43,7 +45,7 @@ struct Event {
         self.cover = cover
         self.imageGallery = imageGallery
         self.willGoUsers = willGoUsers
-        self.mayGoUsers = mayGoUsers
+        self.invitedUsers = invitedUsers
     }
     
     
@@ -63,7 +65,7 @@ struct Event {
     
     
     var willGoUsers: [UserID]
-    var mayGoUsers: [UserID]
+    var invitedUsers: [UserID]
 }
 
 // Singleton!
@@ -73,12 +75,11 @@ struct InternalStorage {
         return instance
     }()
     
-    private init(nowUser: User? = nil, cachedEvents: [EventID : Event], cachedUsers: [UserID : User], cachedPictures: [PictureID : String], networkPuller: NetworkPuller = NetworkPuller()) {
+    private init(nowUser: User? = nil, cachedEvents: [EventID : Event], cachedUsers: [UserID : User], cachedPictures: [PictureID : String]) {
         self.nowUser = nowUser
         self.cachedEvents = cachedEvents
         self.cachedUsers = cachedUsers
         self.cachedPictures = cachedPictures
-        self.networkPuller = networkPuller
     }
     
     
@@ -88,12 +89,28 @@ struct InternalStorage {
     var cachedEvents: [EventID:Event]
     var cachedUsers: [UserID:User]
     var cachedPictures: [PictureID:String]
-    var networkPuller: NetworkPuller = NetworkPuller()
+    
+    func cleanup() {
+        InternalStorage.shared.cachedEvents = [:]
+        InternalStorage.shared.cachedPictures = [:]
+        InternalStorage.shared.cachedUsers = [:]
+        InternalStorage.shared.nowUser = nil
+    }
+    
+    func getAdministratedEventsByUser(user: User) -> [EventID] {
+        var result: [EventID]
+        for eventID in user.willGoEvents {
+            if let got_event = self.getEventByID(ID: eventID) {
+                result.append(got_event.id)
+            }
+        }
+        return result
+    }
     
     func getEventByID(ID eventID: EventID) -> Event? {
         if let cachedEvent = cachedEvents[eventID] {
             return cachedEvent
-        } else if let downloadedEvent = networkPuller.downloadEventByID(ID: eventID) {
+        } else if let downloadedEvent = NetworkPuller.shared.downloadEventByID(ID: eventID) {
             return downloadedEvent
         } else {
             return nil
@@ -103,7 +120,7 @@ struct InternalStorage {
     func getUserByID(ID userID: UserID) -> User? {
         if let cachedUser = cachedUsers[userID] {
             return cachedUser
-        } else if let downloadedUser = networkPuller.downloadUserByID(ID: userID) {
+        } else if let downloadedUser = NetworkPuller.shared.downloadUserByID(ID: userID) {
             return downloadedUser
         } else {
             return nil
@@ -111,6 +128,7 @@ struct InternalStorage {
     }
     
 }
+
 // Singleton!
 struct FirebaseDB {
     static var shared: FirebaseDB {
@@ -157,6 +175,14 @@ struct NetworkPusher {
         // TODO
     }
     
+    func login(login: String, password: String) {
+        // TODO
+        
+        // InternalStorage.shared.cleanup()
+        // InternalStorage.shared.nowUser = downloadedUser
+        // NetworkPuller.fullDatabaseRefresh()
+    }
+    
     func sendUpdateToEvent(ID eventID: EventID, newData: Event) {
         // TODO
     }
@@ -166,7 +192,7 @@ struct NetworkPusher {
     }
 }
 
-
+// Singleton!
 struct NetworkPuller {
     static var shared: NetworkPuller {
         let instance = NetworkPuller()

@@ -28,20 +28,6 @@ struct User {
     var isAppUser: Bool
     
     var followedEvents: [EventID]
-    
-    func returnAdministratedEvents(storage: InternalStorage?) -> [EventID] {
-        var result: [EventID] = []
-        if let okayStorage = storage {
-            for eventID in followedEvents {
-                if okayStorage.getEventByID(ID: eventID)?.owner == self.id {
-                    result.append(eventID)
-                }
-            }
-        } else {
-            return []
-        }
-        return result
-    }
 }
 
 struct Event {
@@ -81,18 +67,25 @@ struct Event {
 }
 
 struct InternalStorage {
-    internal init(nowUser: User, cachedEvents: [EventID : Event], cachedUsers: [UserID : User], cachedPictures: [PictureID : String]) {
+    private init(nowUser: User? = nil, cachedEvents: [EventID : Event], cachedUsers: [UserID : User], cachedPictures: [PictureID : String], networkPuller: NetworkPuller = NetworkPuller()) {
         self.nowUser = nowUser
         self.cachedEvents = cachedEvents
         self.cachedUsers = cachedUsers
         self.cachedPictures = cachedPictures
+        self.networkPuller = networkPuller
     }
+    
+    
+    static var shared: InternalStorage = {
+        let instance = InternalStorage(cachedEvents: [:], cachedUsers: [:], cachedPictures: [:])
+            return instance
+        }()
     
     var nowUser: User?
     
-    var cachedEvents: [EventID: Event]
-    var cachedUsers: [UserID: User]
-    var cachedPictures: [PictureID: String]
+    var cachedEvents: [EventID:Event]
+    var cachedUsers: [UserID:User]
+    var cachedPictures: [PictureID:String]
     var networkPuller: NetworkPuller = NetworkPuller()
     
     func getEventByID(ID eventID: EventID) -> Event? {
@@ -105,39 +98,54 @@ struct InternalStorage {
         }
     }
     
-}
-
-
-
-//Отправка нового события на сервер
-let db = Firestore.firestore()
-func sendEvent(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PictureID? = nil, imageGallery: [PictureID]? = nil, willGoUsers: [UserID], mayGoUsers: [UserID]){
-    
-    
-    
-    // Добавление нового мероприятия в бд
-    var ref: DocumentReference? = nil
-    ref = db.collection("events").addDocument(data: [
-        "id": id,
-        "nam" : name,
-        "eventBeginDate" : eventBeginDate,
-        "eventEndDate" : eventEndDate,
-        "place" : place,
-        "creatingDate" : creatingDate!,
-        "owner" : owner,
-        "description" : description!,
-        "cover" : cover!,
-        "imageGallery" : imageGallery!,
-        "willGoUsers" : willGoUsers,
-        "mayGoUsers" : mayGoUsers,
-    ]) { err in
-        if let err = err {
-            print("Error adding document: \(err)")
+    func getUserByID(ID userID: UserID) -> User? {
+        if let cachedUser = cachedUsers[userID] {
+            return cachedUser
+        } else if let downloadedUser = networkPuller.getUserByID(ID: userID) {
+            return downloadedUser
         } else {
-            print("Document added with ID: \(ref!.documentID)")
+            return nil
         }
     }
+    
 }
+
+struct NetworkPusher {
+    
+    static var shared: NetworkPuller {
+        let instance = NetworkPuller()
+        return instance
+    }
+    let db = Firestore.firestore()
+    
+    func sendNewEvent(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PictureID? = nil, imageGallery: [PictureID]? = nil, willGoUsers: [UserID], mayGoUsers: [UserID]) {
+        var ref: DocumentReference? = db.collection("events").addDocument(data: [
+            "id": id,
+            "name" : name,
+            "eventBeginDate" : eventBeginDate,
+            "eventEndDate" : eventEndDate,
+            "place" : place,
+            "creatingDate" : creatingDate?,
+            "owner" : owner,
+            "description" : description?,
+            "cover" : cover!,
+            "imageGallery" : imageGallery?,
+            "willGoUsers" : willGoUsers,
+            "mayGoUsers" : mayGoUsers,
+        ]) {
+            mayError in
+            if let error = mayError {
+                print("error sending event. name: \(name), id: \(id)")
+            } else {
+                print("succesfully sent event. name: \(name), id: \(id)")
+                InternalStorage.shared.cachedEvents[id] = Event(id: id, name: name, eventBeginDate: eventBeginDate, eventEndDate: eventEndDate, place: place, creatingDate: creatingDate, owner: owner, description: description, cover: cover, imageGallery: imageGallery, willGoUsers: willGoUsers, mayGoUsers: mayGoUsers)
+            }
+        }
+    }
+    
+}
+
+
 
 //Тестовое пполучение мероприятия
 func getEvent(){
@@ -172,7 +180,7 @@ struct NetworkPuller {
     func tryDownloadEvent(ID eventID: EventID) -> Event? {
         //
         
-        return Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: ["1", "4"], mayGoUsers: ["5"])
+//        return Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: ["1", "4"], mayGoUsers: ["5"])
     }
     
     func getUserByID(ID userID: UserID) -> User? {
@@ -186,24 +194,24 @@ struct NetworkPuller {
     func tryDownloadUser(ID userID: UserID) -> User? {
         //
         
-        return User(id: "5", name: "Саша", image: nil, isAppUser: false, followedEvents: ["3", "4", "5"])
+//        return User(id: "5", name: "Саша", image: nil, isAppUser: false, followedEvents: ["3", "4", "5"])
     }
 }
 
 
-var testevent_1 = Event(id: "1", name: "Футбольный матч", eventBeginDate: Date(), eventEndDate: Date(), place: (51.1, 31.1), owner: "1", willGoUsers: ["1", "2"], mayGoUsers: ["3"])
-
-var testevent_2 = Event(id: "2", name: "Встреча в баре", eventBeginDate: Date(), eventEndDate: Date(), place: (52.2, 32.2), owner: "2", willGoUsers: ["2"], mayGoUsers: ["3", "4"])
-
-var testevent_3 = Event(id: "3", name: "Мафия", eventBeginDate: Date(), eventEndDate: Date(), place: (53.3, 33.3), owner: "2", willGoUsers: ["1", "2", "3"], mayGoUsers: ["5"])
-
-var testevent_4 = Event(id: "4", name: "Обмен одеждой", eventBeginDate: Date(), eventEndDate: Date(), place: (54.4, 34.4), owner: "3", willGoUsers: ["3"], mayGoUsers: ["1", "2", "4", "5"])
-
-
-var testuser_1 = User(id: "1", name: "Артём", image: nil, isAppUser: true, followedEvents: ["1", "3", "4", "5"])
-var testuser_2 = User(id: "2", name: "Егор", image: nil, isAppUser: false, followedEvents: ["1", "2", "3", "4"])
-var testuser_3 = User(id: "3", name: "Илья", image: nil, isAppUser: false, followedEvents: ["1", "2", "3", "4"])
-var testuser_4 = User(id: "4", name: "Света", image: nil, isAppUser: false, followedEvents: ["2", "4", "5"])
-
-
-var testEverythingStorage = InternalStorage(nowUser: testuser_1, cachedEvents: ["1": testevent_1, "2": testevent_2, "3": testevent_3, "4": testevent_4], cachedUsers: ["1": testuser_1, "2": testuser_2, "3": testuser_3, "4": testuser_4], cachedPictures: [:])
+//var testevent_1 = Event(id: "1", name: "Футбольный матч", eventBeginDate: Date(), eventEndDate: Date(), place: (51.1, 31.1), owner: "1", willGoUsers: ["1", "2"], mayGoUsers: ["3"])
+//
+//var testevent_2 = Event(id: "2", name: "Встреча в баре", eventBeginDate: Date(), eventEndDate: Date(), place: (52.2, 32.2), owner: "2", willGoUsers: ["2"], mayGoUsers: ["3", "4"])
+//
+//var testevent_3 = Event(id: "3", name: "Мафия", eventBeginDate: Date(), eventEndDate: Date(), place: (53.3, 33.3), owner: "2", willGoUsers: ["1", "2", "3"], mayGoUsers: ["5"])
+//
+//var testevent_4 = Event(id: "4", name: "Обмен одеждой", eventBeginDate: Date(), eventEndDate: Date(), place: (54.4, 34.4), owner: "3", willGoUsers: ["3"], mayGoUsers: ["1", "2", "4", "5"])
+//
+//
+//var testuser_1 = User(id: "1", name: "Артём", image: nil, isAppUser: true, followedEvents: ["1", "3", "4", "5"])
+//var testuser_2 = User(id: "2", name: "Егор", image: nil, isAppUser: false, followedEvents: ["1", "2", "3", "4"])
+//var testuser_3 = User(id: "3", name: "Илья", image: nil, isAppUser: false, followedEvents: ["1", "2", "3", "4"])
+//var testuser_4 = User(id: "4", name: "Света", image: nil, isAppUser: false, followedEvents: ["2", "4", "5"])
+//
+//
+//var testEverythingStorage = InternalStorage(nowUser: testuser_1, cachedEvents: ["1": testevent_1, "2": testevent_2, "3": testevent_3, "4": testevent_4], cachedUsers: ["1": testuser_1, "2": testuser_2, "3": testuser_3, "4": testuser_4], cachedPictures: [:])

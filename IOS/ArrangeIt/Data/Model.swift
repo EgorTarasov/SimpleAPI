@@ -66,7 +66,13 @@ struct Event {
     var mayGoUsers: [UserID]
 }
 
+// Singleton!
 struct InternalStorage {
+    static var shared: InternalStorage = {
+        let instance = InternalStorage(cachedEvents: [:], cachedUsers: [:], cachedPictures: [:])
+        return instance
+    }()
+    
     private init(nowUser: User? = nil, cachedEvents: [EventID : Event], cachedUsers: [UserID : User], cachedPictures: [PictureID : String], networkPuller: NetworkPuller = NetworkPuller()) {
         self.nowUser = nowUser
         self.cachedEvents = cachedEvents
@@ -76,10 +82,6 @@ struct InternalStorage {
     }
     
     
-    static var shared: InternalStorage = {
-        let instance = InternalStorage(cachedEvents: [:], cachedUsers: [:], cachedPictures: [:])
-            return instance
-        }()
     
     var nowUser: User?
     
@@ -91,7 +93,7 @@ struct InternalStorage {
     func getEventByID(ID eventID: EventID) -> Event? {
         if let cachedEvent = cachedEvents[eventID] {
             return cachedEvent
-        } else if let downloadedEvent = networkPuller.getEventByID(ID: eventID) {
+        } else if let downloadedEvent = networkPuller.downloadEventByID(ID: eventID) {
             return downloadedEvent
         } else {
             return nil
@@ -101,7 +103,7 @@ struct InternalStorage {
     func getUserByID(ID userID: UserID) -> User? {
         if let cachedUser = cachedUsers[userID] {
             return cachedUser
-        } else if let downloadedUser = networkPuller.getUserByID(ID: userID) {
+        } else if let downloadedUser = networkPuller.downloadUserByID(ID: userID) {
             return downloadedUser
         } else {
             return nil
@@ -109,94 +111,132 @@ struct InternalStorage {
     }
     
 }
-
-struct NetworkPusher {
-    
-    static var shared: NetworkPuller {
-        let instance = NetworkPuller()
+// Singleton!
+struct FirebaseDB {
+    static var shared: FirebaseDB {
+        let instance = FirebaseDB()
         return instance
     }
-    let db = Firestore.firestore()
     
-    func sendNewEvent(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PictureID? = nil, imageGallery: [PictureID]? = nil, willGoUsers: [UserID], mayGoUsers: [UserID]) {
-        var ref: DocumentReference? = db.collection("events").addDocument(data: [
-            "id": id,
-            "name" : name,
-            "eventBeginDate" : eventBeginDate,
-            "eventEndDate" : eventEndDate,
-            "place" : place,
-            "creatingDate" : creatingDate?,
-            "owner" : owner,
-            "description" : description?,
-            "cover" : cover!,
-            "imageGallery" : imageGallery?,
-            "willGoUsers" : willGoUsers,
-            "mayGoUsers" : mayGoUsers,
+    let db = Firestore.firestore()
+}
+
+// Singleton!
+struct NetworkPusher {
+    static var shared: NetworkPusher {
+        let instance = NetworkPusher()
+        return instance
+    }
+    
+    func sendNewEvent(event: Event) {
+        var ref: DocumentReference? = FirebaseDB.shared.collection("events").addDocument(data: [
+            "id": event.id,
+            "name" : event.name,
+            "eventBeginDate" : event.eventBeginDate,
+            "eventEndDate" : event.eventEndDate,
+            "place" : event.place,
+            "creatingDate" : event.creatingDate?,
+            "owner" : event.owner,
+            "description" : event.description?,
+            "cover" : event.cover?,
+            "imageGallery" : event.imageGallery?,
+            "willGoUsers" : event.willGoUsers,
+            "mayGoUsers" : event.mayGoUsers,
         ]) {
             mayError in
             if let error = mayError {
                 print("error sending event. name: \(name), id: \(id)")
             } else {
                 print("succesfully sent event. name: \(name), id: \(id)")
-                InternalStorage.shared.cachedEvents[id] = Event(id: id, name: name, eventBeginDate: eventBeginDate, eventEndDate: eventEndDate, place: place, creatingDate: creatingDate, owner: owner, description: description, cover: cover, imageGallery: imageGallery, willGoUsers: willGoUsers, mayGoUsers: mayGoUsers)
+                InternalStorage.shared.cachedEvents[event.id] =  event
             }
         }
     }
     
-}
-
-
-
-//Тестовое пполучение мероприятия
-func getEvent(){
-    //let events : [Event]
-    db.collection("events").getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in querySnapshot!.documents {
-                
-                print("\(document.documentID) => \(document.data())")
-            }
-        }
+    func registrateNewUser(name: String, image: String, password: String) {
+        // TODO
     }
-    //return events
+    
+    func sendUpdateToEvent(ID eventID: EventID, newData: Event) {
+        // TODO
+    }
+    
+    func sendUpdateForCurrentUser(newName: String?, newPassword: String?, newImage: String?) {
+        // TODO
+    }
 }
 
-
-
-
-//
 
 struct NetworkPuller {
-    func getEventByID(ID eventID: EventID) -> Event? {
-        if let downloadedEvent = self.tryDownloadEvent(ID: eventID) {
-            return downloadedEvent
-        } else {
-            return nil
-        }
+    static var shared: NetworkPuller {
+        let instance = NetworkPuller()
+        return instance
     }
     
-    func tryDownloadEvent(ID eventID: EventID) -> Event? {
-        //
+    func downloadUserByID(ID userID: UserID) -> User? {
+        // TODO
         
-//        return Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: ["1", "4"], mayGoUsers: ["5"])
+        // InternalStorage.shared.cachedUsers[downloadedUser.id] = downloadedUser
     }
     
-    func getUserByID(ID userID: UserID) -> User? {
-        if let downloadedUser = self.tryDownloadUser(ID: userID) {
-            return downloadedUser
-        } else {
-            return nil
-        }
-    }
-    
-    func tryDownloadUser(ID userID: UserID) -> User? {
-        //
+    func downloadEventByID(ID eventID: EventID) -> Event? {
+        // TODO
         
-//        return User(id: "5", name: "Саша", image: nil, isAppUser: false, followedEvents: ["3", "4", "5"])
+        // InternalStorage.shared.cachedEvents[downloadedEvent.id] = downloadedEvent
+    }
+    
+    func downloadPictureByID(ID pictureID: PictureID) -> PictureID? {
+        // TODO
+        
+        // *Добавить в хранилище реальных файлов картинок*
+        // InternalStorage.shared.cachedPictures[downloadedPicture.id] = downloadedPicture
+    }
+    
+    func getNearestEventsByPlace(placeCoordinates: (Double, Double), radius: Int) -> [EventID] {
+        // TODO
+    }
+    
+    func fullDatabaseRefresh(appUserID: UserID) {
+        // TODO
+        
+        
+        // InternalStorage.shared.cachedEvents = [:]
+        // InternalStorage.shared.cachedUsers = [:]
+        // InternalStorage.shared.cachedPictures = [:]
+        // for event in downloadedEvents {
+        //     InternalStorage.shared.cachedEvents[event.id] = event
+        // }
+        // for user in downloadedUsers {
+        //     InternalStorage.shared.cachedUsers[user.id] = user
+        // }
+        // for picture in downloadedPictures {
+        //     *добавить в хранилище реальных файлов картинок*
+        //     InternalStorage.shared.cachedPictures[picture.id] = picture
+        // }
     }
 }
+//Тестовое получение мероприятия
+//func getEvent(){
+//    //let events : [Event]
+//    db.collection("events").getDocuments() { (querySnapshot, err) in
+//        if let err = err {
+//            print("Error getting documents: \(err)")
+//        } else {
+//            for document in querySnapshot!.documents {
+//
+//                print("\(document.documentID) => \(document.data())")
+//            }
+//        }
+//    }
+//    //return events
+//}
+
+
+
+
+// ТЕСТОВЫЕ ДАННЫЕ
+//var testevent_5 =  Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: ["1", "4"], mayGoUsers: ["5"])
+//var testuser_5 = User(id: "5", name: "Саша", image: nil, isAppUser: false, followedEvents: ["3", "4", "5"])
 
 
 //var testevent_1 = Event(id: "1", name: "Футбольный матч", eventBeginDate: Date(), eventEndDate: Date(), place: (51.1, 31.1), owner: "1", willGoUsers: ["1", "2"], mayGoUsers: ["3"])

@@ -115,7 +115,7 @@ func sendEvent(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Da
     
     
     
-    // Add a new document with a generated ID
+    // Добавление нового мероприятия в бд
     var ref: DocumentReference? = nil
     ref = db.collection("events").addDocument(data: [
         "id": id,

@@ -1,5 +1,6 @@
 //
-//  AuthVIewController.swift
+//  Login&Register.swift
+//  Регистрация и вход в приложения с помощью Firebase
 //  ArrangeIt
 //
 
@@ -9,6 +10,7 @@ import Firebase
 
 class LoginAndRegisterViewController: UIViewController {
     
+    // Переключатель Log in / sign up
     var signup: Bool = true {
         willSet {
             if newValue {
@@ -26,24 +28,24 @@ class LoginAndRegisterViewController: UIViewController {
         }
     }
     
-    // Лейблы
-    @IBOutlet weak var accountLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+
+    @IBOutlet var accountLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
-    // Поля ввода
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+
+    @IBOutlet var nameField: UITextField!
+    @IBOutlet var emailField: UITextField!
+    @IBOutlet var passwordField: UITextField!
     
-    // Кнопки
-    @IBOutlet weak var enterButton: UIButton!
-    @IBOutlet weak var switchButton: UIButton!
+
+    @IBOutlet var enterButton: UIStackView!
+    @IBOutlet var switchButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    // Показать уведомление, что все окей
+    // Генераци всплывающего окна
     func showAlert(title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -51,14 +53,15 @@ class LoginAndRegisterViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    // Обработать введенные данные и отправить на сервер
+    // Обработать данных с экрана
     @IBAction func enterButton(_ sender: UIButton) {
+        
         let name = nameField.text!
         let email = emailField.text!
         let password = passwordField.text!
         
-        if name.isEmpty || email.isEmpty || password.isEmpty {
-            showAlert(title: "Проверьте ввод", message: "Вы заполнили не все поля")
+        if (name.isEmpty && !nameField.isHidden) || email.isEmpty || password.isEmpty {
+            showAlert(title: "Ошибка при выполнении действия!", message: "Вы заполнили не все поля")
         }
         else {
             Auth.auth().createUser(withEmail: email, password: password) {

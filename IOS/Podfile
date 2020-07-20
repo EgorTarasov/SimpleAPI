@@ -7,6 +7,8 @@ target 'ArrangeIt' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'FirebaseFirestoreSwift'
+  pod 'Firebase/Firestore'
   # Pods for ArrangeIt
 
 end

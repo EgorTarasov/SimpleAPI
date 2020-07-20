@@ -8,20 +8,11 @@ import UIKit
 
 
 class AccountMenuViewController: UITableViewController {
-    var everythingStorage: InternalStorage? = testEverythingStorage
-    var nowUser: User? = nil
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        nowUser = everythingStorage?.nowUser
-    }
-    
-    
+
     // Отвечает за количество строк
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let user = nowUser {
-            return 1 + user.returnAdministratedEvents(storage: everythingStorage).count
+        if let user = InternalStorage.shared.nowUser {
+            return 1 + InternalStorage.shared.getAdministratedEventsByUser(user: user).count
         }
         else {
             return 1
@@ -33,24 +24,24 @@ class AccountMenuViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // аккаунт и залогинен - просмотр аккаунта
-        if indexPath.row == 0 && nowUser != nil {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "detailedAccountView") as? AccountDetailViewController {
-                vc.selectedUser = everythingStorage?.nowUser
+        if indexPath.row == 0 && InternalStorage.shared.nowUser != nil {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "accountDetail") as? AccountDetailViewController {
+                vc.selectedUser = InternalStorage.shared.nowUser
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
         
         // аккаунт и не залогинен - регистрация/вход
-        else if indexPath.row == 0 && nowUser == nil {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "loginInAccountView") as? LoginAndRegisterViewController {
+        else if indexPath.row == 0 && InternalStorage.shared.nowUser == nil {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "loginAndRegister") as? LoginAndRegisterViewController {
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
         
         // мероприятие - детальный просмотр мероприятия
-        else if nowUser != nil {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "detailedEventView") as? EventDetailViewController {
-                vc.selectedEvent = everythingStorage?.getEventByID(ID: nowUser!.returnAdministratedEvents(storage: everythingStorage)[indexPath.row - 1])
+        else if InternalStorage.shared.nowUser != nil {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "eventDetail") as? EventDetailViewController {
+                vc.selectedEvent = InternalStorage.shared.getEventByID(ID: InternalStorage.shared.nowUser!.willGoEvents[indexPath.row - 1])
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -60,17 +51,17 @@ class AccountMenuViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Строчка "аккаунт" и пользователь залогинен - имя, ближайший ивент, фотография, уведомления
-        if indexPath.row == 0 && nowUser != nil {
+        if indexPath.row == 0 && InternalStorage.shared.nowUser != nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccountItem", for: indexPath)
             
-            cell.textLabel?.text = "Ваш аккаунт, \(nowUser!.name)"
+            cell.textLabel?.text = "Ваш аккаунт, \(InternalStorage.shared.nowUser!.name)"
             cell.imageView?.image = UIImage(systemName: "person")
             
             return cell
         }
         
         // Строчка "аккаунт" и пользователь не залогинен - пустое изображение, "войти или зарегистрироваться"
-        else if indexPath.row == 0 && nowUser == nil {
+        else if indexPath.row == 0 && InternalStorage.shared.nowUser == nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccountItem", for: indexPath)
             
             cell.textLabel?.text = "Войти в аккаунт"
@@ -83,7 +74,7 @@ class AccountMenuViewController: UITableViewController {
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventItem", for: indexPath)
             
-            cell.textLabel?.text = everythingStorage?.getEventByID(ID: nowUser!.returnAdministratedEvents(storage: everythingStorage)[indexPath.row - 1])?.name
+            cell.textLabel?.text = InternalStorage.shared.getEventByID(ID: InternalStorage.shared.getAdministratedEventsByUser(user: InternalStorage.shared.nowUser!)[indexPath.row - 1])?.name
             cell.imageView?.image = UIImage(systemName: "person.3")
             
             return cell

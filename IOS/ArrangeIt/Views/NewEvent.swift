@@ -22,5 +22,8 @@ class NewEventViewController: UIViewController {
         newEventStartTime.preferredDatePickerStyle = .compact
         newEventEndTime.datePickerMode = .time
         newEventEndTime.preferredDatePickerStyle = .compact
+        
+        //TODO : можешь отправить событие
+        //sendEvent(id: <#T##EventID#>, name: <#T##String#>, eventBeginDate: <#T##Date#>, eventEndDate: <#T##Date#>, place: <#T##(Double, Double)#>, owner: <#T##UserID#>, willGoUsers: <#T##[UserID]#>, mayGoUsers: <#T##[UserID]#>)
     }
 }

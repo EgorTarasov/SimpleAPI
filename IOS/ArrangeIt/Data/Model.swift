@@ -139,6 +139,7 @@ func sendEvent(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Da
     }
 }
 
+//Тестовое пполучение мероприятия
 func getEvent(){
     //let events : [Event]
     db.collection("events").getDocuments() { (querySnapshot, err) in

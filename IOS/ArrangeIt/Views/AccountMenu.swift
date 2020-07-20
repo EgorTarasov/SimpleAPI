@@ -51,17 +51,17 @@ class AccountMenuViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Строчка "аккаунт" и пользователь залогинен - имя, ближайший ивент, фотография, уведомления
-        if indexPath.row == 0 && nowUser != nil {
+        if indexPath.row == 0 && InternalStorage.shared.nowUser != nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccountItem", for: indexPath)
             
-            cell.textLabel?.text = "Ваш аккаунт, \(nowUser!.name)"
+            cell.textLabel?.text = "Ваш аккаунт, \(InternalStorage.shared.nowUser!.name)"
             cell.imageView?.image = UIImage(systemName: "person")
             
             return cell
         }
         
         // Строчка "аккаунт" и пользователь не залогинен - пустое изображение, "войти или зарегистрироваться"
-        else if indexPath.row == 0 && nowUser == nil {
+        else if indexPath.row == 0 && InternalStorage.shared.nowUser == nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AccountItem", for: indexPath)
             
             cell.textLabel?.text = "Войти в аккаунт"
@@ -74,7 +74,7 @@ class AccountMenuViewController: UITableViewController {
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventItem", for: indexPath)
             
-            cell.textLabel?.text = everythingStorage?.getEventByID(ID: nowUser!.returnAdministratedEvents(storage: everythingStorage)[indexPath.row - 1])?.name
+            cell.textLabel?.text = InternalStorage.shared.getEventByID(ID: InternalStorage.shared.getAdministratedEventsByUser(user: InternalStorage.shared.nowUser!)[indexPath.row - 1])?.name
             cell.imageView?.image = UIImage(systemName: "person.3")
             
             return cell

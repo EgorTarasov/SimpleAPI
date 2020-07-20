@@ -147,7 +147,7 @@ struct NetworkPusher {
     }
     
     func sendNewEvent(event: Event) {
-        var ref: DocumentReference? = FirebaseDB.shared.collection("events").addDocument(data: [
+        var ref: DocumentReference? = FirebaseDB.shared.db.collection("events").addDocument(data: [
             "id": event.id,
             "name" : event.name,
             "eventBeginDate" : event.eventBeginDate,

@@ -17,7 +17,7 @@ class EventScrollView: UIView {
         super.awakeFromNib()
         eventsCollectionView.delegate = self
         eventsCollectionView.dataSource = self
-        eventsCollectionView.register(UINib(nibName: "EventScrollView", bundle: .main), forCellWithReuseIdentifier: "EventCell")
+        eventsCollectionView.register(UINib(nibName: "EventCellView", bundle: .main), forCellWithReuseIdentifier: "EventCell")
     }
     
     func setup(eventsListOpt: [Event], collectionName: String) {
@@ -27,7 +27,23 @@ class EventScrollView: UIView {
     }
 }
 
-
+extension EventScrollView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 250, height: 250)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    }
+}
 
 extension EventScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -46,3 +62,5 @@ extension EventScrollView: UICollectionViewDelegate, UICollectionViewDataSource 
         return cell
     }
 }
+
+

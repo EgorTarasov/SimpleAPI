@@ -48,7 +48,7 @@ class EventsCollectionCell: UICollectionViewCell {
         
         eventNameLabel.text = event.name
         
-        df.dateFormat = "dd MMM"
+        df.dateFormat = "dd MMMM"
         eventDateLabel.text = df.string(from: event.eventBeginDate)
         
         df.dateFormat = "hh:mm"
@@ -63,9 +63,9 @@ class EventsCollectionCell: UICollectionViewCell {
             (placemarksOpt, error) in
             if let placemarks = placemarksOpt, let streetAndHouse = placemarks[0].name, let city = placemarks[0].locality {
                 if error == nil {
-                    print("\(city), \(streetAndHouse)")
+                    self.eventShortAdresslabel.text = "\(city), \(streetAndHouse)"
                 } else {
-                    print("Нет краткого имени места")
+                    self.eventShortAdresslabel.text = ("Нет краткого имени места")
                 }
             }
         }

@@ -29,10 +29,32 @@
             </objects>
             <point key="canvasLocation" x="-541" y="-6"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="2fA-1U-y4A">
+            <objects>
+                <viewController id="q1o-V6-ibk" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NuF-GM-qVX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0F8-3Q-du6">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="VTX-DT-SDj"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="dAd-Uj-xrq"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yZL-ub-baQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JFH-qZ-QDH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1424.6376811594205" y="-1655.3571428571429"/>
+        </scene>
         <!--Ваши мероприятия-->
         <scene sceneID="WDb-2n-lMT">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a1V-S4-AK8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Hqk-Xh-CyM" customClass="EventMenuViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9iP-lu-Pp0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -55,6 +77,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Ваши мероприятия" id="Jff-dz-LIc"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a1V-S4-AK8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1425" y="-998"/>
         </scene>
@@ -196,7 +219,7 @@
                                 <state key="normal" title="Показать предпросмотр"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdn-PW-e8p">
-                                <rect key="frame" x="172" y="649" width="71" height="33"/>
+                                <rect key="frame" x="171.5" y="649" width="71" height="33"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <state key="normal" title="Создать!"/>
                             </button>
@@ -222,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HD-TC-REb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2317.5999999999999" y="-1677.2113943028487"/>
+            <point key="canvasLocation" x="3038" y="-998"/>
         </scene>
         <!--Ваш аккаунт-->
         <scene sceneID="OsV-ju-NtM">

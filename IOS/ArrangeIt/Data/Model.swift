@@ -10,11 +10,11 @@ import Firebase
 
 typealias UserID = String
 typealias EventID = String
-typealias PictureID = String
+typealias PathToImage = String
 
 
 struct User {
-    internal init(id: UserID, name: String, image: PictureID? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]) {
+    internal init(id: UserID, name: String, image: PathToImage? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]) {
         self.id = id
         self.name = name
         self.image = image
@@ -25,7 +25,7 @@ struct User {
     
     var id: UserID
     var name: String
-    var image: PictureID?
+    var image: PathToImage?
     var isAppUser: Bool
     
     var willGoEvents: [EventID]
@@ -33,7 +33,7 @@ struct User {
 }
 
 struct Event {
-    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PictureID? = nil, imageGallery: [PictureID]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
+    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
         self.id = id
         self.name = name
         self.eventBeginDate = eventBeginDate
@@ -60,8 +60,8 @@ struct Event {
     var owner: UserID
     
     var description: String?
-    var cover: PictureID?
-    var imageGallery : [PictureID]?
+    var cover: PathToImage?
+    var imageGallery : [PathToImage]?
     
     
     var willGoUsers: [UserID]
@@ -71,15 +71,14 @@ struct Event {
 // Singleton!
 struct InternalStorage {
     static var shared: InternalStorage = {
-        let instance = InternalStorage(cachedEvents: [:], cachedUsers: [:], cachedPictures: [:])
+        let instance = InternalStorage()
         return instance
     }()
     
-    private init(nowUser: User? = nil, cachedEvents: [EventID : Event], cachedUsers: [UserID : User], cachedPictures: [PictureID : String]) {
+    private init(nowUser: User? = nil, cachedEvents: [EventID : Event] = [:], cachedUsers: [UserID : User] = [:]) {
         self.nowUser = nowUser
         self.cachedEvents = cachedEvents
         self.cachedUsers = cachedUsers
-        self.cachedPictures = cachedPictures
     }
     
     
@@ -88,11 +87,9 @@ struct InternalStorage {
     
     var cachedEvents: [EventID:Event]
     var cachedUsers: [UserID:User]
-    var cachedPictures: [PictureID:String]
     
     func cleanup() {
         InternalStorage.shared.cachedEvents = [:]
-        InternalStorage.shared.cachedPictures = [:]
         InternalStorage.shared.cachedUsers = [:]
         InternalStorage.shared.nowUser = nil
     }
@@ -156,9 +153,9 @@ struct NetworkPusher {
             "place" : event.place,
             "creatingDate" : event.creatingDate ?? defaultData,
             "owner" : event.owner,
-            "description" : event.description ?? " ",
-            "cover" : event.cover ?? " ",
-            "imageGallery" : event.imageGallery ?? " ",
+            "description" : event.description ?? "",
+            "cover" : event.cover ?? "",
+            "imageGallery" : event.imageGallery ?? "",
             "willGoUsers" : event.willGoUsers,
             "invitedUsers" : event.invitedUsers,
         ]) {
@@ -202,14 +199,6 @@ struct NetworkPuller {
         // InternalStorage.shared.cachedEvents[downloadedEvent.id] = downloadedEvent
         let testevent_5 =  Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: [], invitedUsers: [])
         return testevent_5
-    }
-    
-    func downloadPictureByID(ID pictureID: PictureID) -> PictureID? {
-        // TODO
-        
-        // *Добавить в хранилище реальных файлов картинок*
-        // InternalStorage.shared.cachedPictures[downloadedPicture.id] = downloadedPicture
-        return "abcde" as PictureID
     }
     
     func getNearestEventsByPlace(placeCoordinates: (Double, Double), radius: Int) -> [EventID] {

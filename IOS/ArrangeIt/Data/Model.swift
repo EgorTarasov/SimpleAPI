@@ -176,8 +176,9 @@ struct NetworkPusher {
         // TODO
     }
     
-    func login(login: String, password: String) {
+    func login(email: String, password: String) {
         // TODO
+        
         
         // InternalStorage.shared.cleanup()
         // InternalStorage.shared.nowUser = downloadedUser

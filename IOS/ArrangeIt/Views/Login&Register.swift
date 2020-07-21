@@ -59,21 +59,44 @@ class LoginAndRegisterViewController: UIViewController {
         let name = nameField.text!
         let email = emailField.text!
         let password = passwordField.text!
-        
-        if (name.isEmpty && !nameField.isHidden) || email.isEmpty || password.isEmpty {
-            showAlert(title: "Ошибка при выполнении действия!", message: "Вы заполнили не все поля")
-        }
-        else {
-            Auth.auth().createUser(withEmail: email, password: password) {
-                (result, error) in
-                if error == nil {
-                    if let result = result {
-                        print(result.user.uid)
+        if signup{
+            if (name.isEmpty && !nameField.isHidden) || email.isEmpty || password.isEmpty {
+                showAlert(title: "Ошибка при выполнении действия!", message: "Вы заполнили не все поля")
+            }
+            else {
+                Auth.auth().createUser(withEmail: email, password: password) {
+                    (result, error) in
+                    if error == nil {
+                        if let result = result {
+                            print(result.user.uid)
+                            let FirebaseDB = Firestore.firestore()
+                            var _: DocumentReference? = FirebaseDB.collection("users").addDocument(data: [
+                                "id": result.user.uid,
+                                "name" : name,
+                                "email" : email,
+                                "image" : "",
+                                "willGoEvents" : [],
+                                "invitedToEvents" : []
+                                
+                            ]) {
+                                mayError in
+                                if let error = mayError {
+                                    print("error sending event. error: \(error) name: \(name)")
+                                } else {
+                                    print("succesfully sent user. name: \(name)")
+                                }
+                            }
+                        }
                     }
                 }
             }
+        }else{
+            Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+                if error == nil{
+                    self.dismiss(animated: true, completion : nil)
+                }
+            }
         }
-        
     }
     
     @IBAction func switchButton(_ sender: UIButton) { signup.toggle() }

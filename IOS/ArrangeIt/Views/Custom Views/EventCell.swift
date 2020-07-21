@@ -28,6 +28,7 @@ class EventsCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.cornerRadius = 20.0
     }
     @IBOutlet var eventNameLabel: UILabel!
     @IBOutlet var eventCoverImageView: UIImageView!

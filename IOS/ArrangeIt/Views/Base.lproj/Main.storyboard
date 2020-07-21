@@ -22,6 +22,7 @@
                     <connections>
                         <segue destination="Z6Y-p4-Tub" kind="relationship" relationship="viewControllers" id="rPy-TN-wFK"/>
                         <segue destination="02K-nh-gAH" kind="relationship" relationship="viewControllers" id="3y7-l1-SJ5"/>
+                        <segue destination="GAt-zh-mX9" kind="relationship" relationship="viewControllers" id="DZV-dz-Tew"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="11u-bV-XA9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -272,10 +273,11 @@
             </objects>
             <point key="canvasLocation" x="1156" y="-6.746626686656672"/>
         </scene>
-        <!--Afisha Navigation Controller-->
+        <!--Афиша-->
         <scene sceneID="cry-ET-m9I">
             <objects>
                 <navigationController id="GAt-zh-mX9" customClass="AfishaNavigationController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Афиша" image="magnifyingglass" catalog="system" id="pFV-Ee-Wwd"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YGf-KL-eT8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -405,6 +407,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">

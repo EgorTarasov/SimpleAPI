@@ -66,6 +66,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" red="0.79502003960000001" green="1" blue="0.82529842389999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstItem="bZT-ra-ECw" firstAttribute="top" secondItem="fpN-EZ-Mkk" secondAttribute="bottom" constant="8" symbolic="YES" id="0v5-98-8fh"/>
                     <constraint firstItem="fpN-EZ-Mkk" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="7LC-6g-JpG"/>

@@ -172,19 +172,6 @@ struct NetworkPusher {
         }
     }
     
-    func registrateNewUser(name: String, image: String, password: String) {
-        // TODO
-    }
-    
-    func login(email: String, password: String) {
-        // TODO
-        
-        
-        // InternalStorage.shared.cleanup()
-        // InternalStorage.shared.nowUser = downloadedUser
-        // NetworkPuller.fullDatabaseRefresh()
-    }
-    
     func sendUpdateToEvent(ID eventID: EventID, newData: Event) {
         // TODO
     }
@@ -236,10 +223,7 @@ struct NetworkPuller {
     func fullDatabaseRefresh(appUserID: UserID) {
         // TODO
         
-        
-        // InternalStorage.shared.cachedEvents = [:]
-        // InternalStorage.shared.cachedUsers = [:]
-        // InternalStorage.shared.cachedPictures = [:]
+        // InternalStorage.cleanup()
         // for event in downloadedEvents {
         //     InternalStorage.shared.cachedEvents[event.id] = event
         // }

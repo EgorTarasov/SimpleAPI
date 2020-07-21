@@ -4,7 +4,6 @@
 //  ArrangeIt
 //
 
-
 import UIKit
 import Firebase
 

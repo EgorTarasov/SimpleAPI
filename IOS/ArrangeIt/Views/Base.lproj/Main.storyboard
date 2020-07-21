@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jGy-kw-elo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dl0-57-Npx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -22,7 +22,6 @@
                     <connections>
                         <segue destination="Z6Y-p4-Tub" kind="relationship" relationship="viewControllers" id="rPy-TN-wFK"/>
                         <segue destination="02K-nh-gAH" kind="relationship" relationship="viewControllers" id="3y7-l1-SJ5"/>
-                        <segue destination="Uzd-kn-7rU" kind="relationship" relationship="viewControllers" id="vyw-5e-MsO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="11u-bV-XA9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -52,35 +51,6 @@
             </objects>
             <point key="canvasLocation" x="1424.6376811594205" y="-1655.3571428571429"/>
         </scene>
-        <!--Ваши мероприятия-->
-        <scene sceneID="WDb-2n-lMT">
-            <objects>
-                <tableViewController id="Hqk-Xh-CyM" customClass="EventMenuViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9iP-lu-Pp0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArrangmentsListItem" id="bnY-P7-3tQ">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bnY-P7-3tQ" id="Rv0-ra-7K5">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Hqk-Xh-CyM" id="lJ2-sx-VUy"/>
-                            <outlet property="delegate" destination="Hqk-Xh-CyM" id="Vw1-Gp-AeJ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Ваши мероприятия" id="Jff-dz-LIc"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a1V-S4-AK8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1425" y="-998"/>
-        </scene>
         <!--Мои мероприятия-->
         <scene sceneID="svG-91-eqY">
             <objects>
@@ -90,9 +60,6 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="Hqk-Xh-CyM" kind="relationship" relationship="rootViewController" id="ige-Es-YCN"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQS-11-2d3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -128,7 +95,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBb-n1-u8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2151" y="-7"/>
+            <point key="canvasLocation" x="2149" y="-6"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="M78-6o-IQv">
+            <objects>
+                <viewController id="2X2-dX-Zsr" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kvC-LC-twv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="dtk-4P-lZU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fmp-Za-d3U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1157" y="-998"/>
         </scene>
         <!--Просмотр мероприятия-->
         <scene sceneID="H5i-Gl-3Z2">
@@ -247,75 +229,66 @@
             </objects>
             <point key="canvasLocation" x="3038" y="-998"/>
         </scene>
-        <!--Ваш аккаунт-->
-        <scene sceneID="OsV-ju-NtM">
-            <objects>
-                <tableViewController id="RaM-8i-tej" customClass="AccountMenuViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DaE-7F-VlX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccountItem" id="BCG-5A-OsE">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BCG-5A-OsE" id="4K2-ph-oMl">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EventItem" id="0kw-vD-WyY">
-                                <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0kw-vD-WyY" id="SFL-hK-bAQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="RaM-8i-tej" id="XKn-x7-FAU"/>
-                            <outlet property="delegate" destination="RaM-8i-tej" id="4gu-mM-3m6"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Ваш аккаунт" id="ZKW-VH-CVf"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5to-fi-3Nl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1426" y="-6"/>
-        </scene>
         <!--Мой аккаунт-->
         <scene sceneID="mX3-Au-txK">
             <objects>
-                <navigationController id="Z6Y-p4-Tub" sceneMemberID="viewController">
+                <navigationController id="Z6Y-p4-Tub" customClass="AccountMenuNavigationController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Мой аккаунт" image="person.fill" catalog="system" id="jIO-dr-xON"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BwR-lZ-m4z">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="RaM-8i-tej" kind="relationship" relationship="rootViewController" id="7We-Ra-oXI"/>
+                        <segue destination="ipU-vC-Zqj" kind="relationship" relationship="rootViewController" id="zFN-1N-RVJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IKf-k8-F6q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="539" y="-6"/>
         </scene>
-        <!--Поиск/Афиша-->
-        <scene sceneID="4M9-ce-IRa">
+        <!--Account Detail View Controller-->
+        <scene sceneID="kCY-cR-u1l">
             <objects>
-                <viewController id="Uzd-kn-7rU" customClass="AfishaViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EpR-4C-Xpk">
+                <viewController id="ipU-vC-Zqj" customClass="AccountDetailViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bwE-l2-Iew">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="k9k-cG-h5N"/>
+                        <viewLayoutGuide key="safeArea" id="T3v-r0-mbe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Поиск/Афиша" image="magnifyingglass" catalog="system" id="592-fp-E0M"/>
+                    <navigationItem key="navigationItem" id="3kh-Hh-00G"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gt7-I2-lHu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xwd-Mu-kDI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="538" y="1337"/>
+            <point key="canvasLocation" x="1157" y="-6"/>
+        </scene>
+        <!--Afisha Navigation Controller-->
+        <scene sceneID="cry-ET-m9I">
+            <objects>
+                <navigationController id="GAt-zh-mX9" customClass="AfishaNavigationController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YGf-KL-eT8">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t3T-0z-kf9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="538" y="1310"/>
+        </scene>
+        <!--Afisha View Controller-->
+        <scene sceneID="Erd-5c-Oc3">
+            <objects>
+                <viewController id="p9M-x6-gVL" customClass="AfishaViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1XF-2a-tny">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="eF1-XY-xpo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jRD-y7-uyi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1157" y="1310"/>
         </scene>
         <!--Login And Register View Controller-->
         <scene sceneID="aUj-z9-CaD">
@@ -418,7 +391,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">

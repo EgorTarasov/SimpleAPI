@@ -13,6 +13,8 @@ typealias EventID = String
 typealias PathToImage = String
 
 
+let testEventsList = ["1": Event(id: "1", name: "Футбол во дворе", eventBeginDate: Date().addingTimeInterval(60), eventEndDate: Date().addingTimeInterval(3660), place: (55.773863, 37.679636), owner: "1", willGoUsers: ["1", "2", "3"], invitedUsers: []), "2": Event(id: "2", name: "Покер", eventBeginDate: Date().addingTimeInterval(3600), eventEndDate: Date().addingTimeInterval(7200), place: (55.810127, 37.652739), owner: "1", willGoUsers: ["1", "2", "3", "4", "5", "6"], invitedUsers: ["7", "8", "9"]), "3": Event(id: "3", name: "Встреча одноклассников", eventBeginDate: Date().addingTimeInterval(10000), eventEndDate: Date().addingTimeInterval(15000), place: (55.794207, 37.582787), owner: "1", willGoUsers: ["1", "2", "3", "4"], invitedUsers: ["5", "6"])]
+
 struct User {
     internal init(id: UserID, name: String, image: PathToImage? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]) {
         self.id = id
@@ -86,6 +88,8 @@ struct InternalStorage {
     var nowUser: User?  
     
     var cachedEvents: [EventID:Event]
+    
+    
     var cachedUsers: [UserID:User]
     
     func cleanup() {
@@ -95,6 +99,7 @@ struct InternalStorage {
     }
     
     func getAdministratedEventsByUser(userOpt: User?) -> [EventID]? {
+        // return ["1", "2", "3"]
         if let user = userOpt {
             var result: [EventID] = []
             for eventID in user.willGoEvents {
@@ -110,10 +115,12 @@ struct InternalStorage {
     
     func getFeaturedEvents() -> [EventID]? {
         // TODO
+        // return ["1", "2", "3"]
         return nil
     }
     
     func getEventByID(ID eventID: EventID) -> Event? {
+        // return testEventsList[eventID]
         if let cachedEvent = cachedEvents[eventID] {
             return cachedEvent
         } else if let downloadedEvent = NetworkPuller.shared.downloadEventByID(ID: eventID) {

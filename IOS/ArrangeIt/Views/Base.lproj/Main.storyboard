@@ -323,20 +323,23 @@
                                     <constraint firstAttribute="trailing" secondItem="pNT-H7-P7e" secondAttribute="trailing" id="tM1-Ze-Qst"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="f9C-QC-1eW">
-                                <rect key="frame" x="3" y="214" width="368" height="404"/>
-                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wP2-KW-yxp">
+                                <rect key="frame" x="0.0" y="214" width="375" height="306"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="306" id="YbT-ew-4mM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="T3v-r0-mbe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="T3v-r0-mbe" firstAttribute="bottom" secondItem="f9C-QC-1eW" secondAttribute="bottom" id="2DJ-qE-EdW"/>
                             <constraint firstItem="cIY-Wk-0Ex" firstAttribute="top" secondItem="T3v-r0-mbe" secondAttribute="top" constant="10" id="K2S-Ld-X6T"/>
-                            <constraint firstItem="f9C-QC-1eW" firstAttribute="leading" secondItem="T3v-r0-mbe" secondAttribute="leading" constant="3" id="kwy-Wy-5Yr"/>
-                            <constraint firstItem="T3v-r0-mbe" firstAttribute="trailing" secondItem="f9C-QC-1eW" secondAttribute="trailing" constant="4" id="ooZ-d2-Vac"/>
-                            <constraint firstItem="f9C-QC-1eW" firstAttribute="top" secondItem="cIY-Wk-0Ex" secondAttribute="bottom" constant="8" symbolic="YES" id="pXZ-8n-sJh"/>
+                            <constraint firstItem="T3v-r0-mbe" firstAttribute="trailing" secondItem="wP2-KW-yxp" secondAttribute="trailing" id="YoO-vS-rQl"/>
+                            <constraint firstItem="wP2-KW-yxp" firstAttribute="top" secondItem="cIY-Wk-0Ex" secondAttribute="bottom" constant="8" symbolic="YES" id="sGf-eJ-do4"/>
                             <constraint firstItem="cIY-Wk-0Ex" firstAttribute="leading" secondItem="T3v-r0-mbe" secondAttribute="leading" constant="16" id="vgF-qq-tGd"/>
                             <constraint firstItem="T3v-r0-mbe" firstAttribute="trailing" secondItem="cIY-Wk-0Ex" secondAttribute="trailing" constant="16" id="wDQ-pA-TxF"/>
+                            <constraint firstItem="wP2-KW-yxp" firstAttribute="leading" secondItem="T3v-r0-mbe" secondAttribute="leading" id="yoD-Ii-AsO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3kh-Hh-00G"/>
@@ -345,6 +348,7 @@
                         <outlet property="image" destination="Zle-fI-4hn" id="QtX-6Z-ghO"/>
                         <outlet property="invites" destination="dgj-0Z-fgK" id="mdd-AL-rSG"/>
                         <outlet property="name" destination="WWq-MU-GyV" id="BCR-Ir-gJv"/>
+                        <outlet property="scroll" destination="wP2-KW-yxp" id="Gej-nQ-TVZ"/>
                         <outlet property="settings" destination="SGo-7r-azZ" id="Pvm-JN-PoJ"/>
                     </connections>
                 </viewController>

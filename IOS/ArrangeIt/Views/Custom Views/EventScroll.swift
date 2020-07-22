@@ -9,6 +9,7 @@ import UIKit
 
 class EventScrollView: UIView {
     @IBOutlet var eventsCollectionView: UICollectionView!
+    @IBOutlet var collectionName: UILabel!
     
     var eventsListOpt: [EventID]?
     
@@ -21,6 +22,7 @@ class EventScrollView: UIView {
     
     func setup(eventsListOpt: [EventID]?, collectionName: String) {
         self.eventsListOpt = eventsListOpt
+        self.collectionName.text = collectionName
         eventsCollectionView.reloadData()
     }
 }

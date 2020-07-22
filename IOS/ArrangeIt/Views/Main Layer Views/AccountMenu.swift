@@ -17,6 +17,7 @@ class AccountMenuViewController: UIViewController {
     @IBOutlet var events: UILabel!
     @IBOutlet var invites: UILabel!
     @IBOutlet var settings: UIButton!
+    @IBOutlet var scroll: UIView!
     
     
     override func viewDidLoad() {
@@ -30,12 +31,15 @@ class AccountMenuViewController: UIViewController {
             name.setTitle(user.name, for: .normal)
             events.text = "Всего мероприятий: \(user.willGoEvents.count)"
             invites.text = "Активных приглшений: \(user.invitedToEvents.count)"
-            
         } else {
             image.image = UIImage(systemName: "person.badge.plus")
             name.setTitle("Войти в аккаунт", for: .normal)
         }
+        let featuredView: EventScrollView = .fromNib()
+        featuredView.setup(eventsListOpt: InternalStorage.shared.getFeaturedEvents(), collectionName: "Избранные мероприятия")
+        scroll = featuredView
     }
+
     
     @IBAction func nameTapped(_ sender: UIButton) {
         if let user = InternalStorage.shared.nowUser, let vc = storyboard?.instantiateViewController(identifier: "accountDetail") as? AccountDetailViewController {

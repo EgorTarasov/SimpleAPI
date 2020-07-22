@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCell" id="HYq-GT-Bs7" customClass="EventsCollectionCell" customModule="ArrangeIt" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="myN-XS-0Bd">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дворовый футбольный матч" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpN-EZ-Mkk">
+                        <rect key="frame" x="16" y="0.0" width="218" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="MlD-lw-u4b"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bZT-ra-ECw">
+                        <rect key="frame" x="16" y="88" width="79.5" height="106"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 июня" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7j-aZ-sY7">
+                                <rect key="frame" x="0.0" y="0.0" width="79.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bi0-cm-wsb">
+                                <rect key="frame" x="0.0" y="28.5" width="79.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fq0-CQ-FFt">
+                                <rect key="frame" x="0.0" y="57" width="79.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 человек" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcu-lV-1O2">
+                                <rect key="frame" x="0.0" y="85.5" width="79.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Москва, Центральный проезд Хорошевского Серебряного Бора, 20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axG-1C-2RZ">
+                        <rect key="frame" x="16" y="203" width="218" height="39"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="RmL-QZ-ZQ9">
+                        <rect key="frame" x="127" y="88" width="107" height="107"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" name="eventCellColor"/>
+                <constraints>
+                    <constraint firstItem="bZT-ra-ECw" firstAttribute="top" secondItem="fpN-EZ-Mkk" secondAttribute="bottom" constant="8" symbolic="YES" id="0v5-98-8fh"/>
+                    <constraint firstItem="fpN-EZ-Mkk" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="7LC-6g-JpG"/>
+                    <constraint firstItem="fpN-EZ-Mkk" firstAttribute="top" secondItem="myN-XS-0Bd" secondAttribute="top" id="8DX-qn-sWk"/>
+                    <constraint firstItem="axG-1C-2RZ" firstAttribute="top" secondItem="RmL-QZ-ZQ9" secondAttribute="bottom" constant="8" id="93i-yW-ykP"/>
+                    <constraint firstAttribute="trailing" secondItem="fpN-EZ-Mkk" secondAttribute="trailing" constant="16" id="FcN-sw-49I"/>
+                    <constraint firstItem="bZT-ra-ECw" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="bil-Mt-git"/>
+                    <constraint firstItem="axG-1C-2RZ" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="drp-Dy-3dA"/>
+                    <constraint firstItem="axG-1C-2RZ" firstAttribute="centerX" secondItem="fpN-EZ-Mkk" secondAttribute="centerX" id="zRA-Jn-76b"/>
+                    <constraint firstAttribute="bottom" secondItem="axG-1C-2RZ" secondAttribute="bottom" constant="8" id="zYS-Wk-cdS"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <connections>
+                <outlet property="eventCoverImageView" destination="RmL-QZ-ZQ9" id="KBo-dh-vtK"/>
+                <outlet property="eventDateLabel" destination="Z7j-aZ-sY7" id="9jg-Bc-YDX"/>
+                <outlet property="eventEndLabel" destination="Fq0-CQ-FFt" id="gQ3-8Q-XMB"/>
+                <outlet property="eventNameLabel" destination="fpN-EZ-Mkk" id="Niy-Bd-y95"/>
+                <outlet property="eventNumOfPersonLabel" destination="Vcu-lV-1O2" id="qih-2t-EhX"/>
+                <outlet property="eventShortAdresslabel" destination="axG-1C-2RZ" id="GT5-H3-fcg"/>
+                <outlet property="eventStartLabel" destination="Bi0-cm-wsb" id="0hE-CQ-Bsm"/>
+            </connections>
+            <point key="canvasLocation" x="-194.20289855072465" y="-9.375"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="eventCellColor">
+            <color red="0.59200000762939453" green="0.89800000190734863" blue="0.63700002431869507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

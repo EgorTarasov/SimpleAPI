@@ -10,11 +10,11 @@ import Firebase
 
 typealias UserID = String
 typealias EventID = String
-typealias PictureID = Int
+typealias PathToImage = String
 
 
 struct User {
-    internal init(id: UserID, name: String, image: PictureID? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]) {
+    internal init(id: UserID, name: String, image: PathToImage? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]) {
         self.id = id
         self.name = name
         self.image = image
@@ -25,7 +25,7 @@ struct User {
     
     var id: UserID
     var name: String
-    var image: PictureID?
+    var image: PathToImage?
     var isAppUser: Bool
     
     var willGoEvents: [EventID]
@@ -33,7 +33,7 @@ struct User {
 }
 
 struct Event {
-    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PictureID? = nil, imageGallery: [PictureID]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
+    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
         self.id = id
         self.name = name
         self.eventBeginDate = eventBeginDate
@@ -60,8 +60,8 @@ struct Event {
     var owner: UserID
     
     var description: String?
-    var cover: PictureID?
-    var imageGallery : [PictureID]?
+    var cover: PathToImage?
+    var imageGallery : [PathToImage]?
     
     
     var willGoUsers: [UserID]
@@ -71,15 +71,14 @@ struct Event {
 // Singleton!
 struct InternalStorage {
     static var shared: InternalStorage = {
-        let instance = InternalStorage(cachedEvents: [:], cachedUsers: [:], cachedPictures: [:])
+        let instance = InternalStorage()
         return instance
     }()
     
-    private init(nowUser: User? = nil, cachedEvents: [EventID : Event], cachedUsers: [UserID : User], cachedPictures: [PictureID : String]) {
+    private init(nowUser: User? = nil, cachedEvents: [EventID : Event] = [:], cachedUsers: [UserID : User] = [:]) {
         self.nowUser = nowUser
         self.cachedEvents = cachedEvents
         self.cachedUsers = cachedUsers
-        self.cachedPictures = cachedPictures
     }
     
     
@@ -88,23 +87,30 @@ struct InternalStorage {
     
     var cachedEvents: [EventID:Event]
     var cachedUsers: [UserID:User]
-    var cachedPictures: [PictureID:String]
     
     func cleanup() {
         InternalStorage.shared.cachedEvents = [:]
-        InternalStorage.shared.cachedPictures = [:]
         InternalStorage.shared.cachedUsers = [:]
         InternalStorage.shared.nowUser = nil
     }
     
-    func getAdministratedEventsByUser(user: User) -> [EventID] {
-        var result: [EventID]
-        for eventID in user.willGoEvents {
-            if let got_event = self.getEventByID(ID: eventID) {
-                result.append(got_event.id)
+    func getAdministratedEventsByUser(userOpt: User?) -> [EventID]? {
+        if let user = userOpt {
+            var result: [EventID] = []
+            for eventID in user.willGoEvents {
+                if let got_event = self.getEventByID(ID: eventID) {
+                    result.append(got_event.id)
+                }
             }
+            return result
+        } else {
+            return nil
         }
-        return result
+    }
+    
+    func getFeaturedEvents() -> [EventID]? {
+        // TODO
+        return nil
     }
     
     func getEventByID(ID eventID: EventID) -> Event? {
@@ -147,40 +153,29 @@ struct NetworkPusher {
     }
     
     func sendNewEvent(event: Event) {
-        var ref: DocumentReference? = FirebaseDB.shared.db.collection("events").addDocument(data: [
+        let defaultData = "20.1.2020"
+        var _: DocumentReference? = FirebaseDB.shared.db.collection("events").addDocument(data: [
             "id": event.id,
             "name" : event.name,
             "eventBeginDate" : event.eventBeginDate,
             "eventEndDate" : event.eventEndDate,
             "place" : event.place,
-            "creatingDate" : event.creatingDate?,
+            "creatingDate" : event.creatingDate ?? defaultData,
             "owner" : event.owner,
-            "description" : event.description?,
-            "cover" : event.cover?,
-            "imageGallery" : event.imageGallery?,
+            "description" : event.description ?? "",
+            "cover" : event.cover ?? "",
+            "imageGallery" : event.imageGallery ?? "",
             "willGoUsers" : event.willGoUsers,
-            "mayGoUsers" : event.mayGoUsers,
+            "invitedUsers" : event.invitedUsers,
         ]) {
             mayError in
             if let error = mayError {
-                print("error sending event. name: \(name), id: \(id)")
+                print("error sending event. error: \(error) name: \(event.name), id: \(event.id)")
             } else {
-                print("succesfully sent event. name: \(name), id: \(id)")
+                print("succesfully sent event. name: \(event.name), id: \(event.id)")
                 InternalStorage.shared.cachedEvents[event.id] =  event
             }
         }
-    }
-    
-    func registrateNewUser(name: String, image: String, password: String) {
-        // TODO
-    }
-    
-    func login(login: String, password: String) {
-        // TODO
-        
-        // InternalStorage.shared.cleanup()
-        // InternalStorage.shared.nowUser = downloadedUser
-        // NetworkPuller.fullDatabaseRefresh()
     }
     
     func sendUpdateToEvent(ID eventID: EventID, newData: Event) {
@@ -203,32 +198,30 @@ struct NetworkPuller {
         // TODO
         
         // InternalStorage.shared.cachedUsers[downloadedUser.id] = downloadedUser
+        let testuser_5 = User(id: "5", name: "Саша", image: nil, isAppUser: false, willGoEvents: [], invitedToEvents: [])
+        return testuser_5
     }
     
     func downloadEventByID(ID eventID: EventID) -> Event? {
         // TODO
         
         // InternalStorage.shared.cachedEvents[downloadedEvent.id] = downloadedEvent
-    }
-    
-    func downloadPictureByID(ID pictureID: PictureID) -> PictureID? {
-        // TODO
-        
-        // *Добавить в хранилище реальных файлов картинок*
-        // InternalStorage.shared.cachedPictures[downloadedPicture.id] = downloadedPicture
+        let testevent_5 =  Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: [], invitedUsers: [])
+        return testevent_5
     }
     
     func getNearestEventsByPlace(placeCoordinates: (Double, Double), radius: Int) -> [EventID] {
         // TODO
+        
+        let testevent_4 = Event(id: "4", name: "Обмен одеждой", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(360), place: (54.4, 34.4), owner: "3", willGoUsers: ["3"], invitedUsers: [])
+        let testevent_5 =  Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: [], invitedUsers: [])
+        return [testevent_5.id, testevent_4.id]
     }
     
     func fullDatabaseRefresh(appUserID: UserID) {
         // TODO
         
-        
-        // InternalStorage.shared.cachedEvents = [:]
-        // InternalStorage.shared.cachedUsers = [:]
-        // InternalStorage.shared.cachedPictures = [:]
+        // InternalStorage.cleanup()
         // for event in downloadedEvents {
         //     InternalStorage.shared.cachedEvents[event.id] = event
         // }

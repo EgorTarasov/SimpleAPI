@@ -226,12 +226,12 @@ PODS:
     - FirebaseAnalytics (= 6.6.2)
   - Firebase/CoreOnly (6.28.1):
     - FirebaseCore (= 6.9.1)
-  - Firebase/Database (6.28.1):
-    - Firebase/CoreOnly
-    - FirebaseDatabase (~> 6.4.0)
   - Firebase/Firestore (6.28.1):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.16.2)
+  - Firebase/Storage (6.28.1):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.8.0)
   - FirebaseAnalytics (6.6.2):
     - FirebaseCore (~> 6.8)
     - FirebaseInstallations (~> 1.4)
@@ -255,9 +255,6 @@ PODS:
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
     - nanopb (~> 1.30905.0)
-  - FirebaseDatabase (6.4.0):
-    - FirebaseCore (~> 6.8)
-    - leveldb-library (~> 1.22)
   - FirebaseFirestore (1.16.2):
     - abseil/algorithm (= 0.20200225.0)
     - abseil/base (= 0.20200225.0)
@@ -270,13 +267,14 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 1.30905.0)
-  - FirebaseFirestoreSwift (0.3.0):
-    - FirebaseFirestore (>= 1.6.1, ~> 1.6)
   - FirebaseInstallations (1.5.0):
     - FirebaseCore (~> 6.8)
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/UserDefaults (~> 6.7)
     - PromisesObjC (~> 1.2)
+  - FirebaseStorage (3.8.0):
+    - FirebaseCore (~> 6.8)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleAppMeasurement (6.6.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -335,14 +333,19 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
+  - Nuke (9.1.1)
   - PromisesObjC (1.2.9)
+  - YandexMapKit (3.5.0):
+    - YandexRuntime (= 3.5.0)
+  - YandexRuntime (3.5.0)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
-  - Firebase/Database
   - Firebase/Firestore
-  - FirebaseFirestoreSwift
+  - Firebase/Storage
+  - Nuke
+  - YandexMapKit (= 3.5)
 
 SPEC REPOS:
   trunk:
@@ -353,10 +356,9 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
-    - FirebaseDatabase
     - FirebaseFirestore
-    - FirebaseFirestoreSwift
     - FirebaseInstallations
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -365,7 +367,10 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - Nuke
     - PromisesObjC
+    - YandexMapKit
+    - YandexRuntime
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -375,10 +380,9 @@ SPEC CHECKSUMS:
   FirebaseAuth: 06feef26ff3a98323677c76c4102146b872cd6b7
   FirebaseCore: 687b8e6a0a4337b898a6326d68254c2f80c143af
   FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
-  FirebaseDatabase: 55e69fe802ccb438d9c6ee51eb32fd425d5409d3
   FirebaseFirestore: 436c2de95f42495fbb6daf86bebde483e66706c3
-  FirebaseFirestoreSwift: 0cda93628782ca5a817cfecd2a8c0187436c0ae5
   FirebaseInstallations: 3c520c951305cbf9ca54eb891ff9e6d1fd384881
+  FirebaseStorage: 3ef81ca5fa7817f85451ca09d516a34d2c7542a7
   GoogleAppMeasurement: 8cd1f289d60e629cf16ab03363b9e89c776b9651
   GoogleDataTransport: 8a40cb194ad242b6f6dfe72c14fe40fc67c4dcd7
   GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
@@ -387,8 +391,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  Nuke: af4301b154d3afd8a3b045a5194a9a773a00b7a8
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  YandexMapKit: ecd4b78de34a35df63d066ac299e6fd0fe46d1ba
+  YandexRuntime: 2d55244d06267106cf9b00c25a1e63f72a73b6fd
 
-PODFILE CHECKSUM: 2b959de5f9c8a19efd8388db111cba0673943acc
+PODFILE CHECKSUM: 07cbfcff53cb00a294a84e925e721ad5c9279955
 
 COCOAPODS: 1.9.3

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="B3N-E1-gfN" customClass="EventScrollView" customModule="ArrangeIt" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="450" height="350"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="u4a-WF-8is">
+                    <rect key="frame" x="0.0" y="80" width="450" height="270"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GGh-pM-vdU">
+                        <size key="itemSize" width="250" height="250"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ваши мероприятия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qs-GE-4HN">
+                    <rect key="frame" x="20" y="18" width="410" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="9hc-c3-FSu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="tOX-om-zY9"/>
+            <constraints>
+                <constraint firstItem="tOX-om-zY9" firstAttribute="top" secondItem="9qs-GE-4HN" secondAttribute="top" constant="26" id="7pV-WB-eZT"/>
+                <constraint firstItem="tOX-om-zY9" firstAttribute="trailing" secondItem="9qs-GE-4HN" secondAttribute="trailing" constant="20" id="BXr-yh-U5R"/>
+                <constraint firstItem="9qs-GE-4HN" firstAttribute="leading" secondItem="tOX-om-zY9" secondAttribute="leading" constant="20" id="D3I-5Y-flG"/>
+                <constraint firstItem="u4a-WF-8is" firstAttribute="leading" secondItem="tOX-om-zY9" secondAttribute="leading" id="QVl-6h-nYY"/>
+                <constraint firstItem="u4a-WF-8is" firstAttribute="top" secondItem="9qs-GE-4HN" secondAttribute="bottom" constant="28" id="YMb-G5-rRO"/>
+                <constraint firstItem="u4a-WF-8is" firstAttribute="centerX" secondItem="tOX-om-zY9" secondAttribute="centerX" id="c7O-JA-Lr9"/>
+                <constraint firstItem="tOX-om-zY9" firstAttribute="trailing" secondItem="u4a-WF-8is" secondAttribute="trailing" id="lYA-j2-V97"/>
+                <constraint firstItem="u4a-WF-8is" firstAttribute="bottom" secondItem="tOX-om-zY9" secondAttribute="bottom" constant="34" id="pFx-tQ-AbD"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="eventsCollectionView" destination="u4a-WF-8is" id="Y79-YW-S8x"/>
+            </connections>
+            <point key="canvasLocation" x="-88.405797101449281" y="-26.785714285714285"/>
+        </view>
+    </objects>
+</document>

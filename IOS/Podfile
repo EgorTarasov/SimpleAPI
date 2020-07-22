@@ -1,14 +1,11 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
-
 target 'ArrangeIt' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Firebase/Core'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Database'
-  pod 'FirebaseFirestoreSwift'
-  pod 'Firebase/Firestore'
-  # Pods for ArrangeIt
 
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  pod 'Nuke'
+  pod 'YandexMapKit', '3.5'
 end
+

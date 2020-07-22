@@ -18,10 +18,39 @@ class AccountMenuViewController: UIViewController {
     @IBOutlet var invites: UILabel!
     @IBOutlet var settings: UIButton!
     @IBOutlet var scroll: UIView!
+    @IBOutlet var accountView: UIView!
+    @IBOutlet var imageButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        accountView.backgroundColor = UIColor(named: "accountCellColor")
+        if let user =
+            InternalStorage.shared.nowUser {
+            if let imageLink = user.image, let imageUrl = URL(string: imageLink) {
+                Nuke.loadImage(with: imageUrl, into: image)
+            } else {
+                image.image = UIImage(systemName: "person.circle")
+            }
+            name.setTitle(user.name, for: .normal)
+            events.text = "Всего мероприятий: \(user.willGoEvents.count)"
+            invites.text = "Активных приглшений: \(user.invitedToEvents.count)"
+        } else {
+            image.image = UIImage(systemName: "person.badge.plus")
+            name.setTitle("Войти в аккаунт", for: .normal)
+        }
+        let featuredView: EventScrollView = .fromNib()
+        featuredView.setup(eventsListOpt: InternalStorage.shared.getFeaturedEvents(), collectionName: "Избранные мероприятия", parentVC: self, storyboard: storyboard)
+        scroll.addSubview(featuredView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.update()
+    }
+    
+    func update() {
+        scroll.subviews.forEach({$0.removeFromSuperview()})
         if let user = InternalStorage.shared.nowUser {
             if let imageLink = user.image, let imageUrl = URL(string: imageLink) {
                 Nuke.loadImage(with: imageUrl, into: image)
@@ -36,11 +65,19 @@ class AccountMenuViewController: UIViewController {
             name.setTitle("Войти в аккаунт", for: .normal)
         }
         let featuredView: EventScrollView = .fromNib()
-        featuredView.setup(eventsListOpt: InternalStorage.shared.getFeaturedEvents(), collectionName: "Избранные мероприятия")
-        scroll = featuredView
+        featuredView.setup(eventsListOpt: InternalStorage.shared.getFeaturedEvents(), collectionName: "Избранные мероприятия", parentVC: self, storyboard: storyboard)
+        featuredView.frame.size.width = self.view.frame.size.width
+        scroll.addSubview(featuredView)
     }
 
-    
+    @IBAction func settingsTapped(_ sender: UIButton) {
+        if let _ = InternalStorage.shared.nowUser, let vc = storyboard?.instantiateViewController(identifier: "accountSettings") as? AccountSettingsViewController {
+            navigationController?.pushViewController(vc, animated: true)
+        } else if let vc = storyboard?.instantiateViewController(identifier: "loginAndRegister") as? LoginAndRegisterViewController {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
     @IBAction func nameTapped(_ sender: UIButton) {
         if let user = InternalStorage.shared.nowUser, let vc = storyboard?.instantiateViewController(identifier: "accountDetail") as? AccountDetailViewController {
             vc.selectedUser = user

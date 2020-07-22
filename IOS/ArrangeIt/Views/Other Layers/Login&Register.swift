@@ -21,7 +21,7 @@ class LoginAndRegisterViewController: UIViewController {
             else {
                 titleLabel.text = "Вход"
                 nameField.isHidden = true
-                accountLabel.text = "Присоединиться"
+                accountLabel.text = "Зарегистрироваться"
                 switchButton.setTitle("Создать аккаунт", for: .normal)
             }
         }
@@ -42,6 +42,7 @@ class LoginAndRegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        signup = false
     }
     
     // Генераци всплывающего окна
@@ -57,7 +58,11 @@ class LoginAndRegisterViewController: UIViewController {
         let name = nameField.text!
         let email = emailField.text!
         let password = passwordField.text!
+        print("clicked" )
         if !name.isEmpty && !email.isEmpty && !password.isEmpty || !email.isEmpty && !password.isEmpty && !signup {
+//            let user = User(id: "1", name: "Игорь Николаевич", isAppUser: true, willGoEvents: ["1", "2", "3"], invitedToEvents: [])
+//            InternalStorage.shared.nowUser = user
+//            return Void()
             if signup {
                 Auth.auth().createUser(withEmail: email, password: password) {
                     (result, error) in
@@ -80,7 +85,6 @@ class LoginAndRegisterViewController: UIViewController {
                                     NetworkPuller.shared.fullDatabaseRefresh(appUserID: result.user.uid)
                                     print("succesfully registrated user. name: \(name) uid: \(result.user.uid)")
                                     self.showAlert(title: "Успех!", message: "Вы успешно зарегистрированы")
-                                    self.dismiss(animated: true, completion: nil)
                                 }
                             }
                         }
@@ -94,7 +98,6 @@ class LoginAndRegisterViewController: UIViewController {
                     } else {
                         NetworkPuller.shared.fullDatabaseRefresh(appUserID: (result?.user.uid)!)
                         self.showAlert(title: "Успех!", message: "Вы успешно вошли в систему")
-                        self.dismiss(animated: true, completion : nil)
                     }
                 }
             }

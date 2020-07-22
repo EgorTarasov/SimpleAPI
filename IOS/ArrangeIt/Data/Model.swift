@@ -99,7 +99,7 @@ struct InternalStorage {
     }
     
     func getAdministratedEventsByUser(userOpt: User?) -> [EventID]? {
-        // return ["1", "2", "3"]
+         return ["1", "2", "3"]
         if let user = userOpt {
             var result: [EventID] = []
             for eventID in user.willGoEvents {
@@ -115,12 +115,12 @@ struct InternalStorage {
     
     func getFeaturedEvents() -> [EventID]? {
         // TODO
-        // return ["1", "2", "3"]
+        if InternalStorage.shared.nowUser != nil { return ["1", "2", "3"] }
         return nil
     }
     
     func getEventByID(ID eventID: EventID) -> Event? {
-        // return testEventsList[eventID]
+         return testEventsList[eventID]
         if let cachedEvent = cachedEvents[eventID] {
             return cachedEvent
         } else if let downloadedEvent = NetworkPuller.shared.downloadEventByID(ID: eventID) {

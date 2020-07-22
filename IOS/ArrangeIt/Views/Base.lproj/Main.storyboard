@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dl0-57-Npx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17140" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dl0-57-Npx">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17115"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,6 +28,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="11u-bV-XA9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-541" y="-6"/>
+        </scene>
+        <!--Account Settings View Controller-->
+        <scene sceneID="LXD-3a-f71">
+            <objects>
+                <viewController storyboardIdentifier="accountSettings" id="G6w-Rd-wqB" customClass="AccountSettingsViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LXw-Fv-3yP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Wa0-XG-Kua"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KdN-8F-Ec9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2804" y="-8"/>
         </scene>
         <!--Мои мероприятия-->
         <scene sceneID="svG-91-eqY">
@@ -125,7 +140,7 @@
         <!--Просмотр мероприятия-->
         <scene sceneID="H5i-Gl-3Z2">
             <objects>
-                <viewController storyboardIdentifier="detailedEvent" id="4aO-AO-etb" customClass="EventDetailViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="eventDetail" id="4aO-AO-etb" customClass="EventDetailViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Lj-Zf-a4i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -300,14 +315,23 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                         <state key="normal" title="Настройки аккаунта..."/>
                                         <connections>
-                                            <action selector="nameTapped:" destination="ipU-vC-Zqj" eventType="touchUpInside" id="NlV-RD-BEt"/>
+                                            <action selector="settingsTapped:" destination="ipU-vC-Zqj" eventType="touchUpInside" id="2sX-OZ-Fg9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dI0-ks-jnB">
+                                        <rect key="frame" x="8" y="8" width="100" height="100"/>
+                                        <connections>
+                                            <action selector="settingsTapped:" destination="ipU-vC-Zqj" eventType="touchUpInside" id="FSm-1l-TJL"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Zle-fI-4hn" firstAttribute="leading" secondItem="cIY-Wk-0Ex" secondAttribute="leading" constant="8" id="33a-b3-xYt"/>
+                                    <constraint firstItem="dI0-ks-jnB" firstAttribute="top" secondItem="cIY-Wk-0Ex" secondAttribute="top" constant="8" id="7wu-oT-3Qg"/>
                                     <constraint firstItem="pNT-H7-P7e" firstAttribute="leading" secondItem="Zle-fI-4hn" secondAttribute="trailing" constant="8" symbolic="YES" id="APR-tX-FfU"/>
                                     <constraint firstAttribute="height" constant="152" id="Ect-tX-52Y"/>
+                                    <constraint firstItem="dI0-ks-jnB" firstAttribute="leading" secondItem="cIY-Wk-0Ex" secondAttribute="leading" constant="8" id="FS4-y2-IXI"/>
+                                    <constraint firstItem="dI0-ks-jnB" firstAttribute="height" secondItem="Zle-fI-4hn" secondAttribute="height" id="GPY-nd-SFL"/>
                                     <constraint firstAttribute="trailing" secondItem="dgj-0Z-fgK" secondAttribute="trailing" id="GhO-6F-k1F"/>
                                     <constraint firstItem="pNT-H7-P7e" firstAttribute="top" secondItem="WWq-MU-GyV" secondAttribute="bottom" constant="14" id="N5W-hC-UYq"/>
                                     <constraint firstItem="Zle-fI-4hn" firstAttribute="top" secondItem="cIY-Wk-0Ex" secondAttribute="top" constant="8" id="Off-iK-lp6"/>
@@ -316,6 +340,7 @@
                                     <constraint firstAttribute="trailing" secondItem="SGo-7r-azZ" secondAttribute="trailing" constant="8" id="YDC-Io-koa"/>
                                     <constraint firstItem="dgj-0Z-fgK" firstAttribute="leading" secondItem="Zle-fI-4hn" secondAttribute="trailing" constant="8" symbolic="YES" id="a9c-CU-VNg"/>
                                     <constraint firstItem="SGo-7r-azZ" firstAttribute="leading" secondItem="cIY-Wk-0Ex" secondAttribute="leading" constant="8" id="fP0-ba-x8E"/>
+                                    <constraint firstItem="dI0-ks-jnB" firstAttribute="width" secondItem="Zle-fI-4hn" secondAttribute="width" id="gKM-jE-DVl"/>
                                     <constraint firstItem="WWq-MU-GyV" firstAttribute="leading" secondItem="Zle-fI-4hn" secondAttribute="trailing" constant="8" symbolic="YES" id="haX-DK-tEJ"/>
                                     <constraint firstItem="WWq-MU-GyV" firstAttribute="top" secondItem="cIY-Wk-0Ex" secondAttribute="top" constant="8" id="jJZ-NV-5Fz"/>
                                     <constraint firstAttribute="bottom" secondItem="SGo-7r-azZ" secondAttribute="bottom" id="mdu-hU-m0u"/>
@@ -324,7 +349,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wP2-KW-yxp">
-                                <rect key="frame" x="0.0" y="214" width="375" height="306"/>
+                                <rect key="frame" x="0.0" y="226" width="375" height="306"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="306" id="YbT-ew-4mM"/>
@@ -336,7 +361,7 @@
                         <constraints>
                             <constraint firstItem="cIY-Wk-0Ex" firstAttribute="top" secondItem="T3v-r0-mbe" secondAttribute="top" constant="10" id="K2S-Ld-X6T"/>
                             <constraint firstItem="T3v-r0-mbe" firstAttribute="trailing" secondItem="wP2-KW-yxp" secondAttribute="trailing" id="YoO-vS-rQl"/>
-                            <constraint firstItem="wP2-KW-yxp" firstAttribute="top" secondItem="cIY-Wk-0Ex" secondAttribute="bottom" constant="8" symbolic="YES" id="sGf-eJ-do4"/>
+                            <constraint firstItem="wP2-KW-yxp" firstAttribute="top" secondItem="cIY-Wk-0Ex" secondAttribute="bottom" constant="20" id="sGf-eJ-do4"/>
                             <constraint firstItem="cIY-Wk-0Ex" firstAttribute="leading" secondItem="T3v-r0-mbe" secondAttribute="leading" constant="16" id="vgF-qq-tGd"/>
                             <constraint firstItem="T3v-r0-mbe" firstAttribute="trailing" secondItem="cIY-Wk-0Ex" secondAttribute="trailing" constant="16" id="wDQ-pA-TxF"/>
                             <constraint firstItem="wP2-KW-yxp" firstAttribute="leading" secondItem="T3v-r0-mbe" secondAttribute="leading" id="yoD-Ii-AsO"/>
@@ -344,8 +369,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="3kh-Hh-00G"/>
                     <connections>
+                        <outlet property="accountView" destination="cIY-Wk-0Ex" id="8m4-yk-Psg"/>
                         <outlet property="events" destination="pNT-H7-P7e" id="x9q-sy-aIc"/>
                         <outlet property="image" destination="Zle-fI-4hn" id="QtX-6Z-ghO"/>
+                        <outlet property="imageButton" destination="dI0-ks-jnB" id="gQ5-K1-gNB"/>
                         <outlet property="invites" destination="dgj-0Z-fgK" id="mdd-AL-rSG"/>
                         <outlet property="name" destination="WWq-MU-GyV" id="BCR-Ir-gJv"/>
                         <outlet property="scroll" destination="wP2-KW-yxp" id="Gej-nQ-TVZ"/>

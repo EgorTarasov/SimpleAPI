@@ -26,6 +26,9 @@ public extension UIView {
 }
 
 class EventsCollectionCell: UICollectionViewCell {
+    var eventOptional: Event?
+    var parentVC: UIViewController? = nil
+    var storyboard: UIStoryboard? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,7 +42,18 @@ class EventsCollectionCell: UICollectionViewCell {
     @IBOutlet var eventNumOfPersonLabel: UILabel!
     @IBOutlet var eventShortAdresslabel: UILabel!
     
-    func update(eventOpt: Event?) {
+    @IBAction func cellTapped(_ sender: UIButton) {
+        print("tapped")
+        if let _ = eventOptional, let vc = storyboard?.instantiateViewController(identifier: "eventDetail") as? EventDetailViewController {
+            vc.selectedEvent = eventOptional
+            self.parentVC?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func update(eventOpt: Event?, parentVCont: UIViewController? = nil, storyboardVC: UIStoryboard? = nil) {
+        eventOptional = eventOpt
+        parentVC = parentVCont
+        storyboard = storyboardVC
         // Загрузка изображения
         if let event = eventOpt {
             if let eventCoverPath = event.cover {

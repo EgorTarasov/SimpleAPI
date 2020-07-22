@@ -94,14 +94,23 @@ struct InternalStorage {
         InternalStorage.shared.nowUser = nil
     }
     
-    func getAdministratedEventsByUser(user: User) -> [EventID] {
-        var result: [EventID] = []
-        for eventID in user.willGoEvents {
-            if let got_event = self.getEventByID(ID: eventID) {
-                result.append(got_event.id)
+    func getAdministratedEventsByUser(userOpt: User?) -> [EventID]? {
+        if let user = userOpt {
+            var result: [EventID] = []
+            for eventID in user.willGoEvents {
+                if let got_event = self.getEventByID(ID: eventID) {
+                    result.append(got_event.id)
+                }
             }
+            return result
+        } else {
+            return nil
         }
-        return result
+    }
+    
+    func getFeaturedEvents() -> [EventID]? {
+        // TODO
+        return nil
     }
     
     func getEventByID(ID eventID: EventID) -> Event? {

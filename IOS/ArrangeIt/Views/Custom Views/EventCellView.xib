@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,9 +56,9 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Земляной вал, 5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axG-1C-2RZ">
-                        <rect key="frame" x="77" y="227.5" width="96.5" height="14.5"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Москва, Центральный проезд Хорошевского Серебряного Бора, 20" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axG-1C-2RZ">
+                        <rect key="frame" x="16" y="203" width="218" height="39"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -66,15 +67,17 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" red="0.79502003960000001" green="1" blue="0.82529842389999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                <color key="backgroundColor" name="eventCellColor"/>
                 <constraints>
                     <constraint firstItem="bZT-ra-ECw" firstAttribute="top" secondItem="fpN-EZ-Mkk" secondAttribute="bottom" constant="8" symbolic="YES" id="0v5-98-8fh"/>
                     <constraint firstItem="fpN-EZ-Mkk" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="7LC-6g-JpG"/>
                     <constraint firstItem="fpN-EZ-Mkk" firstAttribute="top" secondItem="myN-XS-0Bd" secondAttribute="top" id="8DX-qn-sWk"/>
+                    <constraint firstItem="axG-1C-2RZ" firstAttribute="top" secondItem="RmL-QZ-ZQ9" secondAttribute="bottom" constant="8" id="93i-yW-ykP"/>
                     <constraint firstAttribute="trailing" secondItem="fpN-EZ-Mkk" secondAttribute="trailing" constant="16" id="FcN-sw-49I"/>
-                    <constraint firstItem="axG-1C-2RZ" firstAttribute="centerX" secondItem="myN-XS-0Bd" secondAttribute="centerX" id="NuI-oh-vbB"/>
                     <constraint firstItem="bZT-ra-ECw" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="bil-Mt-git"/>
-                    <constraint firstAttribute="bottom" secondItem="axG-1C-2RZ" secondAttribute="bottom" constant="8" id="rYd-6O-1F9"/>
+                    <constraint firstItem="axG-1C-2RZ" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="drp-Dy-3dA"/>
+                    <constraint firstItem="axG-1C-2RZ" firstAttribute="centerX" secondItem="fpN-EZ-Mkk" secondAttribute="centerX" id="zRA-Jn-76b"/>
+                    <constraint firstAttribute="bottom" secondItem="axG-1C-2RZ" secondAttribute="bottom" constant="8" id="zYS-Wk-cdS"/>
                 </constraints>
             </collectionViewCellContentView>
             <connections>
@@ -89,4 +92,9 @@
             <point key="canvasLocation" x="-194.20289855072465" y="-9.375"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <namedColor name="eventCellColor">
+            <color red="0.59200000762939453" green="0.89800000190734863" blue="0.63700002431869507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

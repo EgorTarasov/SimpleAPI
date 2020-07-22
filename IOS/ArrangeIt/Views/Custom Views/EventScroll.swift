@@ -8,10 +8,9 @@
 import UIKit
 
 class EventScrollView: UIView {
-    @IBOutlet var typeOfCollectionLabel: UILabel!
     @IBOutlet var eventsCollectionView: UICollectionView!
     
-    var eventsListOpt: [Event]?
+    var eventsListOpt: [EventID]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,9 +19,8 @@ class EventScrollView: UIView {
         eventsCollectionView.register(UINib(nibName: "EventCellView", bundle: .main), forCellWithReuseIdentifier: "EventCell")
     }
     
-    func setup(eventsListOpt: [Event], collectionName: String) {
+    func setup(eventsListOpt: [EventID]?, collectionName: String) {
         self.eventsListOpt = eventsListOpt
-        self.typeOfCollectionLabel.text = collectionName
         eventsCollectionView.reloadData()
     }
 }
@@ -47,19 +45,21 @@ extension EventScrollView: UICollectionViewDelegateFlowLayout {
 
 extension EventScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return eventsListOpt?.count ?? 0
+        return eventsListOpt?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let eventsList = self.eventsListOpt,
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as? EventsCollectionCell
-        else {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as? EventsCollectionCell {
+            if let eventsList = self.eventsListOpt {
+                cell.update(eventOpt: InternalStorage.shared.getEventByID(ID: eventsList[indexPath.row]))
+            } else {
+                cell.update(eventOpt: nil)
+            }
+            return cell
+        } else {
             return UICollectionViewCell()
         }
         
-        cell.update(event: eventsList[indexPath.row])
-        return cell
     }
 }
 

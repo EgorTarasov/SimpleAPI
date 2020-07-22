@@ -453,9 +453,8 @@
                             <constraint firstItem="hHW-rN-HDD" firstAttribute="top" secondItem="U7G-Sc-qP6" secondAttribute="bottom" constant="83.5" id="1o3-ab-cCx"/>
                             <constraint firstItem="qHO-R6-b5i" firstAttribute="bottom" secondItem="ZaO-Lh-rnQ" secondAttribute="bottom" constant="30" id="BTp-Et-HnQ"/>
                             <constraint firstItem="hHW-rN-HDD" firstAttribute="centerY" secondItem="qHO-R6-b5i" secondAttribute="centerY" id="K5S-3W-QeQ"/>
-                            <constraint firstItem="ZaO-Lh-rnQ" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="TOx-v9-eQ5"/>
-                            <constraint firstItem="U7G-Sc-qP6" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="aPP-um-o04"/>
-                            <constraint firstItem="hHW-rN-HDD" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="p2O-Cr-XTv"/>
+                            <constraint firstItem="ZaO-Lh-rnQ" firstAttribute="top" secondItem="eZc-vC-uxg" secondAttribute="bottom" constant="93" id="Dn1-aO-7OI"/>
+                            <constraint firstItem="U7G-Sc-qP6" firstAttribute="top" secondItem="qHO-R6-b5i" secondAttribute="top" constant="50" id="L0g-nN-kOR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wx5-aa-Uch"/>

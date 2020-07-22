@@ -84,7 +84,7 @@ class EventsCollectionCell: UICollectionViewCell {
             eventNumOfPersonLabel.text = "?????????"
             
         } else {
-            eventNameLabel.text = "Вы не вошли аккаунт"
+            eventNameLabel.text = "Вы не вошли в аккаунт"
             eventShortAdresslabel.isHidden = true
             eventDateLabel.isHidden = true
             eventStartLabel.isHidden = true

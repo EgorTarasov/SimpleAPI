@@ -6,6 +6,5 @@ target 'ArrangeIt' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'Nuke'
-  pod 'YandexMapKit', '3.5'
 end
 

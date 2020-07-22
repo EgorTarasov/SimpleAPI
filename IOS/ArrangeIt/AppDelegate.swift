@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import YandexMapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        
+        let APIKey = "735c1cde-4e03-41f7-bbea-082099eed5a3"
+        YMKMapKit.setApiKey(APIKey)
         
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user == nil{

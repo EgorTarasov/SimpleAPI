@@ -25,6 +25,7 @@ class AccountMenuViewController: UIViewController {
         administratedEventsCell.setup(eventsListOpt: InternalStorage.shared.getAdministratedEventsByUser(userOpt: InternalStorage.shared.nowUser), collectionName: "Администрируемые встречи")
         
         view.addSubview(accountCell)
+        view.addSubview(administratedEventsCell)
         // Do any additional setup after loading the view.
     }
 }

@@ -57,7 +57,7 @@ class LoginAndRegisterViewController: UIViewController {
         let name = nameField.text!
         let email = emailField.text!
         let password = passwordField.text!
-        if !name.isEmpty && !email.isEmpty && !password.isEmpty{
+        if !name.isEmpty && !email.isEmpty && !password.isEmpty || !email.isEmpty && !password.isEmpty && !signup {
             if signup {
                 Auth.auth().createUser(withEmail: email, password: password) {
                     (result, error) in

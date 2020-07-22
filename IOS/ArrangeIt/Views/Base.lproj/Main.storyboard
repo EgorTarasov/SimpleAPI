@@ -379,7 +379,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hHW-rN-HDD">
-                                <rect key="frame" x="77.5" y="225.5" width="220" height="216"/>
+                                <rect key="frame" x="77.5" y="182.5" width="220" height="302"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tl2-BV-Qdl">
                                         <rect key="frame" x="0.0" y="0.0" width="220" height="45"/>
@@ -409,7 +409,7 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZc-vC-uxg">
-                                        <rect key="frame" x="0.0" y="183" width="220" height="33"/>
+                                        <rect key="frame" x="0.0" y="183" width="220" height="119"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="NiD-gv-hW1"/>
                                         </constraints>
@@ -422,7 +422,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Регистрация" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7G-Sc-qP6">
-                                <rect key="frame" x="89" y="101" width="197.5" height="41"/>
+                                <rect key="frame" x="89" y="50" width="197.5" height="49"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -452,9 +452,12 @@
                         <constraints>
                             <constraint firstItem="hHW-rN-HDD" firstAttribute="top" secondItem="U7G-Sc-qP6" secondAttribute="bottom" constant="83.5" id="1o3-ab-cCx"/>
                             <constraint firstItem="qHO-R6-b5i" firstAttribute="bottom" secondItem="ZaO-Lh-rnQ" secondAttribute="bottom" constant="30" id="BTp-Et-HnQ"/>
-                            <constraint firstItem="hHW-rN-HDD" firstAttribute="centerY" secondItem="qHO-R6-b5i" secondAttribute="centerY" id="K5S-3W-QeQ"/>
+                            <constraint firstItem="hHW-rN-HDD" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="Brw-Zf-mde"/>
+                            <constraint firstItem="U7G-Sc-qP6" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="DNA-E6-jT2"/>
                             <constraint firstItem="ZaO-Lh-rnQ" firstAttribute="top" secondItem="eZc-vC-uxg" secondAttribute="bottom" constant="93" id="Dn1-aO-7OI"/>
+                            <constraint firstItem="hHW-rN-HDD" firstAttribute="centerY" secondItem="qHO-R6-b5i" secondAttribute="centerY" id="K5S-3W-QeQ"/>
                             <constraint firstItem="U7G-Sc-qP6" firstAttribute="top" secondItem="qHO-R6-b5i" secondAttribute="top" constant="50" id="L0g-nN-kOR"/>
+                            <constraint firstItem="ZaO-Lh-rnQ" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="Qri-hP-ejm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wx5-aa-Uch"/>

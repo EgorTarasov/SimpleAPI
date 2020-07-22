@@ -45,7 +45,7 @@ extension EventScrollView: UICollectionViewDelegateFlowLayout {
 
 extension EventScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return eventsListOpt?.count ?? 1
+        return eventsListOpt?.count ?? 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

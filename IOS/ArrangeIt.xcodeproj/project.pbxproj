@@ -11,8 +11,6 @@
 		700C7D3C24C730B200B1DF47 /* EventCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 700C7D3B24C730B200B1DF47 /* EventCellView.xib */; };
 		70396C8E24C762CF00752929 /* EventScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70396C8D24C762CF00752929 /* EventScrollView.xib */; };
 		70396C9024C762DD00752929 /* EventScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70396C8F24C762DD00752929 /* EventScroll.swift */; };
-		70396C9324C76CDD00752929 /* AccountCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70396C9224C76CDD00752929 /* AccountCellView.xib */; };
-		70396C9524C76CEC00752929 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70396C9424C76CEC00752929 /* AccountCell.swift */; };
 		70D7D0A824C6453400C59FA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70D7D0A724C6453400C59FA3 /* GoogleService-Info.plist */; };
 		70EAF48A24BF363A000E53F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EAF48924BF363A000E53F6 /* AppDelegate.swift */; };
 		70EAF48C24BF363A000E53F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EAF48B24BF363A000E53F6 /* SceneDelegate.swift */; };
@@ -37,8 +35,6 @@
 		700C7D3B24C730B200B1DF47 /* EventCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCellView.xib; sourceTree = "<group>"; };
 		70396C8D24C762CF00752929 /* EventScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventScrollView.xib; sourceTree = "<group>"; };
 		70396C8F24C762DD00752929 /* EventScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScroll.swift; sourceTree = "<group>"; };
-		70396C9224C76CDD00752929 /* AccountCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCellView.xib; sourceTree = "<group>"; };
-		70396C9424C76CEC00752929 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		70A8BA8CB87A5585EC8DEA51 /* Pods-ArrangeIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArrangeIt.debug.xcconfig"; path = "Target Support Files/Pods-ArrangeIt/Pods-ArrangeIt.debug.xcconfig"; sourceTree = "<group>"; };
 		70D7D0A724C6453400C59FA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		70EAF48624BF363A000E53F6 /* ArrangeIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArrangeIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,19 +88,9 @@
 			name = EventPresentationScroll;
 			sourceTree = "<group>";
 		};
-		70396C9124C76CB000752929 /* AccountCell */ = {
-			isa = PBXGroup;
-			children = (
-				70396C9424C76CEC00752929 /* AccountCell.swift */,
-				70396C9224C76CDD00752929 /* AccountCellView.xib */,
-			);
-			name = AccountCell;
-			sourceTree = "<group>";
-		};
 		704FB6BC24C73DAA0024E491 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				70396C9124C76CB000752929 /* AccountCell */,
 				70396C8C24C762AC00752929 /* EventPresentationScroll */,
 				704FB6BD24C73DBA0024E491 /* EventPresentationCell */,
 			);
@@ -215,7 +201,6 @@
 				70EAF48324BF3639000E53F6 /* Frameworks */,
 				70EAF48424BF3639000E53F6 /* Resources */,
 				65A8FC0182B02AEC0360E33D /* [CP] Embed Pods Frameworks */,
-				29EFB0C24694B10403FB524A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,7 +252,6 @@
 				70D7D0A824C6453400C59FA3 /* GoogleService-Info.plist in Resources */,
 				70EAF49324BF363B000E53F6 /* Assets.xcassets in Resources */,
 				700C7D3C24C730B200B1DF47 /* EventCellView.xib in Resources */,
-				70396C9324C76CDD00752929 /* AccountCellView.xib in Resources */,
 				70396C8E24C762CF00752929 /* EventScrollView.xib in Resources */,
 				70EAF49124BF363A000E53F6 /* Main.storyboard in Resources */,
 			);
@@ -276,23 +260,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		29EFB0C24694B10403FB524A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArrangeIt/Pods-ArrangeIt-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ArrangeIt/Pods-ArrangeIt-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ArrangeIt/Pods-ArrangeIt-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		55C7CB8688E05C56E2700E67 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -345,7 +312,6 @@
 				700C7D3A24C72DE200B1DF47 /* EventCell.swift in Sources */,
 				70F6296E24C4A09800E043AF /* NewEvent.swift in Sources */,
 				70F6296424C49EE400E043AF /* AccountMenu.swift in Sources */,
-				70396C9524C76CEC00752929 /* AccountCell.swift in Sources */,
 				70EAF48A24BF363A000E53F6 /* AppDelegate.swift in Sources */,
 				70EAF48C24BF363A000E53F6 /* SceneDelegate.swift in Sources */,
 				70F6296C24C4A05B00E043AF /* Afisha.swift in Sources */,

@@ -62,6 +62,7 @@ class LoginAndRegisterViewController: UIViewController {
         if !name.isEmpty && !email.isEmpty && !password.isEmpty || !email.isEmpty && !password.isEmpty && !signup {
 //            let user = User(id: "1", name: "Игорь Николаевич", isAppUser: true, willGoEvents: ["1", "2", "3"], invitedToEvents: [])
 //            InternalStorage.shared.nowUser = user
+//            navigationController?.popViewController(animated: true)
 //            return Void()
             if signup {
                 Auth.auth().createUser(withEmail: email, password: password) {
@@ -85,6 +86,7 @@ class LoginAndRegisterViewController: UIViewController {
                                     NetworkPuller.shared.fullDatabaseRefresh(appUserID: result.user.uid)
                                     print("succesfully registrated user. name: \(name) uid: \(result.user.uid)")
                                     self.showAlert(title: "Успех!", message: "Вы успешно зарегистрированы")
+                                    self.navigationController?.popViewController(animated: true)
                                 }
                             }
                         }
@@ -98,6 +100,7 @@ class LoginAndRegisterViewController: UIViewController {
                     } else {
                         NetworkPuller.shared.fullDatabaseRefresh(appUserID: (result?.user.uid)!)
                         self.showAlert(title: "Успех!", message: "Вы успешно вошли в систему")
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }
             }

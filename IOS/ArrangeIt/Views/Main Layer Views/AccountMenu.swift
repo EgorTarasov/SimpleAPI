@@ -59,7 +59,7 @@ class AccountMenuViewController: UIViewController {
             }
             name.setTitle(user.name, for: .normal)
             events.text = "Всего мероприятий: \(user.willGoEvents.count)"
-            invites.text = "Активных приглшений: \(user.invitedToEvents.count)"
+            invites.text = "Активных приглашений: \(user.invitedToEvents.count)"
         } else {
             image.image = UIImage(systemName: "person.badge.plus")
             name.setTitle("Войти в аккаунт", for: .normal)

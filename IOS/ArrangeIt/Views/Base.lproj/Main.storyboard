@@ -76,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBb-n1-u8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2149" y="-6"/>
+            <point key="canvasLocation" x="2017" y="-349"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="FAt-Gy-lmi">
@@ -280,9 +280,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <state key="normal" title="Ярослав Мединский"/>
                                         <connections>
-                                            <segue destination="IUj-wz-PKW" kind="popoverPresentation" popoverAnchorView="WWq-MU-GyV" id="r0P-zB-HK1">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <action selector="nameTapped:" destination="ipU-vC-Zqj" eventType="touchUpInside" id="t0w-W3-uGt"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Активных приглашений: ---" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgj-0Z-fgK">
@@ -301,6 +299,9 @@
                                         <rect key="frame" x="8" y="124" width="327" height="28"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                         <state key="normal" title="Настройки аккаунта..."/>
+                                        <connections>
+                                            <action selector="nameTapped:" destination="ipU-vC-Zqj" eventType="touchUpInside" id="NlV-RD-BEt"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -370,11 +371,11 @@
             <objects>
                 <viewController storyboardIdentifier="loginAndRegister" id="IUj-wz-PKW" customClass="LoginAndRegisterViewController" customModule="ArrangeIt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rdD-Hh-0qv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hHW-rN-HDD">
-                                <rect key="frame" x="77.5" y="209" width="220" height="216"/>
+                                <rect key="frame" x="77.5" y="225.5" width="220" height="216"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tl2-BV-Qdl">
                                         <rect key="frame" x="0.0" y="0.0" width="220" height="45"/>
@@ -405,6 +406,9 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZc-vC-uxg">
                                         <rect key="frame" x="0.0" y="183" width="220" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="220" id="NiD-gv-hW1"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="Зарегистрироваться "/>
                                         <connections>
@@ -420,7 +424,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZaO-Lh-rnQ">
-                                <rect key="frame" x="96.5" y="518" width="182.5" height="59.5"/>
+                                <rect key="frame" x="96.5" y="577.5" width="182.5" height="59.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="У вас уже есть аккаунт?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkP-cY-dnh">
                                         <rect key="frame" x="0.0" y="0.0" width="182.5" height="19.5"/>
@@ -442,10 +446,10 @@
                         <viewLayoutGuide key="safeArea" id="qHO-R6-b5i"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ZaO-Lh-rnQ" firstAttribute="top" secondItem="eZc-vC-uxg" secondAttribute="bottom" constant="93" id="Dn1-aO-7OI"/>
-                            <constraint firstItem="U7G-Sc-qP6" firstAttribute="top" secondItem="qHO-R6-b5i" secondAttribute="top" constant="101" id="L0g-nN-kOR"/>
+                            <constraint firstItem="hHW-rN-HDD" firstAttribute="top" secondItem="U7G-Sc-qP6" secondAttribute="bottom" constant="83.5" id="1o3-ab-cCx"/>
+                            <constraint firstItem="qHO-R6-b5i" firstAttribute="bottom" secondItem="ZaO-Lh-rnQ" secondAttribute="bottom" constant="30" id="BTp-Et-HnQ"/>
+                            <constraint firstItem="hHW-rN-HDD" firstAttribute="centerY" secondItem="qHO-R6-b5i" secondAttribute="centerY" id="K5S-3W-QeQ"/>
                             <constraint firstItem="ZaO-Lh-rnQ" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="TOx-v9-eQ5"/>
-                            <constraint firstItem="tl2-BV-Qdl" firstAttribute="top" secondItem="U7G-Sc-qP6" secondAttribute="bottom" constant="67" id="Yin-o0-RBP"/>
                             <constraint firstItem="U7G-Sc-qP6" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="aPP-um-o04"/>
                             <constraint firstItem="hHW-rN-HDD" firstAttribute="centerX" secondItem="qHO-R6-b5i" secondAttribute="centerX" id="p2O-Cr-XTv"/>
                         </constraints>
@@ -463,7 +467,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MB0-ZI-3B5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="647"/>
+            <point key="canvasLocation" x="2018" y="297"/>
         </scene>
     </scenes>
     <resources>

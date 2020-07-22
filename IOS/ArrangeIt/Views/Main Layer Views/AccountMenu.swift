@@ -18,6 +18,7 @@ class AccountMenuViewController: UIViewController {
     @IBOutlet var invites: UILabel!
     @IBOutlet var settings: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let user = InternalStorage.shared.nowUser {
@@ -33,6 +34,15 @@ class AccountMenuViewController: UIViewController {
         } else {
             image.image = UIImage(systemName: "person.badge.plus")
             name.setTitle("Войти в аккаунт", for: .normal)
+        }
+    }
+    
+    @IBAction func nameTapped(_ sender: UIButton) {
+        if let user = InternalStorage.shared.nowUser, let vc = storyboard?.instantiateViewController(identifier: "accountDetail") as? AccountDetailViewController {
+            vc.selectedUser = user
+            navigationController?.pushViewController(vc, animated: true)
+        } else if let vc = storyboard?.instantiateViewController(identifier: "loginAndRegister") as? LoginAndRegisterViewController {
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

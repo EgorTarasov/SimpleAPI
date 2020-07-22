@@ -52,59 +52,51 @@ class LoginAndRegisterViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func registerUser(_ email: String, _ password: String, _ name: String) {
-        Auth.auth().createUser(withEmail: email, password: password) {
-            (result, error) in
-            if error == nil {
-                if let result = result {
-                    let _: DocumentReference? = FirebaseDB.shared.db.collection("users").addDocument(data: [
-                        "id": result.user.uid,
-                        "name" : name,
-                        "email" : email,
-                        "image" : "",
-                        "willGoEvents" : [],
-                        "invitedToEvents" : []
-                        
-                    ]) {
-                        mayError in
-                        if let error = mayError {
-                            print("error registrating user. error: \(error) name: \(name)")
-                            self.showAlert(title: "Ошибка", message: "Не получилось зарегистрироваться. Ошибка: \(error)")
-                        } else {
-                            NetworkPuller.shared.fullDatabaseRefresh(appUserID: result.user.uid)
-                            print("succesfully registrated user. name: \(name) uid: \(result.user.uid)")
-                            self.showAlert(title: "Успех!", message: "Вы успешно зарегистрированы")
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    fileprivate func signInUser(_ email: String, _ password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { (result, mayError) in
-            if let error = mayError {
-                self.showAlert(title: "Ошибка", message: "Не получилось войти. Ошибка: \(error)")
-                
-            } else {
-                NetworkPuller.shared.fullDatabaseRefresh(appUserID: (result?.user.uid)!)
-                self.showAlert(title: "Успех!", message: "Вы успешно вошли в систему")
-                self.dismiss(animated: true, completion : nil)
-            }
-        }
-    }
-    
-    @IBAction func enterButton(_ sender: UIButton) {
+    @IBAction func enterButton(_ sender: UIButton) {//NetworkPusher.sendEvent(id: <#T##EventID#>, name: <#T##String#>, eventBeginDate: <#T##Date#>, eventEndDate: <#T##Date#>, place: <#T##(Double, Double)#>, owner: <#T##UserID#>, willGoUsers: <#T##[UserID]#>, mayGoUsers: <#T##[UserID]#>)
         
         let name = nameField.text!
         let email = emailField.text!
         let password = passwordField.text!
-        if (name.isEmpty && !nameField.isHidden) || email.isEmpty || password.isEmpty {
+        if !name.isEmpty && !email.isEmpty && !password.isEmpty{
             if signup {
-                registerUser(email, password, name)
-            } else {
-                signInUser(email, password)
+                Auth.auth().createUser(withEmail: email, password: password) {
+                    (result, error) in
+                    if error == nil {
+                        if let result = result {
+                            let _: DocumentReference? = FirebaseDB.shared.db.collection("users").addDocument(data: [
+                                "id": result.user.uid,
+                                "name" : name,
+                                "email" : email,
+                                "image" : "",
+                                "willGoEvents" : [],
+                                "invitedToEvents" : []
+                                
+                            ]) {
+                                mayError in
+                                if let error = mayError {
+                                    print("error registrating user. error: \(error) name: \(name)")
+                                    self.showAlert(title: "Ошибка", message: "Не получилось зарегистрироваться. Ошибка: \(error)")
+                                } else {
+                                    NetworkPuller.shared.fullDatabaseRefresh(appUserID: result.user.uid)
+                                    print("succesfully registrated user. name: \(name) uid: \(result.user.uid)")
+                                    self.showAlert(title: "Успех!", message: "Вы успешно зарегистрированы")
+                                    self.dismiss(animated: true, completion: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if !signup{
+                Auth.auth().signIn(withEmail: email, password: password) { (result, mayError) in
+                    if let error = mayError {
+                        self.showAlert(title: "Ошибка", message: "Не получилось войти. Ошибка: \(error)")
+                        
+                    } else {
+                        NetworkPuller.shared.fullDatabaseRefresh(appUserID: (result?.user.uid)!)
+                        self.showAlert(title: "Успех!", message: "Вы успешно вошли в систему")
+                        self.dismiss(animated: true, completion : nil)
+                    }
+                }
             }
         } else {
             showAlert(title: "Ошибка при выполнении действия!", message: "Вы заполнили не все поля")

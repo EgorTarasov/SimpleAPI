@@ -83,7 +83,7 @@ struct InternalStorage {
     
     
     
-    var nowUser: User?
+    var nowUser: User?  
     
     var cachedEvents: [EventID:Event]
     var cachedUsers: [UserID:User]

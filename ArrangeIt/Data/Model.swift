@@ -101,12 +101,13 @@ struct Event {
             "willGoUsers" : willGoUsers,
             "invitedUsers" : invitedUsers
         ]){ err in
-        if let err = err {
-            print("Error updating document: \(err)")
-        } else {
-            print("Document successfully updated")
-        }
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
         
+        }
     }
 }
 

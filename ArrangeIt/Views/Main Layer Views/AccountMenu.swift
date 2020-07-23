@@ -26,7 +26,7 @@ class AccountMenuViewController: UIViewController {
         super.viewDidLoad()
         accountView.backgroundColor = UIColor(named: "accountCellColor")
         if let user =
-            InternalStorage.shared.nowUser {
+            FirebaseCover.shared.getNowUser() {
             if let imageLink = user.image, let imageUrl = URL(string: imageLink) {
                 Nuke.loadImage(with: imageUrl, into: image)
             } else {
@@ -35,13 +35,17 @@ class AccountMenuViewController: UIViewController {
             name.setTitle(user.name, for: .normal)
             events.text = "Всего мероприятий: \(user.willGoEvents.count)"
             invites.text = "Активных приглшений: \(user.invitedToEvents.count)"
+            
+            let featuredView: EventScrollView = .fromNib()
+            featuredView.setup(eventsListOpt: user.willGoEvents, collectionName: "Ваши мероприятия", parentVC: self, storyboard: storyboard)
+            scroll.addSubview(featuredView)
         } else {
             image.image = UIImage(systemName: "person.badge.plus")
             name.setTitle("Войти в аккаунт", for: .normal)
+            events.text = "Всего мероприятий: 0"
+            invites.text = "Активных приглшений: 0"
+            scroll.subviews.forEach { $0.removeFromSuperview() }
         }
-        let featuredView: EventScrollView = .fromNib()
-        featuredView.setup(eventsListOpt: InternalStorage.shared.getFeaturedEvents(), collectionName: "Избранные мероприятия", parentVC: self, storyboard: storyboard)
-        scroll.addSubview(featuredView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +55,7 @@ class AccountMenuViewController: UIViewController {
     
     func update() {
         scroll.subviews.forEach({$0.removeFromSuperview()})
-        if let user = InternalStorage.shared.nowUser {
+        if let user = FirebaseCover.shared.getNowUser() {
             if let imageLink = user.image, let imageUrl = URL(string: imageLink) {
                 Nuke.loadImage(with: imageUrl, into: image)
             } else {
@@ -60,26 +64,19 @@ class AccountMenuViewController: UIViewController {
             name.setTitle(user.name, for: .normal)
             events.text = "Всего мероприятий: \(user.willGoEvents.count)"
             invites.text = "Активных приглашений: \(user.invitedToEvents.count)"
+            let featuredView: EventScrollView = .fromNib()
+            featuredView.setup(eventsListOpt: user.willGoEvents, collectionName: "Ваши мероприятия", parentVC: self, storyboard: storyboard)
+            featuredView.frame.size.width = self.view.frame.size.width
+            scroll.addSubview(featuredView)
         } else {
             image.image = UIImage(systemName: "person.badge.plus")
             name.setTitle("Войти в аккаунт", for: .normal)
         }
-        let featuredView: EventScrollView = .fromNib()
-        featuredView.setup(eventsListOpt: InternalStorage.shared.getFeaturedEvents(), collectionName: "Избранные мероприятия", parentVC: self, storyboard: storyboard)
-        featuredView.frame.size.width = self.view.frame.size.width
-        scroll.addSubview(featuredView)
-    }
-
-    @IBAction func settingsTapped(_ sender: UIButton) {
-        if let _ = InternalStorage.shared.nowUser, let vc = storyboard?.instantiateViewController(identifier: "accountSettings") as? AccountSettingsViewController {
-            navigationController?.pushViewController(vc, animated: true)
-        } else if let vc = storyboard?.instantiateViewController(identifier: "loginAndRegister") as? LoginAndRegisterViewController {
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        
     }
 
     @IBAction func nameTapped(_ sender: UIButton) {
-        if let user = InternalStorage.shared.nowUser, let vc = storyboard?.instantiateViewController(identifier: "accountDetail") as? AccountDetailViewController {
+        if let user = FirebaseCover.shared.getNowUser(), let vc = storyboard?.instantiateViewController(identifier: "accountDetail") as? AccountDetailViewController {
             vc.selectedUser = user
             navigationController?.pushViewController(vc, animated: true)
         } else if let vc = storyboard?.instantiateViewController(identifier: "loginAndRegister") as? LoginAndRegisterViewController {

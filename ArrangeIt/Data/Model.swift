@@ -14,7 +14,7 @@ typealias PathToImage = String
 
 let fireBase = Firestore.firestore()
 
-let testEventsList = ["1": Event(id: "1", name: "Футбол во дворе", eventBeginDate: Date().addingTimeInterval(60), eventEndDate: Date().addingTimeInterval(3660), place: (55.773863, 37.679636), owner: "1", willGoUsers: ["1", "2", "3"], invitedUsers: []), "2": Event(id: "2", name: "Покер", eventBeginDate: Date().addingTimeInterval(3600), eventEndDate: Date().addingTimeInterval(7200), place: (55.810127, 37.652739), owner: "1", willGoUsers: ["1", "2", "3", "4", "5", "6"], invitedUsers: ["7", "8", "9"]), "3": Event(id: "3", name: "Встреча одноклассников", eventBeginDate: Date().addingTimeInterval(10000), eventEndDate: Date().addingTimeInterval(15000), place: (55.794207, 37.582787), owner: "1", willGoUsers: ["1", "2", "3", "4"], invitedUsers: ["5", "6"])]
+let testEventsList = ["1": Event(id: "1", name: "Футбол во дворе", eventBeginDate: Date().addingTimeInterval(60), eventEndDate: Date().addingTimeInterval(3660), place: [55.773863, 37.679636], owner: "1", willGoUsers: ["1", "2", "3"], invitedUsers: []), "2": Event(id: "2", name: "Покер", eventBeginDate: Date().addingTimeInterval(3600), eventEndDate: Date().addingTimeInterval(7200), place: [55.810127, 37.652739], owner: "1", willGoUsers: ["1", "2", "3", "4", "5", "6"], invitedUsers: ["7", "8", "9"]), "3": Event(id: "3", name: "Встреча одноклассников", eventBeginDate: Date().addingTimeInterval(10000), eventEndDate: Date().addingTimeInterval(15000), place: [55.794207, 37.582787], owner: "1", willGoUsers: ["1", "2", "3", "4"], invitedUsers: ["5", "6"])]
 
 struct User {
     internal init(id: UserID, name: String, image: PathToImage? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]) {
@@ -36,7 +36,7 @@ struct User {
 }
 
 struct Event {
-    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: (Double, Double), creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
+    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: [Double], creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
         self.id = id
         self.name = name
         self.eventBeginDate = eventBeginDate
@@ -57,7 +57,7 @@ struct Event {
     
     var eventBeginDate: Date
     var eventEndDate : Date
-    var place: (Double, Double)
+    var place: [Double]
     var creatingDate: Date?
     
     var owner: UserID
@@ -74,10 +74,13 @@ struct Event {
             fireBase.collection("events").document("testEvent").setData([
                 "name": self.name,
                 "description": self.description ?? " ",
+                "place" : self.place,
                 "eventBeginDate" : Timestamp( date : self.creatingDate ?? Date()),
                 "eventEndDate" : Timestamp( date : self.eventEndDate),
                 "cover": self.cover ?? " ",
-                "imageGallery" : self.imageGallery ?? [""]
+                "imageGallery" : self.imageGallery ?? [""],
+                "willGoUsers" : self.willGoUsers,
+                "invitedUsers" : self.invitedUsers
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
@@ -189,15 +192,15 @@ struct NetworkPuller {
         // TODO
         
         // InternalStorage.shared.cachedEvents[downloadedEvent.id] = downloadedEvent
-        let testevent_5 =  Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: [], invitedUsers: [])
+        let testevent_5 =  Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: [54.3, 55.1], owner: "1", willGoUsers: [], invitedUsers: [])
         return testevent_5
     }
     
     func getNearestEventsByPlace(placeCoordinates: (Double, Double), radius: Int) -> [EventID] {
         // TODO
         
-        let testevent_4 = Event(id: "4", name: "Обмен одеждой", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(360), place: (54.4, 34.4), owner: "3", willGoUsers: ["3"], invitedUsers: [])
-        let testevent_5 =  Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: (54.3, 55.1), owner: "1", willGoUsers: [], invitedUsers: [])
+        let testevent_4 = Event(id: "4", name: "Обмен одеждой", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(360), place: [54.4, 34.4], owner: "3", willGoUsers: ["3"], invitedUsers: [])
+        let testevent_5 =  Event(id: "5", name: "Вписка", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(3600), place: [54.3, 55.1], owner: "1", willGoUsers: [], invitedUsers: [])
         return [testevent_5.id, testevent_4.id]
     }
     

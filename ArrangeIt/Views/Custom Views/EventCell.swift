@@ -78,7 +78,7 @@ class EventsCollectionCell: UICollectionViewCell {
             
             // Краткое название места
             let geocoder = CLGeocoder()
-            geocoder.reverseGeocodeLocation(CLLocation(latitude: event.place.0, longitude: event.place.1), preferredLocale: Locale(identifier: "RU")) {
+            geocoder.reverseGeocodeLocation(CLLocation(latitude: event.place[0], longitude: event.place[1]), preferredLocale: Locale(identifier: "RU")) {
                 (placemarksOpt, error) in
                 if let placemarks = placemarksOpt, let streetAndHouse = placemarks[0].name, let city = placemarks[0].locality {
                     if error == nil {

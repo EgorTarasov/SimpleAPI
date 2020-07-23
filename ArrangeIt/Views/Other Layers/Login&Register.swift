@@ -8,6 +8,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+let db = Firestore.firestore()
+
 class LoginAndRegisterViewController: UIViewController {
     
     // Переключатель Log in / sign up
@@ -84,7 +86,7 @@ class LoginAndRegisterViewController: UIViewController {
                             ]) {
                                 (mayError, datref) in
                                 if let error = mayError {
-                                    print("error registrating user. error: \(error) name: \(name)")
+                                    print("error registratingсни user. error: \(error) name: \(name)")
                                     self.showAlert(title: "Ошибка", message: "Не получилось зарегистрироваться. Ошибка: \(error)")
                                 } else {
                                     print("succesfully registrated user. name: \(name) uid: \(result.user.uid)")
@@ -101,6 +103,8 @@ class LoginAndRegisterViewController: UIViewController {
                         self.showAlert(title: "Ошибка", message: "Не получилось войти. Ошибка: \(error.localizedDescription)")
                         
                     } else {
+                        let user = db.collection("users")
+                        print(user)
                         self.showAlert(title: "Успех!", message: "Вы успешно вошли в систему")
                         self.navigationController?.popViewController(animated: true)
                     }

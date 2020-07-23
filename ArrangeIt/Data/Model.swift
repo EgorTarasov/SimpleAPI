@@ -75,9 +75,7 @@ struct Event {
     var invitedUsers: [UserID]
 }
 
-struct Saver {
-    static var userSaved: User? = User(id: "-19", name: "-19", isAppUser: false, willGoEvents: [], invitedToEvents: [])
-}
+var userSaved: User?
 
 
 struct FirebaseCover {
@@ -124,15 +122,13 @@ struct FirebaseCover {
             let username = value?["name"] as? String ?? ""
             let userInvites = value?["invitedToEvents"] as? NSMutableArray ?? []
             let userEvents = value?["willGoEvents"] as? NSMutableArray ?? []
-            Saver.userSaved?.id = id
-            Saver.userSaved?.name = username
-            Saver.userSaved?.willGoEvents = (userEvents as? [EventID]) ?? []
-            Saver.userSaved?.invitedToEvents = (userInvites as? [EventID]) ?? []
+            let user = User(id: id, name: username, image: nil, isAppUser: true, willGoEvents: (userEvents as? [EventID]) ?? [], invitedToEvents: (userInvites as? [EventID]) ?? [])
+            userSaved = user
         }) {
             (error) in
-            Saver.userSaved = nil
+            userSaved = nil
         }
-        return Saver.userSaved
+        return userSaved
     }
     
     func getUserEvents(_ id: UserID) -> [Event]? {
@@ -198,9 +194,9 @@ struct FirebaseCover {
         let user = Auth.auth().currentUser
         if let user = user {
             var dw = FirebaseCover.shared.getUserByID(user.uid as UserID)
-            print("dw: \(dw)")
+            print("dw: \(String(describing: dw))")
             dw?.isAppUser = true
-            return Saver.userSaved
+            return userSaved
         } else {
             return nil
         }

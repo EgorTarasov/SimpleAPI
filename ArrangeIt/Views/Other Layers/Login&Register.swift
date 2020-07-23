@@ -6,6 +6,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class LoginAndRegisterViewController: UIViewController {
     
@@ -58,8 +59,7 @@ class LoginAndRegisterViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func enterButton(_ sender: UIButton) {//NetworkPusher.sendEvent(id: <#T##EventID#>, name: <#T##String#>, eventBeginDate: <#T##Date#>, eventEndDate: <#T##Date#>, place: <#T##(Double, Double)#>, owner: <#T##UserID#>, willGoUsers: <#T##[UserID]#>, mayGoUsers: <#T##[UserID]#>)
-        
+    @IBAction func enterButton(_ sender: UIButton) {
         let name = nameField.text!
         let email = emailField.text!
         let password = passwordField.text!
@@ -73,7 +73,7 @@ class LoginAndRegisterViewController: UIViewController {
                     (result, error) in
                     if error == nil {
                         if let result = result {
-                            let _: DocumentReference? = fireBase.collection("users").addDocument(data: [
+                            FirebaseCover.shared.ref.child("users").child(result.user.uid).setValue([
                                 "id": result.user.uid,
                                 "name" : name,
                                 "email" : email,
@@ -82,12 +82,11 @@ class LoginAndRegisterViewController: UIViewController {
                                 "invitedToEvents" : []
                                 
                             ]) {
-                                mayError in
+                                (mayError, datref) in
                                 if let error = mayError {
                                     print("error registrating user. error: \(error) name: \(name)")
                                     self.showAlert(title: "Ошибка", message: "Не получилось зарегистрироваться. Ошибка: \(error)")
                                 } else {
-                                    NetworkPuller.shared.fullDatabaseRefresh(appUserID: result.user.uid)
                                     print("succesfully registrated user. name: \(name) uid: \(result.user.uid)")
                                     self.showAlert(title: "Успех!", message: "Вы успешно зарегистрированы")
                                     self.navigationController?.popViewController(animated: true)
@@ -98,11 +97,10 @@ class LoginAndRegisterViewController: UIViewController {
                 }
             } else if !signup{
                 Auth.auth().signIn(withEmail: email, password: password) { (result, mayError) in
-                    if let error = mayError {
-                        self.showAlert(title: "Ошибка", message: "Не получилось войти. Ошибка: \(error)")
+                    if let error: Error = mayError as NSError? {
+                        self.showAlert(title: "Ошибка", message: "Не получилось войти. Ошибка: \(error.localizedDescription)")
                         
                     } else {
-                        NetworkPuller.shared.fullDatabaseRefresh(appUserID: (result?.user.uid)!)
                         self.showAlert(title: "Успех!", message: "Вы успешно вошли в систему")
                         self.navigationController?.popViewController(animated: true)
                     }

@@ -5,6 +5,7 @@ target 'ArrangeIt' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
+  pod 'Firebase/Database'
   pod 'Nuke'
 end
 

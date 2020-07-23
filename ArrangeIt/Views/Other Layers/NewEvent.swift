@@ -13,8 +13,6 @@ class NewEventViewController: UIViewController {
     
     @IBOutlet weak var newEventBeginDate: UITextField!
     @IBOutlet weak var newEventTime: UITextField!
-    
-    //NetworkPusher.sendEvent(id: <#T##EventID#>, name: <#T##String#>, eventBeginDate: <#T##Date#>, eventEndDate: <#T##Date#>, place: <#T##(Double, Double)#>, owner: <#T##UserID#>, willGoUsers: <#T##[UserID]#>, mayGoUsers: <#T##[UserID]#>)
     override func viewDidLoad() {
         super.viewDidLoad()
         

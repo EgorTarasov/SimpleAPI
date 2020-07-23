@@ -8,6 +8,7 @@
 import UIKit
 import Nuke
 import MapKit
+import Firebase
 
 public extension UIView {
     class func fromNib<T: UIView>(nibName: String) -> T {
@@ -88,7 +89,7 @@ class EventsCollectionCell: UICollectionViewCell {
                     }
                 }
             }
-        } else if InternalStorage.shared.nowUser != nil {
+        } else if Auth.auth().currentUser != nil {
             eventNameLabel.text = "Не удалось получить данные встречи"
             eventShortAdresslabel.text = "??????"
             eventDateLabel.text = "?? ????"

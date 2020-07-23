@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class EventScrollView: UIView {
     var parentVC: UIViewController?
@@ -59,7 +60,7 @@ extension EventScrollView: UICollectionViewDelegate, UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as? EventsCollectionCell {
             if let eventsList = self.eventsListOpt {
-                cell.update(eventOpt: InternalStorage.shared.getEventByID(ID: eventsList[indexPath.row]), parentVCont: parentVC, storyboardVC: storyboard)
+                cell.update(eventOpt: FirebaseCover.shared.getEventByID(eventsList[indexPath.row]), parentVCont: parentVC, storyboardVC: storyboard)
             } else {
                 cell.update(eventOpt: nil)
             }

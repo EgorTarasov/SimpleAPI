@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>291301666245-r289m8u6olrf4gs72mv2k1trfb44r6ld.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.291301666245-r289m8u6olrf4gs72mv2k1trfb44r6ld</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCzzp8Mcfz1eKQhAK-8xQvwCV6K9K2YGvs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>291301666245</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ru.ithse.ArrangeIt</string>
+	<key>PROJECT_ID</key>
+	<string>arrangeit-8f800</string>
+	<key>STORAGE_BUCKET</key>
+	<string>arrangeit-8f800.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:291301666245:ios:9ab71e52c1da62a7772fac</string>
+	<key>DATABASE_URL</key>
+	<string>https://arrangeit-8f800.firebaseio.com</string>
+</dict>
+</plist>

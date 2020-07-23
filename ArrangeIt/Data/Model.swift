@@ -96,8 +96,8 @@ struct Event {
             "place" : place,
             "eventBeginDate" : Timestamp( date : creatingDate ?? Date()),
             "eventEndDate" : Timestamp( date : eventEndDate) ,
-            "cover": cover ?? self.cover,
-            "imageGallery" : self.imageGallery + imageGallery ?? [""],
+            "cover": cover ?? " " ,
+            "imageGallery" : self.imageGallery  ?? [""],
             "willGoUsers" : willGoUsers,
             "invitedUsers" : invitedUsers
         ]){ err in

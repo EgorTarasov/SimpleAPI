@@ -88,16 +88,16 @@ struct Event {
                 }
             }
         }
-    func update(id: UserID, name: String, image: PathToImage? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]){
+    func update(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: [Double], creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]){
         let eventRef = fireBase.collection("events").document(name)
         
         eventRef.updateData([
             "description": description ?? " ",
             "place" : place,
             "eventBeginDate" : Timestamp( date : creatingDate ?? Date()),
-            "eventEndDate" : Timestamp( date : eventEndDate),
-            "cover": image ?? " ",
-            "imageGallery" : self.imageGallery  ?? [""],
+            "eventEndDate" : Timestamp( date : eventEndDate) ,
+            "cover": cover ?? self.cover,
+            "imageGallery" : self.imageGallery + imageGallery ?? [""],
             "willGoUsers" : willGoUsers,
             "invitedUsers" : invitedUsers
         ]){ err in

@@ -71,8 +71,7 @@ struct Event {
     var invitedUsers: [UserID]
     
     func save() {
-            fireBase.collection("events").document("testEvent").setData([
-                "name": self.name,
+            fireBase.collection("events").document(self.name).setData([
                 "description": self.description ?? " ",
                 "place" : self.place,
                 "eventBeginDate" : Timestamp( date : self.creatingDate ?? Date()),
@@ -89,6 +88,26 @@ struct Event {
                 }
             }
         }
+    func update(id: UserID, name: String, image: PathToImage? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]){
+        let eventRef = fireBase.collection("events").document(name)
+        
+        eventRef.updateData([
+            "description": description ?? " ",
+            "place" : place,
+            "eventBeginDate" : Timestamp( date : creatingDate ?? Date()),
+            "eventEndDate" : Timestamp( date : eventEndDate),
+            "cover": image ?? " ",
+            "imageGallery" : self.imageGallery  ?? [""],
+            "willGoUsers" : willGoUsers,
+            "invitedUsers" : invitedUsers
+        ]){ err in
+        if let err = err {
+            print("Error updating document: \(err)")
+        } else {
+            print("Document successfully updated")
+        }
+        
+    }
 }
 
 // Singleton!

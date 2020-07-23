@@ -491,7 +491,7 @@
                     <connections>
                         <outlet property="accountLabel" destination="SkP-cY-dnh" id="ToX-0Z-IBu"/>
                         <outlet property="emailField" destination="ZL0-Vg-MXD" id="YcO-FD-iiB"/>
-                        <outlet property="enterButton" destination="hHW-rN-HDD" id="JjU-Ca-YRB"/>
+                        <outlet property="enterButton" destination="eZc-vC-uxg" id="Ba8-le-HkB"/>
                         <outlet property="nameField" destination="tl2-BV-Qdl" id="Uf2-cI-zD7"/>
                         <outlet property="passwordField" destination="F49-j5-5ZF" id="0Xv-cm-sT4"/>
                         <outlet property="switchButton" destination="EFi-4K-brd" id="tuj-2M-rhy"/>

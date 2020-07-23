@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17132" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17140" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17115"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дворовый футбольный матч" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpN-EZ-Mkk">
-                        <rect key="frame" x="16" y="0.0" width="188" height="69"/>
+                        <rect key="frame" x="16" y="5" width="188" height="64"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -63,19 +62,29 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCA-Wy-GNC">
+                        <rect key="frame" x="55" y="55" width="110" height="110"/>
+                        <connections>
+                            <action selector="cellTapped:" destination="HYq-GT-Bs7" eventType="touchUpInside" id="7M2-q2-wmb"/>
+                        </connections>
+                    </button>
                 </subviews>
-                <color key="backgroundColor" name="eventCellColor"/>
+                <color key="backgroundColor" red="0.9882352941176471" green="0.72995041033991725" blue="0.22999954009924281" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
+                    <constraint firstItem="bCA-Wy-GNC" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="55" id="0yu-7h-19N"/>
                     <constraint firstAttribute="trailing" secondItem="bZT-ra-ECw" secondAttribute="trailing" constant="124.5" id="284-z0-Ay7"/>
                     <constraint firstItem="RmL-QZ-ZQ9" firstAttribute="top" secondItem="axG-1C-2RZ" secondAttribute="bottom" constant="7.5" id="9PB-zr-Mn6"/>
                     <constraint firstAttribute="bottom" secondItem="bZT-ra-ECw" secondAttribute="bottom" constant="7" id="HKf-20-3nt"/>
+                    <constraint firstItem="bCA-Wy-GNC" firstAttribute="top" secondItem="myN-XS-0Bd" secondAttribute="top" constant="55" id="OJX-Ok-89y"/>
                     <constraint firstAttribute="bottom" secondItem="fpN-EZ-Mkk" secondAttribute="bottom" constant="151" id="OcF-qK-V2C"/>
+                    <constraint firstAttribute="bottom" secondItem="bCA-Wy-GNC" secondAttribute="bottom" constant="55" id="OnQ-6G-BAq"/>
                     <constraint firstItem="fpN-EZ-Mkk" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="RbD-Xp-1UC"/>
                     <constraint firstItem="bZT-ra-ECw" firstAttribute="top" secondItem="axG-1C-2RZ" secondAttribute="bottom" constant="7.5" id="ToH-Ho-nib"/>
                     <constraint firstItem="axG-1C-2RZ" firstAttribute="top" secondItem="fpN-EZ-Mkk" secondAttribute="bottom" id="VCa-wh-I1N"/>
                     <constraint firstAttribute="trailing" secondItem="axG-1C-2RZ" secondAttribute="trailing" constant="16" id="bMr-sk-Jrc"/>
                     <constraint firstItem="RmL-QZ-ZQ9" firstAttribute="leading" secondItem="bZT-ra-ECw" secondAttribute="trailing" constant="12.5" id="iZI-Rc-4wg"/>
-                    <constraint firstItem="fpN-EZ-Mkk" firstAttribute="top" secondItem="myN-XS-0Bd" secondAttribute="top" id="oRr-sz-jJW"/>
+                    <constraint firstAttribute="trailing" secondItem="bCA-Wy-GNC" secondAttribute="trailing" constant="55" id="myJ-65-BF3"/>
+                    <constraint firstItem="fpN-EZ-Mkk" firstAttribute="top" secondItem="myN-XS-0Bd" secondAttribute="top" constant="5" id="oRr-sz-jJW"/>
                     <constraint firstItem="axG-1C-2RZ" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="pkp-rt-mE5"/>
                     <constraint firstAttribute="trailing" secondItem="fpN-EZ-Mkk" secondAttribute="trailing" constant="16" id="qKS-c9-gGv"/>
                     <constraint firstItem="bZT-ra-ECw" firstAttribute="leading" secondItem="myN-XS-0Bd" secondAttribute="leading" constant="16" id="viO-ET-WYN"/>
@@ -94,9 +103,4 @@
             <point key="canvasLocation" x="-208" y="-82.758620689655174"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <namedColor name="eventCellColor">
-            <color red="0.59200000762939453" green="0.89800000190734863" blue="0.63700002431869507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

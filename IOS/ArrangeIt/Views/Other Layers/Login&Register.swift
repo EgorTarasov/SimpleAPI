@@ -17,34 +17,40 @@ class LoginAndRegisterViewController: UIViewController {
                 nameField.isHidden = false
                 accountLabel.text = "У вас уже есть аккаунт?"
                 switchButton.setTitle("Войти", for: .normal)
+                enterButton.setTitle("Зарегистрироваться!", for:   .normal)
             }
             else {
+                //Тут я проверяю бд ПОЖАЛУЙСТА НЕ УДАЛЯТЬ
+                //let newEvent = Event(id: "4", name: "Обмен одеждой", eventBeginDate: Date(), eventEndDate: Date().addingTimeInterval(360), place: (54.4, 34.4), owner: "3", willGoUsers: ["3"], invitedUsers: [])
+                //newEvent.save()
                 titleLabel.text = "Вход"
                 nameField.isHidden = true
-                accountLabel.text = "Присоединиться"
+                accountLabel.text = "Зарегистрироваться"
                 switchButton.setTitle("Создать аккаунт", for: .normal)
+                enterButton.setTitle("Войти", for: .normal)
             }
         }
     }
     
-
+    
     @IBOutlet var accountLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     
-
+    
     @IBOutlet var nameField: UITextField!
     @IBOutlet var emailField: UITextField!
     @IBOutlet var passwordField: UITextField!
     
-
-    @IBOutlet var enterButton: UIStackView!
+    
     @IBOutlet var switchButton: UIButton!
+    @IBOutlet var enterButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        signup = false
     }
     
-    // Генераци всплывающего окна
+    // Генерация всплывающего окна
     func showAlert(title : String, message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -58,12 +64,16 @@ class LoginAndRegisterViewController: UIViewController {
         let email = emailField.text!
         let password = passwordField.text!
         if !name.isEmpty && !email.isEmpty && !password.isEmpty || !email.isEmpty && !password.isEmpty && !signup {
+            //            let user = User(id: "1", name: "Игорь Николаевич", isAppUser: true, willGoEvents: ["1", "2", "3"], invitedToEvents: [])
+            //            InternalStorage.shared.nowUser = user
+            //            navigationController?.popViewController(animated: true)
+            //            return Void()
             if signup {
                 Auth.auth().createUser(withEmail: email, password: password) {
                     (result, error) in
                     if error == nil {
                         if let result = result {
-                            let _: DocumentReference? = FirebaseDB.shared.db.collection("users").addDocument(data: [
+                            let _: DocumentReference? = fireBase.collection("users").addDocument(data: [
                                 "id": result.user.uid,
                                 "name" : name,
                                 "email" : email,
@@ -80,7 +90,7 @@ class LoginAndRegisterViewController: UIViewController {
                                     NetworkPuller.shared.fullDatabaseRefresh(appUserID: result.user.uid)
                                     print("succesfully registrated user. name: \(name) uid: \(result.user.uid)")
                                     self.showAlert(title: "Успех!", message: "Вы успешно зарегистрированы")
-                                    self.dismiss(animated: true, completion: nil)
+                                    self.navigationController?.popViewController(animated: true)
                                 }
                             }
                         }
@@ -94,7 +104,7 @@ class LoginAndRegisterViewController: UIViewController {
                     } else {
                         NetworkPuller.shared.fullDatabaseRefresh(appUserID: (result?.user.uid)!)
                         self.showAlert(title: "Успех!", message: "Вы успешно вошли в систему")
-                        self.dismiss(animated: true, completion : nil)
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }
             }

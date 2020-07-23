@@ -15,13 +15,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ваши мероприятия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qs-GE-4HN">
-                    <rect key="frame" x="20" y="44" width="410" height="41"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                    <rect key="frame" x="20" y="44" width="410" height="24"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="u4a-WF-8is">
-                    <rect key="frame" x="0.0" y="93" width="450" height="257"/>
+                    <rect key="frame" x="0.0" y="76" width="450" height="257"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="257" id="qkw-jm-ncK"/>
@@ -48,6 +48,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="collectionName" destination="9qs-GE-4HN" id="wM9-De-OMz"/>
                 <outlet property="eventsCollectionView" destination="u4a-WF-8is" id="Y79-YW-S8x"/>
             </connections>
             <point key="canvasLocation" x="-88.405797101449281" y="-12.053571428571429"/>

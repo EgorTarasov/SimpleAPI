@@ -8,7 +8,12 @@
 import UIKit
 
 class EventScrollView: UIView {
+    var parentVC: UIViewController?
+    var storyboard: UIStoryboard?
+    
+    
     @IBOutlet var eventsCollectionView: UICollectionView!
+    @IBOutlet var collectionName: UILabel!
     
     var eventsListOpt: [EventID]?
     
@@ -19,8 +24,11 @@ class EventScrollView: UIView {
         eventsCollectionView.register(UINib(nibName: "EventCellView", bundle: .main), forCellWithReuseIdentifier: "EventCell")
     }
     
-    func setup(eventsListOpt: [EventID]?, collectionName: String) {
+    func setup(eventsListOpt: [EventID]?, collectionName: String, parentVC: UIViewController? = nil, storyboard: UIStoryboard? = nil) {
+        self.parentVC = parentVC
+        self.storyboard = storyboard
         self.eventsListOpt = eventsListOpt
+        self.collectionName.text = collectionName
         eventsCollectionView.reloadData()
     }
 }
@@ -45,13 +53,13 @@ extension EventScrollView: UICollectionViewDelegateFlowLayout {
 
 extension EventScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return eventsListOpt?.count ?? 4
+        return eventsListOpt?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as? EventsCollectionCell {
             if let eventsList = self.eventsListOpt {
-                cell.update(eventOpt: InternalStorage.shared.getEventByID(ID: eventsList[indexPath.row]))
+                cell.update(eventOpt: InternalStorage.shared.getEventByID(ID: eventsList[indexPath.row]), parentVCont: parentVC, storyboardVC: storyboard)
             } else {
                 cell.update(eventOpt: nil)
             }

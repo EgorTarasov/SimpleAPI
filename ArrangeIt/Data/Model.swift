@@ -4,49 +4,171 @@
 //
 //  Created by Артём Тихоненко on 15.07.2020.
 //
-
 import Foundation
-import FirebaseStorage
 import Firebase
-import FirebaseDatabase
-import FirebaseFirestore
-import FirebaseAuth
 
 typealias UserID = String
-typealias EventID = String
 typealias PathToImage = String
 
+let fireBase = Firestore.firestore()
 
+class EventsCollection {
+    var storage: [Event] = []
+    var count: Int {
+        return storage.count
+    }
+    func getWillEvents(userid: UserID) {
+        let eventsRef = FirebaseCover.shared.fireBase.collection("users")
+        let query = eventsRef.whereField("willGoEvents", arrayContains: "\(userid)")
+        query.getDocuments() {
+            (querySnapshot, err) in
+            if err != nil {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let newEvent = Event()
+                    let name = data["name"] as! String
+                    let eventBeginDate = (data["eventBeginDate"] as! Timestamp).dateValue()
+                    let eventEndDate = (data["eventEndDate"] as! Timestamp).dateValue()
+                    let place = data["place"] as! [Double]
+                    let owner = data["owner"] as! String
+                    let willGoUsers = data["willGoUsers"] as! [String]
+                    let invitedUsers = data["invitedUsers"] as! [String]
+                    newEvent.update(name: name, eventBeginDate: eventBeginDate, eventEndDate: eventEndDate, place: place, owner: owner, description: nil, cover: nil, imageGallery: nil, willGoUsers: willGoUsers, invitedUsers: invitedUsers)
+                    self.storage.append(newEvent)
+                }
+            }
+        }
+    }
+    
+    func getInvitedEvents(userid: UserID) {
+        let eventsRef = FirebaseCover.shared.fireBase.collection("users")
+        let query = eventsRef.whereField("invitedUsers", arrayContains: "\(userid)")
+        query.getDocuments() {
+            (querySnapshot, err) in
+            if err != nil {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let newEvent = Event()
+                    let name = data["name"] as! String
+                    let eventBeginDate = (data["eventBeginDate"] as! Timestamp).dateValue()
+                    let eventEndDate = (data["eventEndDate"] as! Timestamp).dateValue()
+                    let place = data["place"] as! [Double]
+                    let owner = data["owner"] as! String
+                    let willGoUsers = data["willGoUsers"] as! [String]
+                    let invitedUsers = data["invitedUsers"] as! [String]
+                    newEvent.update(name: name, eventBeginDate: eventBeginDate, eventEndDate: eventEndDate, place: place, owner: owner, description: nil, cover: nil, imageGallery: nil, willGoUsers: willGoUsers, invitedUsers: invitedUsers)
+                    self.storage.append(newEvent)
+                }
+            }
+        }
+    }
+}
 
-let testEventsList = ["1": Event(id: "1", name: "Футбол во дворе", eventBeginDate: Date().addingTimeInterval(60), eventEndDate: Date().addingTimeInterval(3660), place: [55.773863, 37.679636], owner: "1", willGoUsers: ["1", "2", "3"], invitedUsers: []), "2": Event(id: "2", name: "Покер", eventBeginDate: Date().addingTimeInterval(3600), eventEndDate: Date().addingTimeInterval(7200), place: [55.810127, 37.652739], owner: "1", willGoUsers: ["1", "2", "3", "4", "5", "6"], invitedUsers: ["7", "8", "9"]), "3": Event(id: "3", name: "Встреча одноклассников", eventBeginDate: Date().addingTimeInterval(10000), eventEndDate: Date().addingTimeInterval(15000), place: [55.794207, 37.582787], owner: "1", willGoUsers: ["1", "2", "3", "4"], invitedUsers: ["5", "6"])]
+struct UsersStorage {
+    static var shared: UsersStorage = {
+        let instance = UsersStorage()
+        return instance
+    }()
+    var cacheId: [UserID: User] = ["1":User()]
+    var cacheEmail: [String: User] = ["":User()]
+    var cacheEvent: [String: Event] = ["":Event()]
+}
 
-struct User {
-    internal init(id: UserID, name: String, image: PathToImage? = nil, isAppUser: Bool, willGoEvents: [EventID], invitedToEvents: [EventID]) {
+class User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    internal init(id: UserID, name: String, email: String, isAppUser: Bool) {
         self.id = id
         self.name = name
-        self.image = image
         self.isAppUser = isAppUser
-        self.willGoEvents = willGoEvents
-        self.invitedToEvents = invitedToEvents
+        self.email = email
+    }
+    
+    init() {
+        self.id = ""
+        self.name = ""
+        self.email = ""
+        self.isAppUser = false
     }
     
     var id: UserID
     var name: String
-    var image: PathToImage?
+    var email: String
     var isAppUser: Bool
     
-    var willGoEvents: [EventID]
-    var invitedToEvents: [EventID]
+    func getCurrentUser(user: User) {
+        let id = Auth.auth().currentUser?.uid ?? "1"
+        user.getUserByID(id, user)
+        user.isAppUser = true
+        UsersStorage.shared.cacheId[id]?.isAppUser = true
+    }
+    
+    func getUserByID(_ id: UserID, _ user: User) {
+        FirebaseCover.shared.fireBase.collection("users").document(id).getDocument() {
+            (document, error) in
+            let data = document?.data()
+            let username = data?["name"] as? String ?? ""
+            let id = data?["id"] as? String ?? ""
+            let email = data?["email"] as? String ?? ""
+            UsersStorage.shared.cacheId[id] = User(id: id, name: username, email: email, isAppUser: false)
+            user.name = username
+            user.id = id
+            user.email = email
+        }
+    }
+    
+    func getUserByEmail(_ email: String, user: User) {
+        let eventsRef = FirebaseCover.shared.fireBase.collection("users")
+        let query = eventsRef.whereField("email", isEqualTo: email)
+        query.getDocuments() {
+            (querySnapshot, error) in
+            if error != nil {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let username = data["name"] as? String ?? ""
+                    let id = data["id"] as? String ?? ""
+                    let email = data["email"] as? String ?? ""
+                    UsersStorage.shared.cacheEmail[id] = User(id: id, name: username, email: email, isAppUser: false)
+                    user.email = email
+                    user.name = username
+                    user.id = id
+                }
+            }
+        }
+    }
+    
+    func updateUsername(_ newName: String, user: User) {
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = newName
+        changeRequest?.commitChanges(completion: {
+            _ in
+        })
+        user.name = newName
+    }
+    
+    func save() {
+        fireBase.collection("users").document(self.id).setData([
+            "email": self.email,
+            "id": self.id,
+            "name": self.name
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err.localizedDescription)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
 }
 
-struct Event {
-    internal init(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: [Double], creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
-        self.id = id
+class Event {
+    internal init(name: String, eventBeginDate: Date, eventEndDate: Date, place: [Double], owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
         self.name = name
         self.eventBeginDate = eventBeginDate
         self.eventEndDate = eventEndDate
         self.place = place
-        self.creatingDate = creatingDate
         self.owner = owner
         self.description = description
         self.cover = cover
@@ -55,14 +177,24 @@ struct Event {
         self.invitedUsers = invitedUsers
     }
     
+    init() {
+        self.name = ""
+        self.eventEndDate = Date()
+        self.eventBeginDate = Date()
+        self.place = [0.0, 0.0]
+        self.owner = ""
+        self.description = nil
+        self.cover = nil
+        self.imageGallery = nil
+        self.willGoUsers = []
+        self.invitedUsers = []
+    }
     
-    var id: EventID
     var name: String
     
     var eventBeginDate: Date
     var eventEndDate : Date
     var place: [Double]
-    var creatingDate: Date?
     
     var owner: UserID
     
@@ -70,14 +202,80 @@ struct Event {
     var cover: PathToImage?
     var imageGallery : [PathToImage]?
     
+    var ref = Database.database().reference()
     
     var willGoUsers: [UserID]
     var invitedUsers: [UserID]
+    
+    func save() {
+        fireBase.collection("events").document(self.name).setData([
+            "description": self.description ?? " ",
+            "place" : self.place,
+            "eventBeginDate" : Timestamp(date: self.eventBeginDate),
+            "eventEndDate" : Timestamp(date: self.eventEndDate),
+            "cover": self.cover ?? "",
+            "imageGallery" : self.imageGallery ?? [],
+            "willGoUsers" : self.willGoUsers,
+            "invitedUsers" : self.invitedUsers,
+            "name" : self.name
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err.localizedDescription)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
+    func update(name: String, eventBeginDate: Date, eventEndDate: Date, place: [Double], owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]) {
+        
+        let eventRef = FirebaseCover.shared.fireBase.collection("events").document(name)
+        
+        eventRef.updateData([
+            "description": description ?? " ",
+            "place" : place,
+            "eventBeginDate" : Timestamp( date : eventBeginDate ),
+            "eventEndDate" : Timestamp( date : eventEndDate) ,
+            "cover": cover ?? " " ,
+            "imageGallery" : self.imageGallery  ?? [],
+            "willGoUsers" : willGoUsers,
+            "invitedUsers" : invitedUsers,
+            "name": name
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+            
+        }
+    }
+    
+    func giveEventByName(_ name: String) {
+        FirebaseCover.shared.fireBase.collection("events").document(name).getDocument() {
+            (document, error) in
+            let value = document?.data()
+            let username = value?["name"] as? String ?? ""
+            let willGoUsers = (value?["willGoUsers"] as? NSMutableArray ?? []) as? [String]
+            let invitedUsers = (value?["invitedUsers"] as? NSMutableArray ?? []) as? [String]
+            let eventBeginDate = (value?["eventBeginDate"] as? Timestamp)?.dateValue()
+            let eventEndDate = (value?["eventEndDate"] as? Timestamp)?.dateValue()
+            let place = value?["place"] as? [Double]
+            let owner = value?["owner"] as? String
+            UsersStorage.shared.cacheEvent[name] = Event(name: username, eventBeginDate: eventBeginDate ?? Date(timeIntervalSince1970: 0), eventEndDate: eventEndDate ?? Date(timeIntervalSince1970: 1000), place: place ?? [0.0, 0.0], owner: owner ?? "", willGoUsers: willGoUsers ?? [], invitedUsers: invitedUsers ?? [])
+            self.name = username
+            self.eventBeginDate = eventBeginDate ?? Date(timeIntervalSince1970: 0)
+            self.eventEndDate = eventEndDate ?? Date(timeIntervalSince1970: 1000)
+            self.place = place ?? [0.0, 0.0]
+            self.owner = owner ?? ""
+            self.willGoUsers = willGoUsers ?? []
+            self.invitedUsers = invitedUsers ?? []
+        }
+    }
 }
 
-struct Saver {
-    static var userSaved: User? = User(id: "-19", name: "-19", isAppUser: false, willGoEvents: [], invitedToEvents: [])
-}
+var eventSaved: Event?
+var userSaved: User?
 
 
 struct FirebaseCover {
@@ -89,161 +287,9 @@ struct FirebaseCover {
     
     var ref = Database.database().reference()
     let fireBase = Firestore.firestore()
+    
     private init() {
         
     }
-    
-    func getEventByID(_ id: EventID) -> Event? {
-        var event: Event? = Event(id: id, name: "-1", eventBeginDate: Date(), eventEndDate: Date(), place: [], owner: "-1", willGoUsers: [], invitedUsers: [])
-        ref.child("events").child(id).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            let value = dataSnapshot.value as? NSDictionary
-            let username = value?["name"] as? String ?? ""
-            let willGoUsers = value?["willGoUsers"] as? NSMutableArray ?? [""]
-            let invitedUsers = value?["invitedUsers"] as? NSMutableArray
-            let eventBeginDate = value?["eventBeginDate"] as? Timestamp
-            let eventEndDate = value?["eventEndDate"] as? Timestamp
-            let place = value?["place"] as? [NSNumber]
-            event?.id = id
-            event?.name = username
-            event?.willGoUsers = (willGoUsers as? [UserID]) ?? []
-            event?.invitedUsers = (invitedUsers as? [UserID]) ?? []
-            event?.eventBeginDate = eventBeginDate?.dateValue() ?? Date()
-            event?.eventEndDate = eventEndDate?.dateValue() ?? Date()
-            event?.place = (place as? [Double]) ?? [0.0, 0.0]
-        }) {
-            (error) in
-            event = nil
-        }
-        return event
-    }
-    
-    func getUserByID(_ id: UserID) -> User? {
-//        var user: User? = User(id: "-3", name: "-3", isAppUser: false, willGoEvents: [], invitedToEvents: [])
-        FirebaseCover.shared.ref.child("users").child(id).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            let value = dataSnapshot.value as? NSDictionary
-            let username = value?["name"] as? String ?? ""
-            let userInvites = value?["invitedToEvents"] as? NSMutableArray ?? []
-            let userEvents = value?["willGoEvents"] as? NSMutableArray ?? []
-            Saver.userSaved?.id = id
-            Saver.userSaved?.name = username
-            Saver.userSaved?.willGoEvents = (userEvents as? [EventID]) ?? []
-            Saver.userSaved?.invitedToEvents = (userInvites as? [EventID]) ?? []
-        }) {
-            (error) in
-            Saver.userSaved = nil
-        }
-        return Saver.userSaved
-    }
-    
-    func getUserEvents(_ id: UserID) -> [Event]? {
-        let user = FirebaseCover.shared.getUserByID(id)
-        var result: [Event]? = nil
-        let tmp: [EventID]? = user?.willGoEvents
-        if let tmp = tmp {
-            result = []
-            for eventID in tmp {
-                if let event = FirebaseCover.shared.getEventByID(eventID) {
-                    result?.append(event)
-                }
-            }
-        }
-        return result
-    }
-    
-    func sendNewEvent(_ newEvent: Event) -> Bool {
-        var result: Bool = false
-        FirebaseCover.shared.fireBase.collection("events").document(newEvent.name).setData([
-            "description": newEvent.description ?? " ",
-            "place" : newEvent.place,
-            "eventBeginDate" : Timestamp(date : newEvent.creatingDate ?? Date()),
-            "eventEndDate" : Timestamp( date : newEvent.eventEndDate),
-            "cover": newEvent.cover ?? " ",
-            "imageGallery" : [],
-            "willGoUsers" : newEvent.willGoUsers,
-            "invitedUsers" : newEvent.invitedUsers
-        ]) { err in
-            if let _ = err {
-                result = false
-            } else {
-                result = true
-            }
-        }
-        return result
-    }
-    
-    func sendEventUpdate(_ newEvent: Event) -> Bool {
-        var result: Bool = false
-        let eventRef = FirebaseCover.shared.fireBase.collection("events").document(newEvent.name)
-        eventRef.updateData([
-            "description": newEvent.description ?? " ",
-            "place" : newEvent.place,
-            "eventBeginDate" : Timestamp(date : newEvent.creatingDate ?? Date()),
-            "eventEndDate" : Timestamp(date : newEvent.eventEndDate) ,
-            "cover": newEvent.cover ?? " " ,
-            "imageGallery" : [],
-            "willGoUsers" : newEvent.willGoUsers,
-            "invitedUsers" : newEvent.invitedUsers
-        ]){ err in
-            if let _ = err {
-                result = false
-            } else {
-                result = true
-            }
-            
-        }
-        return result
-    }
-    
-    func getNowUser() -> User? {
-        let user = Auth.auth().currentUser
-        if let user = user {
-            var dw = FirebaseCover.shared.getUserByID(user.uid as UserID)
-            print("dw: \(dw)")
-            dw?.isAppUser = true
-            return Saver.userSaved
-        } else {
-            return nil
-        }
-    }
 }
-//    func save() {
-//            fireBase.collection("events").document(self.name).setData([
-//                "description": self.description ?? " ",
-//                "place" : self.place,
-//                "eventBeginDate" : Timestamp( date : self.creatingDate ?? Date()),
-//                "eventEndDate" : Timestamp( date : self.eventEndDate),
-//                "cover": self.cover ?? " ",
-//                "imageGallery" : self.imageGallery ?? [""],
-//                "willGoUsers" : self.willGoUsers,
-//                "invitedUsers" : self.invitedUsers
-//            ]) { err in
-//                if let err = err {
-//                    print("Error writing document: \(err)")
-//                } else {
-//                    print("Document successfully written!")
-//                }
-//            }
-//        }
-//    func update(id: EventID, name: String, eventBeginDate: Date, eventEndDate: Date, place: [Double], creatingDate: Date? = nil, owner: UserID, description: String? = nil, cover: PathToImage? = nil, imageGallery: [PathToImage]? = nil, willGoUsers: [UserID], invitedUsers: [UserID]){
-//        let eventRef = fireBase.collection("events").document(name)
-//
-//        eventRef.updateData([
-//            "description": description ?? " ",
-//            "place" : place,
-//            "eventBeginDate" : Timestamp( date : creatingDate ?? Date()),
-//            "eventEndDate" : Timestamp( date : eventEndDate) ,
-//            "cover": cover ?? " " ,
-//            "imageGallery" : self.imageGallery  ?? [""],
-//            "willGoUsers" : willGoUsers,
-//            "invitedUsers" : invitedUsers
-//        ]){ err in
-//            if let err = err {
-//                print("Error updating document: \(err)")
-//            } else {
-//                print("Document successfully updated")
-//            }
-//
-//        }
-//    }
-//}
-//
+//let user = Auth.auth().currentUser

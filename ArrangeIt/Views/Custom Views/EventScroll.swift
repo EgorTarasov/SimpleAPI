@@ -16,7 +16,7 @@ class EventScrollView: UIView {
     @IBOutlet var eventsCollectionView: UICollectionView!
     @IBOutlet var collectionName: UILabel!
     
-    var eventsListOpt: [EventID]?
+    var eventsListOpt: [Event]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +25,7 @@ class EventScrollView: UIView {
         eventsCollectionView.register(UINib(nibName: "EventCellView", bundle: .main), forCellWithReuseIdentifier: "EventCell")
     }
     
-    func setup(eventsListOpt: [EventID]?, collectionName: String, parentVC: UIViewController? = nil, storyboard: UIStoryboard? = nil) {
+    func setup(eventsListOpt: [Event], collectionName: String, parentVC: UIViewController? = nil, storyboard: UIStoryboard? = nil) {
         self.parentVC = parentVC
         self.storyboard = storyboard
         self.eventsListOpt = eventsListOpt
@@ -60,7 +60,7 @@ extension EventScrollView: UICollectionViewDelegate, UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as? EventsCollectionCell {
             if let eventsList = self.eventsListOpt {
-                cell.update(eventOpt: FirebaseCover.shared.getEventByID(eventsList[indexPath.row]), parentVCont: parentVC, storyboardVC: storyboard)
+                cell.update(eventOpt: eventsList[indexPath.row], parentVCont: parentVC, storyboardVC: storyboard)
             } else {
                 cell.update(eventOpt: nil)
             }

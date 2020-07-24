@@ -71,9 +71,9 @@ class EventsCollectionCell: UICollectionViewCell {
             df.dateFormat = "dd MMMM"
             eventDateLabel.text = df.string(from: event.eventBeginDate)
             
-            df.dateFormat = "hh:mm"
+            df.dateFormat = "HH:mm"
             eventStartLabel.text = df.string(from: event.eventBeginDate)
-            df.dateFormat = "hh:mm"
+            df.dateFormat = "HH:mm"
             eventEndLabel.text = df.string(from: event.eventEndDate)
             eventNumOfPersonLabel.text = "\(event.willGoUsers.count) человек"
             
@@ -106,8 +106,6 @@ class EventsCollectionCell: UICollectionViewCell {
             eventEndLabel.isHidden = true
             eventCoverImageView.image = UIImage(systemName: "person.crop.circle.badge.questionmark")
             eventNumOfPersonLabel.isHidden = true
-            // TODO
-            // Пользователь не вошел в аккаунт
         }
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		700C7D3A24C72DE200B1DF47 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C7D3924C72DE200B1DF47 /* EventCell.swift */; };
 		700C7D3C24C730B200B1DF47 /* EventCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 700C7D3B24C730B200B1DF47 /* EventCellView.xib */; };
+		700D1F6424CA441D0016D71F /* UsersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D1F6324CA441D0016D71F /* UsersList.swift */; };
 		70396C8E24C762CF00752929 /* EventScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70396C8D24C762CF00752929 /* EventScrollView.xib */; };
 		70396C9024C762DD00752929 /* EventScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70396C8F24C762DD00752929 /* EventScroll.swift */; };
 		70D7D0A824C6453400C59FA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70D7D0A724C6453400C59FA3 /* GoogleService-Info.plist */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		700C7D3924C72DE200B1DF47 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		700C7D3B24C730B200B1DF47 /* EventCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCellView.xib; sourceTree = "<group>"; };
+		700D1F6324CA441D0016D71F /* UsersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersList.swift; sourceTree = "<group>"; };
 		70396C8D24C762CF00752929 /* EventScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventScrollView.xib; sourceTree = "<group>"; };
 		70396C8F24C762DD00752929 /* EventScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScroll.swift; sourceTree = "<group>"; };
 		70A8BA8CB87A5585EC8DEA51 /* Pods-ArrangeIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArrangeIt.debug.xcconfig"; path = "Target Support Files/Pods-ArrangeIt/Pods-ArrangeIt.debug.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				70F6296D24C4A09800E043AF /* NewEvent.swift */,
 				70F6296124C49ECA00E043AF /* AccountDetail.swift */,
 				864415EE24C2F2E100BFBBE2 /* Login&Register.swift */,
+				700D1F6324CA441D0016D71F /* UsersList.swift */,
 			);
 			path = "Other Layers";
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				70396C9024C762DD00752929 /* EventScroll.swift in Sources */,
 				70F6296824C4A01000E043AF /* EventDetail.swift in Sources */,
 				700C7D3A24C72DE200B1DF47 /* EventCell.swift in Sources */,
+				700D1F6424CA441D0016D71F /* UsersList.swift in Sources */,
 				70F6296E24C4A09800E043AF /* NewEvent.swift in Sources */,
 				70F6296424C49EE400E043AF /* AccountMenu.swift in Sources */,
 				70EAF48A24BF363A000E53F6 /* AppDelegate.swift in Sources */,

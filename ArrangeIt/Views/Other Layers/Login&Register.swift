@@ -6,7 +6,6 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
 
 class LoginAndRegisterViewController: UIViewController {
     
@@ -48,6 +47,8 @@ class LoginAndRegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
         signup = false
     }
     
@@ -64,34 +65,17 @@ class LoginAndRegisterViewController: UIViewController {
         let email = emailField.text!
         let password = passwordField.text!
         if !name.isEmpty && !email.isEmpty && !password.isEmpty || !email.isEmpty && !password.isEmpty && !signup {
-            //            let user = User(id: "1", name: "Игорь Николаевич", isAppUser: true, willGoEvents: ["1", "2", "3"], invitedToEvents: [])
-            //            InternalStorage.shared.nowUser = user
-            //            navigationController?.popViewController(animated: true)
-            //            return Void()
             if signup {
                 Auth.auth().createUser(withEmail: email, password: password) {
                     (result, error) in
                     if error == nil {
                         if let result = result {
-                            FirebaseCover.shared.ref.child("users").child(result.user.uid).setValue([
-                                "id": result.user.uid,
-                                "name" : name,
-                                "email" : email,
-                                "image" : "",
-                                "willGoEvents" : [],
-                                "invitedToEvents" : []
-                                
-                            ]) {
-                                (mayError, datref) in
-                                if let error = mayError {
-                                    print("error registrating user. error: \(error) name: \(name)")
-                                    self.showAlert(title: "Ошибка", message: "Не получилось зарегистрироваться. Ошибка: \(error)")
-                                } else {
-                                    print("succesfully registrated user. name: \(name) uid: \(result.user.uid)")
-                                    self.showAlert(title: "Успех!", message: "Вы успешно зарегистрированы")
-                                    self.navigationController?.popViewController(animated: true)
-                                }
-                            }
+                            let user = User()
+                            user.id = result.user.uid
+                            user.name = name
+                            user.email = email
+                            user.save()
+                            self.navigationController?.popViewController(animated: true)
                         }
                     }
                 }
